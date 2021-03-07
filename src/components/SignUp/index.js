@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 import FormInput from './../Forms/FormInput';
 import Button from './../Forms/Button';
-import WrapAuth from './../WrapAuth';
+
 
 const mapState = ({ user }) => ({
   currentUser : user.currentUser,
@@ -48,7 +48,7 @@ const Signup = props => {
     setErrors([]);
   };
 
-  const handleFormSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     dispatch(signUpStart ({ displayName,email, password, confirmPassword })); 
    
@@ -58,7 +58,9 @@ const Signup = props => {
         }
 
         return(
-            <WrapAuth {...configAuth}>
+           <div class="container">
+             <div class="wrap">
+               <h2>Register</h2>
                   <div className="formWrap">
                     
                   {/* Render any errors */}
@@ -74,7 +76,7 @@ const Signup = props => {
                     </Typography>
                   )}
 
-                    <form onSubmit={handleFormSubmit}>
+                    <form onSubmit={handleSubmit}>
                        <FormInput
                           type="text"
                           name="displayName"
@@ -109,13 +111,13 @@ const Signup = props => {
 
                        <Button type="submit">
                           <Typography variant="h6" align="center" display="block">
-                                {/* This styling could be enhanced in Button - styles.scss */}
                                 Register
                           </Typography>
                        </Button>
                     </form>
                     </div>
-            </WrapAuth>
+             </div>
+           </div>
         );
     }
 

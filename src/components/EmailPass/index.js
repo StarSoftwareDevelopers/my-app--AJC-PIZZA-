@@ -3,7 +3,6 @@ import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { resetPassStart, resetStateUser } from './../../Redux/User/user.actions';
 import './styles.scss';
-import WrapAuth from './../WrapAuth';
 import FormInput from './../Forms/FormInput';
 import Button from  './../Forms/Button';
 
@@ -55,12 +54,10 @@ const EmailPass = props => {
         dispatch(resetPassStart({email}));
     }
 
-        const configAuth ={
-            headLine: 'Forgot your password?'
-        }
-
         return (
-            <WrapAuth {...configAuth}>
+            <div class="container">
+                <div class="wrap">
+                    <h2>Forgot Password?</h2>
                 <ThemeProvider theme={theme}>
                 <Typography variant="body1" align="center">
                     Enter your email and we'll send you a link to reset your password
@@ -97,7 +94,8 @@ const EmailPass = props => {
                     </form>
                 </div>
                 </ThemeProvider>
-            </WrapAuth>
+                </div>
+            </div>
         );
     }
 

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import './../Admin.scss';
 import Card from '@material-ui/core/Card';
 
+
 const Menu = () => {
     return ( 
         <Container maxWidth = "lg" style={{
@@ -20,7 +21,7 @@ const Menu = () => {
                     <Typography variant="h5" style={{display: 'inline-block'}}>| PromoCode</Typography>  
                 </Link>
                 <Card>
-                  JUST TRYING IF IT COULD MERGE
+                 
                 </Card>
     </Container>
      );

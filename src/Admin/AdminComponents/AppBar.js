@@ -30,6 +30,7 @@ import { Route, Switch }
 
   import Home from './../Pages/Home';
   import Menu from './../Pages/Menu';
+  import Users from './../Pages/User';
 
 import './../Admin.scss';
 import Notifications from '../Pages/Notifications';
@@ -252,6 +253,7 @@ export default function PersistentDrawerLeft() {
           <Route exact path='/Menu' component={Menu}/> 
           <Route exact path='/Orders' component={Orders}/> 
           <Route exact path='/Notifications' component={Notifications}/> 
+          <Route exact path='/Users' component={Users}/> 
         </Switch>
       </main>
     </div>

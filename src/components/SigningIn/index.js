@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
 import FormInput from './../Forms/FormInput';
-import WrapAuth from './../WrapAuth';
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser
@@ -50,25 +49,11 @@ const SigninIn = props => {
         dispatch(facebookSignInStart());
     }
 
-    const configAuth ={
-        headLine: 'Log In'
-    }
-
         return (
-            <WrapAuth {...configAuth} >
+            <div class="container">
+                <div class="wrap">
+                <h2>Log in</h2>
                         <div className="formWrap">
-      
-                    {/* {errors.length > 0 && (
-                        <Typography color="error" align="center">
-                            {errors.map((e, index) => {
-                                return (
-                                    <li key={index} style={{listStyleType: "none"}}>
-                                        {e}
-                                    </li>
-                                );
-                            })}
-                        </Typography>
-                    )} */}
                             <form onSubmit={handleSubmit}>
 
                                 <FormInput  
@@ -125,7 +110,8 @@ const SigninIn = props => {
                                     </div>
                             </form>
                         </div>
-            </WrapAuth>
+                </div>
+           </div>
         );
     }
 

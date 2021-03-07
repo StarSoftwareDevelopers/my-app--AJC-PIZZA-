@@ -1,4 +1,4 @@
-import { auth } from './../../firebase/utils';
+import { auth } from './../../firebase/firebase.utils';
 
 export const resetPasswordAPI = (email) => {
     const config = {

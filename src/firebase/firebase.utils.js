@@ -9,9 +9,12 @@ firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+//try
+export default firebase;
+
 //utility function for the onclick event with the Sign in of Google button
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
-GoogleProvider.setCustomParameters( {prompt: 'select_account' });
+GoogleProvider.setCustomParameters({prompt: 'select_account' });
 
 export const FacebookProvider = new firebase.auth.FacebookAuthProvider();
 FacebookProvider.setCustomParameters({prompt: 'select_account'});
