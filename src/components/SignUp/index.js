@@ -53,9 +53,6 @@ const Signup = props => {
     dispatch(signUpStart ({ displayName,email, password, confirmPassword })); 
    
   }
-        const configAuth = {
-          headLine : 'Registration'
-        }
 
         return(
            <div class="container">

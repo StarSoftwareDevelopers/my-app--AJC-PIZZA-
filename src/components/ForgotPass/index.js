@@ -1,10 +1,10 @@
 import React,{ useState, useEffect} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { resetPassStart, resetStateUser } from './../../Redux/User/user.actions';
+import { resetPassStart, resetStateUser } from '../../Redux/User/user.actions';
 import './styles.scss';
-import FormInput from './../Forms/FormInput';
-import Button from  './../Forms/Button';
+import FormInput from '../Forms/FormInput';
+import Button from  '../Forms/Button';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
