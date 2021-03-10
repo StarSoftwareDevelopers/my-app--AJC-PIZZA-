@@ -5,7 +5,7 @@ const FormInput = ({ handleChange, label, ...otherProps }) => {
     return ( 
         <div className="formRow">
             {label && (
-                <label>
+                <label {...otherProps}>
                     {label}
                 </label>
             )}

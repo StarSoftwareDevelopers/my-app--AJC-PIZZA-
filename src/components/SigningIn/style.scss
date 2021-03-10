@@ -55,3 +55,31 @@
 .socialSignin {
   margin: 0.5rem auto 1.5rem;
 }
+
+label {
+  display: inline-block;
+}
+
+input {
+  width: 90%;
+  display: in-line block;
+  border: none;
+  border-bottom: 1px solid #999;
+  padding: 10px 25px;
+  font-family: "Poppins";
+  box-sizing: border-box;
+  font-size: medium;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+input:focus {
+  border-bottom: 1px solid #222;
+}
+input:focus::-webkit-input-placeholder {
+  color: #222;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}

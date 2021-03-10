@@ -1,6 +1,6 @@
 .formRow {
   input {
-    width: 75%;
+    width: 90%;
     display: in-line block;
     border: none;
     border-bottom: 1px solid #999;
@@ -22,4 +22,8 @@
   input.invalid {
     background-color: #ffdddd;
   }
+}
+
+label {
+  margin-right: 1rem;
 }
