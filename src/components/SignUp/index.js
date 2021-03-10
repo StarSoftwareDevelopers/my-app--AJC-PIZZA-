@@ -78,8 +78,8 @@ const Signup = props => {
 
                     <form onSubmit={handleSubmit}>
                       <div class="grouped">
-                      <label for="name" class="name"><PersonIcon/></label>
                        <FormInput
+                          label={<PersonIcon/>}
                           type="text"
                           name="displayName"
                           value={displayName}
@@ -87,8 +87,9 @@ const Signup = props => {
                           handleChange = {e => setdisplayName(e.target.value)}
                           required
                        />
-                       <label for="email" class="email"><EmailIcon/></label>
+                
                         <FormInput
+                          label={<EmailIcon/>}
                           type="email"
                           name="email"
                           value={email}
@@ -96,8 +97,9 @@ const Signup = props => {
                           handleChange = {e => setEmail(e.target.value)}
                           required
                        />
-                        <label for="password" class="password"><LockIcon/></label> 
+         
                        <FormInput
+                          label={<LockIcon/>}
                           type="password"
                           name="password"
                           value={password}
@@ -106,8 +108,9 @@ const Signup = props => {
                           title="Password should be at least 6 characters long"
                           required
                        /> 
-                        <label for="password" class="password"><LockIcon/></label> 
+                        
                         <FormInput
+                          label={<LockIcon/>}
                           type="password"
                           name="confirmPassword"
                           value={confirmPassword}

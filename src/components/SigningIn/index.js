@@ -7,7 +7,7 @@ import './style.scss';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
-import FormInput from './../Forms/FormInput';
+
 
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
@@ -65,23 +65,23 @@ const SigninIn = props => {
                         <div className="formWrap">
                             <form onSubmit={handleSubmit}>
                               <div className="grouped"> 
-                              <label for="email" class="email"><EmailIcon/></label>
-                                <FormInput  
-                                    type="email"
-                                    name="email"
-                                    value={email}
-                                    placeholder="Email"
-                                    handleChange = {e => setEmail(e.target.value)}
-                                />
+                              <label for="email" class="email"><EmailIcon style={{
+                                  display: 'in-line block',
+                                  marginRight: '1rem'
+                                  }}/></label>
 
-                                <label for="email" class="email"><LockIcon/></label>
-                                <FormInput  
-                                    type="password"
-                                    name="password"
-                                    value={password}
-                                    placeholder="Password"
-                                    handleChange = {e => setPassword(e.target.value)}
-                                />          
+                              <input type="email" name="email" value={email} placeholder="Email"
+                                    onChange={ e => setEmail(e.target.value)}/>
+
+                                <br></br>
+                                <label for="email" class="email"><LockIcon style={{
+                                    display: 'in-line block',
+                                    marginRight: '1rem'
+                                    }}/></label>
+                                <input type="password" name="password" value={password} placeholder="Password"
+                                    onChange={ e => setPassword(e.target.value)}/>     
+
+
                                 <Link to="/recovery">
                                         <Typography align="center" variant="subtitle1" display="block">
                                             Forgot Password?
@@ -113,7 +113,7 @@ const SigninIn = props => {
                                                         fontSize: 'large'
                                                         }}
                                                     />
-                                                    Sign In With Google
+                                                    Continue With Google
                                                 </Typography>
                                             </Button>
                         
@@ -124,9 +124,18 @@ const SigninIn = props => {
                                                         marginRight: '1rem',
                                                         fontSize: 'large'
                                                         }}/>
-                                                    Sign In With Facebook
+                                                    Continue With Facebook
                                                 </Typography>
                                             </Button>
+
+                                                           
+                                            <Typography variant="body1" align="center">
+                                                Does not have an account yet? 
+                                                <Link to ="/registration">
+                                                    Register Now
+                                                </Link>
+                                            </Typography>
+                                    
                                         </div>
                                     </div>
                                 </div>     
