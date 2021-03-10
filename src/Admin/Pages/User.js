@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { firestore} from './../../firebase/firebase.utils';
 
+
 class Users extends Component {
     state = { user : null}
 
@@ -24,17 +25,24 @@ class Users extends Component {
         return(
             <div>
                 <h1>List of Users:</h1>
-                {
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    {
                     this.state.users &&
                     this.state.users.map( users => {
                         return (
-                            <div>
-                                <p>{users.displayName} </p>
-                                <p>-{users.email} </p>
-                            </div>
+                                <tr>
+                                    <td>{users.displayName} </td>
+                                    <td>-{users.email} </td>
+                                </tr>
                         );
                     })
                 }
+                </table>
+                
             </div>
         );
     }

@@ -9,6 +9,15 @@ import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
 import FormInput from './../Forms/FormInput';
 
+import EmailIcon from '@material-ui/icons/Email';
+import LockIcon from '@material-ui/icons/Lock';
+
+import {
+    FaFacebook,
+    FaGoogle
+} from 'react-icons/fa';
+
+
 const mapState = ({ user }) => ({
     currentUser: user.currentUser
 }); //to get from the redux store 
@@ -55,7 +64,8 @@ const SigninIn = props => {
                 <h2>Log in</h2>
                         <div className="formWrap">
                             <form onSubmit={handleSubmit}>
-
+                              <div className="grouped"> 
+                              <label for="email" class="email"><EmailIcon/></label>
                                 <FormInput  
                                     type="email"
                                     name="email"
@@ -64,7 +74,7 @@ const SigninIn = props => {
                                     handleChange = {e => setEmail(e.target.value)}
                                 />
 
-                                
+                                <label for="email" class="email"><LockIcon/></label>
                                 <FormInput  
                                     type="password"
                                     name="password"
@@ -97,17 +107,29 @@ const SigninIn = props => {
                                             {/* Put a google Icon after the <Button> */}
                                             <Button onClick={handleGoogleSignIn}>
                                                 <Typography variant="h6" align="center" display="block">
+                                                    <FaGoogle style={{
+                                                        display: 'inline-block',
+                                                        marginRight: '1rem',
+                                                        fontSize: 'large'
+                                                        }}
+                                                    />
                                                     Sign In With Google
                                                 </Typography>
                                             </Button>
                         
                                             <Button onClick={handleFacebookSignIn} style={{backgroundColor: '#3b5998'}}>
                                                 <Typography variant="h6" align="center" display="block">
+                                                    <FaFacebook style={{
+                                                        display: 'inline-block',
+                                                        marginRight: '1rem',
+                                                        fontSize: 'large'
+                                                        }}/>
                                                     Sign In With Facebook
                                                 </Typography>
                                             </Button>
                                         </div>
                                     </div>
+                                </div>     
                             </form>
                         </div>
                 </div>

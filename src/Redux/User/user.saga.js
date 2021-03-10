@@ -30,8 +30,7 @@ export function* emailSignIn({ payload: {email,password} }) {
         yield snapshotFromUserAuth(user) 
 
     }catch(err){
-        console.log(err.message);
-        // alert(err);
+        alert(err.message);
     }
 }
 

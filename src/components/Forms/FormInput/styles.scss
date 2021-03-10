@@ -1,13 +1,25 @@
 .formRow {
   input {
-    width: 100%;
-    padding: 10px 5px;
-    text-align: left;
-    margin: 10px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
+    width: 75%;
+    display: in-line block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding: 10px 25px;
+    font-family: "Poppins";
     box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
+    font-size: medium;
+    margin-bottom: 1rem;
+  }
+
+  input:focus {
+    border-bottom: 1px solid #222;
+  }
+  input:focus::-webkit-input-placeholder {
+    color: #222;
+  }
+
+  /* Mark input boxes that gets an error on validation: */
+  input.invalid {
+    background-color: #ffdddd;
   }
 }

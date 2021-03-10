@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import FormInput from './../Forms/FormInput';
 import Button from './../Forms/Button';
 
+import EmailIcon from '@material-ui/icons/Email';
+import PersonIcon from '@material-ui/icons/Person';
+import LockIcon from '@material-ui/icons/Lock';
 
 const mapState = ({ user }) => ({
   currentUser : user.currentUser,
@@ -74,21 +77,26 @@ const Signup = props => {
                   )}
 
                     <form onSubmit={handleSubmit}>
+                      <div class="grouped">
+                      <label for="name" class="name"><PersonIcon/></label>
                        <FormInput
                           type="text"
                           name="displayName"
                           value={displayName}
                           placeholder="Full Name"
                           handleChange = {e => setdisplayName(e.target.value)}
+                          required
                        />
+                       <label for="email" class="email"><EmailIcon/></label>
                         <FormInput
                           type="email"
                           name="email"
                           value={email}
                           placeholder="Email"
                           handleChange = {e => setEmail(e.target.value)}
+                          required
                        />
-                  
+                        <label for="password" class="password"><LockIcon/></label> 
                        <FormInput
                           type="password"
                           name="password"
@@ -96,8 +104,9 @@ const Signup = props => {
                           placeholder="Password"
                           handleChange = {e => setPassword(e.target.value)}
                           title="Password should be at least 6 characters long"
+                          required
                        /> 
-                 
+                        <label for="password" class="password"><LockIcon/></label> 
                         <FormInput
                           type="password"
                           name="confirmPassword"
@@ -111,6 +120,7 @@ const Signup = props => {
                                 Register
                           </Typography>
                        </Button>
+                       </div>
                     </form>
                     </div>
              </div>

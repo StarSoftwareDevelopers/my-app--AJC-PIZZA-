@@ -24,8 +24,7 @@ const useStyles = makeStyles({
     },
     GridContainer: {
       padding: '10px'
-    },
-    
+    },    
   });
 
 
