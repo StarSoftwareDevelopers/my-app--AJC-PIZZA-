@@ -8,9 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
 
-
-import EmailIcon from '@material-ui/icons/Email';
-import LockIcon from '@material-ui/icons/Lock';
+import TextField from '@material-ui/core/TextField';
 
 import {
     FaFacebook,
@@ -66,23 +64,20 @@ const SigninIn = props => {
                         <div className="formWrap">
                             <form onSubmit={handleSubmit}>
                               <div className="grouped"> 
-                              <label><EmailIcon style={{
-                                  display: 'in-line block',
-                                  marginRight: '1rem'
-                                  }}/></label>
-
-                              <input type="email" name="email" value={email} placeholder="Email"
-                                    onChange={ e => setEmail(e.target.value)}/>
-
+                                 
+                            <TextField autoFocus margin="dense"
+                            type="email" label= "Email" 
+                             fullWidth variant="outlined"     
+                             onChange={ e => setEmail(e.target.value)}
+                            />
                                 <br></br>
-                                <label><LockIcon style={{
-                                    display: 'in-line block',
-                                    marginRight: '1rem'
-                                    }}/></label>
-                                <input type="password" name="password" value={password} placeholder="Password"
-                                    onChange={ e => setPassword(e.target.value)}/>     
-
-
+                            
+                                <TextField autoFocus margin="dense"
+                            type="password" label= "Password" 
+                             fullWidth variant="outlined"     
+                             onChange={ e => setPassword(e.target.value)}
+                            />
+                            
                                 <Link to="/recovery">
                                         <Typography align="center" variant="subtitle1" display="block">
                                             Forgot Password?

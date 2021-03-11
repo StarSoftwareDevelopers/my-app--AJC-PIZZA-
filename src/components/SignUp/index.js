@@ -6,12 +6,10 @@ import { signUpStart } from './../../Redux/User/user.actions';
 import './styles.scss';
 import Typography from '@material-ui/core/Typography';
 
-import FormInput from './../Forms/FormInput';
-import Button from './../Forms/Button';
 
-import EmailIcon from '@material-ui/icons/Email';
-import PersonIcon from '@material-ui/icons/Person';
-import LockIcon from '@material-ui/icons/Lock';
+import Button from './../Forms/Button';
+import TextField from '@material-ui/core/TextField';
+
 
 const mapState = ({ user }) => ({
   currentUser : user.currentUser,
@@ -77,53 +75,37 @@ const Signup = props => {
                   )}
 
                     <form onSubmit={handleSubmit}>
-                      <div className="grouped">
-                       <FormInput
-                          label={<PersonIcon/>}
-                          type="text"
-                          name="displayName"
-                          value={displayName}
-                          placeholder="Full Name"
-                          handleChange = {e => setdisplayName(e.target.value)}
-                          required
-                       />
-                
-                        <FormInput
-                          label={<EmailIcon/>}
-                          type="email"
-                          name="email"
-                          value={email}
-                          placeholder="Email"
-                          handleChange = {e => setEmail(e.target.value)}
-                          required
-                       />
-         
-                       <FormInput
-                          label={<LockIcon/>}
-                          type="password"
-                          name="password"
-                          value={password}
-                          placeholder="Password"
-                          handleChange = {e => setPassword(e.target.value)}
-                          title="Password should be at least 6 characters long"
-                          required
-                       /> 
-                        
-                        <FormInput
-                          label={<LockIcon/>}
-                          type="password"
-                          name="confirmPassword"
-                          value={confirmPassword}
-                          placeholder="Confirm Password"
-                          handleChange = {e => setConfirmPassword(e.target.value)}
-                       />
 
+                        <TextField autoFocus margin="dense"
+                            type="text" label= "Full Name" 
+                             fullWidth variant="outlined"     
+                             onChange={ e => setdisplayName(e.target.value)}
+                            />
+
+                        <TextField autoFocus margin="dense"
+                            type="email" label= "Email" 
+                             fullWidth variant="outlined"     
+                             onChange={ e => setEmail(e.target.value)}
+                            />
+
+                         <TextField autoFocus margin="dense"
+                            type="password" label= "Password" 
+                             fullWidth variant="outlined"     
+                             onChange={ e => setPassword(e.target.value)}
+                            />
+
+                          <TextField autoFocus margin="dense"
+                            type="password" label= "Confirm Password" 
+                             fullWidth variant="outlined"     
+                             onChange={ e => setConfirmPassword(e.target.value)}
+                            />
+                      
                        <Button type="submit">
                           <Typography variant="h6" align="center" display="block">
                                 Register
                           </Typography>
                        </Button>
-                       </div>
+                       
                     </form>
                     </div>
              </div>
