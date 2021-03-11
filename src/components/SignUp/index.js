@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Button from './../Forms/Button';
 import TextField from '@material-ui/core/TextField';
+import { TextFieldsTwoTone } from '@material-ui/icons';
 
 
 const mapState = ({ user }) => ({
@@ -82,19 +83,19 @@ const Signup = props => {
                              onChange={ e => setdisplayName(e.target.value)}
                             />
 
-                        <TextField autoFocus margin="dense"
+                        <TextField margin="dense"
                             type="email" label= "Email" 
                              fullWidth variant="outlined"     
                              onChange={ e => setEmail(e.target.value)}
                             />
 
-                         <TextField autoFocus margin="dense"
+                         <TextField  margin="dense"
                             type="password" label= "Password" 
                              fullWidth variant="outlined"     
                              onChange={ e => setPassword(e.target.value)}
                             />
 
-                          <TextField autoFocus margin="dense"
+                          <TextField  margin="dense"
                             type="password" label= "Confirm Password" 
                              fullWidth variant="outlined"     
                              onChange={ e => setConfirmPassword(e.target.value)}
