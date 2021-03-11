@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { firestore} from './../../firebase/firebase.utils';
+// import { firestore} from './../../firebase/firebase.utils';
 
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,7 +28,7 @@ const MyAccount = () => {
     const { currentUser } = useSelector(mapState);
     const classes = useStyles();
 
-    const userRef = firestore.collection('users').doc(currentUser.uid);
+    // const userRef = firestore.collection('users').doc(currentUser.uid);
 
     // async function addAddress() {
     //    const res = await userRef.set({

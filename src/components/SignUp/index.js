@@ -58,8 +58,8 @@ const Signup = props => {
   }
 
         return(
-           <div class="container">
-             <div class="wrap">
+           <div className="container">
+             <div className="wrap">
                <h2>Register</h2>
                   <div className="formWrap">
                     
@@ -77,7 +77,7 @@ const Signup = props => {
                   )}
 
                     <form onSubmit={handleSubmit}>
-                      <div class="grouped">
+                      <div className="grouped">
                        <FormInput
                           label={<PersonIcon/>}
                           type="text"

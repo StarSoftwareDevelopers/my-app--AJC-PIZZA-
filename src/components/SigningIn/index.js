@@ -14,7 +14,8 @@ import LockIcon from '@material-ui/icons/Lock';
 
 import {
     FaFacebook,
-    FaGoogle
+    FaGoogle,
+    FaMailBulk
 } from 'react-icons/fa';
 
 
@@ -59,13 +60,13 @@ const SigninIn = props => {
     }
 
         return (
-            <div class="container">
-                <div class="wrap">
+            <div className="container">
+                <div className="wrap">
                 <h2>Log in</h2>
                         <div className="formWrap">
                             <form onSubmit={handleSubmit}>
                               <div className="grouped"> 
-                              <label for="email" class="email"><EmailIcon style={{
+                              <label><EmailIcon style={{
                                   display: 'in-line block',
                                   marginRight: '1rem'
                                   }}/></label>
@@ -74,7 +75,7 @@ const SigninIn = props => {
                                     onChange={ e => setEmail(e.target.value)}/>
 
                                 <br></br>
-                                <label for="email" class="email"><LockIcon style={{
+                                <label><LockIcon style={{
                                     display: 'in-line block',
                                     marginRight: '1rem'
                                     }}/></label>
@@ -105,7 +106,7 @@ const SigninIn = props => {
                                         </Typography>
 
                                             {/* Put a google Icon after the <Button> */}
-                                            <Button onClick={handleGoogleSignIn}>
+                                            <Button onClick={handleGoogleSignIn} style={{backgroundColor: '#EA4335'}}>
                                                 <Typography variant="h6" align="center" display="block">
                                                     <FaGoogle style={{
                                                         display: 'inline-block',
@@ -129,12 +130,18 @@ const SigninIn = props => {
                                             </Button>
 
                                                            
-                                            <Typography variant="body1" align="center">
-                                                Does not have an account yet? 
-                                                <Link to ="/registration">
-                                                    Register Now
-                                                </Link>
-                                            </Typography>
+                                            <Link to="/registration">
+                                                <Button>
+                                                    <Typography variant="h6" align="center" display="block" >
+                                                        <FaMailBulk style={{
+                                                        display: 'inline-block',
+                                                        marginRight: '1rem',
+                                                        fontSize: 'large'
+                                                        }}/>
+                                                        Register with Email
+                                                    </Typography>
+                                                </Button>
+                                            </Link>
                                     
                                         </div>
                                     </div>

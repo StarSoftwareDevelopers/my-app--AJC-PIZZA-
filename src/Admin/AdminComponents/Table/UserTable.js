@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import MUIDataTable from "mui-datatables";
 import {firestore} from './../../../firebase/firebase.utils';
 
-const columns = ["Display Name","Email"];
-
 
 class UserTable extends Component {
-    
+
     state = { user : null}
     
     componentDidMount() {
@@ -25,17 +23,18 @@ class UserTable extends Component {
     }   
 
     render() {
-        return ( 
+        const {columns,data} = this.props;
         
-            // <MUIDataTable
-            //         title={"Users"}
-            //         columns={columns}
-            //         data={data}
-            //         // options={options}
-            // />
-            <div>
-                Hello   
-            </div>
+       
+        return ( 
+
+            <MUIDataTable
+                    title={"Users"}
+                    columns={columns}
+                    data={data}
+                    // options={options}
+            />
+         
          );
     }
   

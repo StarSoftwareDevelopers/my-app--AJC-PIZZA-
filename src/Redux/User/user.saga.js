@@ -46,6 +46,7 @@ export function* onEmailSignInStart(){
 //if they are signed in - restore the redux store with current user's info
 export function* isUserAuthenticated() {
     try {
+        
        const userAuth = yield getCurrentUser();
        if(!userAuth) return; 
         yield snapshotFromUserAuth(userAuth);
