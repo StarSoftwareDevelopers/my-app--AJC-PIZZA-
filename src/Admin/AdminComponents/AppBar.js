@@ -24,6 +24,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import GroupIcon from '@material-ui/icons/Group';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { Route, Switch } 
   from 'react-router-dom'; 
@@ -238,6 +239,15 @@ export default function PersistentDrawerLeft() {
                     </Typography>
                 </ListItem> 
            </Link>
+         
+                <ListItem button key='Users'> 
+                  <ListItemIcon><ExitToAppIcon fontSize="large"/>
+                  </ListItemIcon> 
+                  <Typography variant="h5">
+                      Log Out
+                    </Typography>
+                </ListItem> 
+           
         </List>
 
       </Drawer>

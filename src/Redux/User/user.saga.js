@@ -97,6 +97,7 @@ export function* signUp({ payload: {
        const { user } = yield auth.createUserWithEmailAndPassword(email,password);
        const additionalData = { displayName};
        yield snapshotFromUserAuth(user, additionalData);
+       
        // await user.sendEmailVerification();
 
       }catch(err){

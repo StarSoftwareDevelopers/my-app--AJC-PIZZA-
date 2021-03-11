@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { firestore} from './../../firebase/firebase.utils';
-
+import UserTable from './../AdminComponents/Table/UserTable';
 
 class Users extends Component {
     state = { user : null}
@@ -24,6 +24,7 @@ class Users extends Component {
     render() {
         return(
             <div>
+                <UserTable/>
                 <h1>List of Users:</h1>
                 <table>
                     <tr>

@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux';
             //we have access to history because of withRoute in withAuth.js
             props.history.push('/login');
         }
+      
           // eslint-disable-next-line react-hooks/exhaustive-deps
     },[currentUser]); //whenever currentUser changes, it will run this code
 

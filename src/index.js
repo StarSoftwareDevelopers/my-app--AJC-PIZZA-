@@ -5,12 +5,15 @@ import { Provider } from 'react-redux';
 import store from './Redux/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './animation.scss';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <div className="wrap">
+          <App />
+        </div>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
