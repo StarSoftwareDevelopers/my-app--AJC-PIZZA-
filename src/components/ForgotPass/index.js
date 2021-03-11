@@ -3,11 +3,12 @@ import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { resetPassStart, resetStateUser } from '../../Redux/User/user.actions';
 import './styles.scss';
-import FormInput from '../Forms/FormInput';
 import Button from  '../Forms/Button';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+
+import TextField from '@material-ui/core/TextField';
 
 const theme = createMuiTheme();
 
@@ -78,13 +79,11 @@ const EmailPass = props => {
 
                     <form onSubmit = {handleSubmit}>
 
-                        <FormInput
-                            type="email"
-                            name="email"
-                            value={email}
-                            placeholder="Email"
-                            handleChange={e => setEmail(e.target.value)}
-                        />
+                        <TextField autoFocus margin="dense"
+                            type="email" label= "Email" 
+                             fullWidth variant="outlined"     
+                             onChange={ e => setEmail(e.target.value)}
+                            />
 
                         <Button type="submit">
                             <Typography variant="h6">
