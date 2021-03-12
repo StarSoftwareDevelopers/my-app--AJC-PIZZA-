@@ -2,28 +2,27 @@ import React, {Component} from 'react';
 import MUIDataTable from "mui-datatables";
 import {firestore} from './../../../firebase/firebase.utils';
 
-
 class UserTable extends Component {
-    columns = ["Display Name", "Email", "Address"];
     constructor() {
-      super();
-      this.state = { users: []};
-    }
+        super();
+        this.state = { users: []};
+      }
+
+    columns = ["Display Name", "Email", "Address"];
+    options = {
+        filter: true,
+        selectableRows: 'none',
+      };
+  
 
     componentDidMount() {
         firestore.collection('users')
             .get()
             .then( snapshot => {
-                const users = snapshot.forEach(doc => {
+                const users = []
+                 snapshot.forEach(doc => {
                     const data = doc.data()
-                    // console.log(data.displayName)
-                    // console.log(data.displayName)
-                    console.log(data.email)
-                    return{
-                       displayName : data.displayName,
-                       emai : data.email,
-                       address : data.address
-                    };
+                    users.push({"Display Name":data.displayName, 'Email': data.email, 'Address' : data.address});
                 })
                 this.setState({ users : users})
                 // console.log(snapshot)
@@ -32,16 +31,17 @@ class UserTable extends Component {
     }   
 
     render() {
-        return  (
-       
-          <MUIDataTable
-            title={"Users"}
-            columns={this.columns}
-            data={this.state.data}
-            // options={options}
-          />
-        );
+        return this.state.users ? (
+            <MUIDataTable
+              title={"List of Users"}
+              columns={this.columns}
+              data={this.state.users}
+              options={this.options}
+            />
+          ) : (
+            <div>Loading...</div>
+          );
+        }
       }
-    }
  
 export default UserTable;
