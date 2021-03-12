@@ -38,6 +38,7 @@ class Users extends Component {
                                 <tr>
                                     <td>{users.displayName} </td>
                                     <td>-{users.email} </td>
+                                    <td>{users.address}</td>
                                 </tr>
                         );
                     })

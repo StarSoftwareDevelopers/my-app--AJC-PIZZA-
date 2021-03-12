@@ -9,8 +9,6 @@ import Typography from '@material-ui/core/Typography';
 
 import Button from './../Forms/Button';
 import TextField from '@material-ui/core/TextField';
-import { TextFieldsTwoTone } from '@material-ui/icons';
-
 
 const mapState = ({ user }) => ({
   currentUser : user.currentUser,

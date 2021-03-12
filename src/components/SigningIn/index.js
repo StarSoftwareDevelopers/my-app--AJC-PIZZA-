@@ -72,7 +72,7 @@ const SigninIn = props => {
                             />
                                 <br></br>
                             
-                                <TextField autoFocus margin="dense"
+                                <TextField margin="dense"
                             type="password" label= "Password" 
                              fullWidth variant="outlined"     
                              onChange={ e => setPassword(e.target.value)}

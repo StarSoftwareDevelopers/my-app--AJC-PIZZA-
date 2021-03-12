@@ -4,17 +4,26 @@ import {firestore} from './../../../firebase/firebase.utils';
 
 
 class UserTable extends Component {
+    columns = ["Display Name", "Email", "Address"];
+    constructor() {
+      super();
+      this.state = { users: []};
+    }
 
-    state = { user : null}
-    
     componentDidMount() {
         firestore.collection('users')
             .get()
             .then( snapshot => {
-                const users = []
-                snapshot.forEach(doc => {
+                const users = snapshot.forEach(doc => {
                     const data = doc.data()
-                    users.push(data)
+                    // console.log(data.displayName)
+                    // console.log(data.displayName)
+                    console.log(data.email)
+                    return{
+                       displayName : data.displayName,
+                       emai : data.email,
+                       address : data.address
+                    };
                 })
                 this.setState({ users : users})
                 // console.log(snapshot)
@@ -23,21 +32,16 @@ class UserTable extends Component {
     }   
 
     render() {
-        const {columns,data} = this.props;
-        
+        return  (
        
-        return ( 
-
-            <MUIDataTable
-                    title={"Users"}
-                    columns={columns}
-                    data={data}
-                    // options={options}
-            />
-         
-         );
+          <MUIDataTable
+            title={"Users"}
+            columns={this.columns}
+            data={this.state.data}
+            // options={options}
+          />
+        );
+      }
     }
-  
-}
  
 export default UserTable;
