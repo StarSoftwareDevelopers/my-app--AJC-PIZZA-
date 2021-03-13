@@ -8,6 +8,7 @@ import OrderTable from './../AdminComponents/Table/OrdersTable';
 let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);
 
+
 const Home = () => {
     return ( 
       <div>

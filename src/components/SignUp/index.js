@@ -98,7 +98,7 @@ const Signup = props => {
                              fullWidth variant="outlined"     
                              onChange={ e => setConfirmPassword(e.target.value)}
                             />
-                      
+                        <br/> <br/>
                        <Button type="submit">
                           <Typography variant="h6" align="center" display="block">
                                 Register

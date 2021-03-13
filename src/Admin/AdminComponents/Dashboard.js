@@ -14,7 +14,7 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import { green, red, orange } from '@material-ui/core/colors';
 
 import {Link} from 'react-router-dom'; 
-
+import { firestore } from './../..//firebase/firebase.utils';
 
 const useStyles = makeStyles({
     root: {
@@ -37,9 +37,16 @@ const useStyles = makeStyles({
     
   });
 
+  function addUser() {
+    firestore.collection('users').get().then(snap => {
+      const size = snap.size // will return the collection size
+      console.log(size)
+   });
+  };
 
 export default function Dashboard() {
     const classes = useStyles();  
+
     return (
       <Card style={{
           padding: '.5rem',
@@ -53,7 +60,7 @@ export default function Dashboard() {
                 <PeopleIcon style={{ color: green[500]}}/>  Total Users
                 </Typography>
                 <Typography variant="h4" component="h2">
-                    150
+                   100
                 </Typography>
                 </CardContent>
                 <CardActions>
