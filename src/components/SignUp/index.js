@@ -5,8 +5,6 @@ import { signUpStart } from './../../Redux/User/user.actions';
 
 import './styles.scss';
 import Typography from '@material-ui/core/Typography';
-
-
 import Button from './../Forms/Button';
 import TextField from '@material-ui/core/TextField';
 
