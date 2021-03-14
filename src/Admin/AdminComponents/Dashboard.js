@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useState, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -14,7 +15,7 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import { green, red, orange } from '@material-ui/core/colors';
 
 import {Link} from 'react-router-dom'; 
-
+import { firestore } from './../..//firebase/firebase.utils';
 
 const useStyles = makeStyles({
     root: {
@@ -39,7 +40,20 @@ const useStyles = makeStyles({
 
 
 export default function Dashboard() {
-    const classes = useStyles();  
+    const classes = useStyles(); 
+    const [size, setSize] = useState(null);
+
+    //useEffect for counting the total users registered
+    useEffect(() => {
+      firestore
+        .collection("users")
+        .get()
+        .then((snap) => {
+          setSize(snap.size)
+        });
+    }, [])
+ 
+
     return (
       <Card style={{
           padding: '.5rem',
@@ -53,11 +67,11 @@ export default function Dashboard() {
                 <PeopleIcon style={{ color: green[500]}}/>  Total Users
                 </Typography>
                 <Typography variant="h4" component="h2">
-                    150
+                  {size}
                 </Typography>
                 </CardContent>
                 <CardActions>
-                <Link to="/Orders">
+                <Link to="/Users">
                     <Button size="medium">
                         <Typography variant="h6" component="h2" >
                             View All

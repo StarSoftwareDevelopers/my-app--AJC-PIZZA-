@@ -2,19 +2,27 @@ import React, {Component} from 'react';
 import MUIDataTable from "mui-datatables";
 import {firestore} from './../../../firebase/firebase.utils';
 
-
 class UserTable extends Component {
+    constructor() {
+        super();
+        this.state = { users: []};
+      }
 
-    state = { user : null}
-    
+    columns = ["Display Name", "Email", "Address"];
+    options = {
+        filter: true,
+        selectableRows: 'none',
+      };
+  
+
     componentDidMount() {
         firestore.collection('users')
             .get()
             .then( snapshot => {
                 const users = []
-                snapshot.forEach(doc => {
+                 snapshot.forEach(doc => {
                     const data = doc.data()
-                    users.push(data)
+                    users.push({"Display Name":data.displayName, 'Email': data.email, 'Address' : data.address});
                 })
                 this.setState({ users : users})
                 // console.log(snapshot)
@@ -23,21 +31,17 @@ class UserTable extends Component {
     }   
 
     render() {
-        const {columns,data} = this.props;
-        
-       
-        return ( 
-
+        return this.state.users ? (
             <MUIDataTable
-                    title={"Users"}
-                    columns={columns}
-                    data={data}
-                    // options={options}
+              title={"List of Users"}
+              columns={this.columns}
+              data={this.state.users}
+              options={this.options}
             />
-         
-         );
-    }
-  
-}
+          ) : (
+            <div>Loading...</div>
+          );
+        }
+      }
  
 export default UserTable;

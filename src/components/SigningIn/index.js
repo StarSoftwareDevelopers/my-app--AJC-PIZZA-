@@ -8,7 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
 
+import IconButton from '@material-ui/core/IconButton';
+
 import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import {
     FaFacebook,
@@ -72,7 +75,7 @@ const SigninIn = props => {
                             />
                                 <br></br>
                             
-                                <TextField autoFocus margin="dense"
+                                <TextField margin="dense"
                             type="password" label= "Password" 
                              fullWidth variant="outlined"     
                              onChange={ e => setPassword(e.target.value)}
@@ -86,58 +89,50 @@ const SigninIn = props => {
                              
                            
                                 <br></br>
-                                <Button type="submit">
+                                <Button type="submit" className="btn">
                                     <Typography variant="h6" align="center" display="block">
-                                        {/* This styling could be enhanced in Button - styles.scss */}
                                         Log In
                                     </Typography>
                                 </Button>
-                           
-                                    <div className="socialSignin">
-                                        <div className="row">
-                                        <Divider/> 
+                               
+                                  <br></br>                  
+                                <Divider/> 
                                         <Typography variant="subtitle2" align="center" display="block">
-                                                   or
+                                                   Or Continue with 
                                         </Typography>
 
-                                            {/* Put a google Icon after the <Button> */}
-                                            <Button onClick={handleGoogleSignIn} style={{backgroundColor: '#EA4335'}}>
-                                                <Typography variant="h6" align="center" display="block">
-                                                    <FaGoogle style={{
-                                                        display: 'inline-block',
-                                                        marginRight: '1rem',
-                                                        fontSize: 'large'
-                                                        }}
-                                                    />
-                                                    Continue With Google
-                                                </Typography>
-                                            </Button>
-                        
-                                            <Button onClick={handleFacebookSignIn} style={{backgroundColor: '#3b5998'}}>
-                                                <Typography variant="h6" align="center" display="block">
-                                                    <FaFacebook style={{
-                                                        display: 'inline-block',
-                                                        marginRight: '1rem',
-                                                        fontSize: 'large'
-                                                        }}/>
-                                                    Continue With Facebook
-                                                </Typography>
-                                            </Button>
+                                   
+                                    <div className="socialSignin">
+                                        <div className="row">
+                                        <Tooltip title="Continue with Google">
+                                            <IconButton onClick={handleGoogleSignIn} aria-label="googleSignIn" >
+                                                <FaGoogle style={{
+                                                    color: '#EA4335',
+                                                    fontSize: '30px'
+                                                    
+                                                }}/>
+                                            </IconButton>
+                                        </Tooltip>
 
-                                                           
-                                            <Link to="/registration">
-                                                <Button>
-                                                    <Typography variant="h6" align="center" display="block" >
-                                                        <FaMailBulk style={{
-                                                        display: 'inline-block',
-                                                        marginRight: '1rem',
-                                                        fontSize: 'large'
-                                                        }}/>
-                                                        Register with Email
-                                                    </Typography>
-                                                </Button>
-                                            </Link>
-                                    
+                                        <Tooltip title="Continue with Facebook">      
+                                            <IconButton onClick={handleFacebookSignIn} aria-label="fbSignIn">
+                                                <FaFacebook style={{
+                                                    color: '#3b5998',
+                                                    fontSize: '30px'
+                                                }}/>
+                                            </IconButton>
+                                        </Tooltip>  
+
+                                        <Tooltip title="Register with email">
+                                          <Link to="/registration">
+                                              <IconButton aria-label="mailRegister">
+                                                  <FaMailBulk style={{
+                                                      color: '#e31837',
+                                                      fontSize: '30px'
+                                                  }}/>
+                                              </IconButton>
+                                          </Link>
+                                        </Tooltip>        
                                         </div>
                                     </div>
                                 </div>     

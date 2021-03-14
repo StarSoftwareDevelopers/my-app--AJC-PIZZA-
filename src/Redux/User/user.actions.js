@@ -1,4 +1,4 @@
-//all redux actions 
+//all redux actions
 import UserTypes from './user.types';
 
 //naming conventions in redux saga

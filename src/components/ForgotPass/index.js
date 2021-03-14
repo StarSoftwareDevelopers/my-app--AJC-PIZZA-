@@ -56,8 +56,8 @@ const EmailPass = props => {
     }
 
         return (
-            <div class="container">
-                <div class="wrap">
+            <div className="container">
+                <div className="wrap">
                     <h2>Forgot Password?</h2>
                 <ThemeProvider theme={theme}>
                 <Typography variant="body1" align="center">

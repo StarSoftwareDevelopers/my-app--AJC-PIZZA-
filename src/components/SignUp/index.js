@@ -5,12 +5,8 @@ import { signUpStart } from './../../Redux/User/user.actions';
 
 import './styles.scss';
 import Typography from '@material-ui/core/Typography';
-
-
 import Button from './../Forms/Button';
 import TextField from '@material-ui/core/TextField';
-import { TextFieldsTwoTone } from '@material-ui/icons';
-
 
 const mapState = ({ user }) => ({
   currentUser : user.currentUser,
@@ -100,7 +96,7 @@ const Signup = props => {
                              fullWidth variant="outlined"     
                              onChange={ e => setConfirmPassword(e.target.value)}
                             />
-                      
+                        <br/> <br/>
                        <Button type="submit">
                           <Typography variant="h6" align="center" display="block">
                                 Register

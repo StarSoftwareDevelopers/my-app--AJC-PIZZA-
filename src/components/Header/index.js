@@ -65,20 +65,12 @@ const Header = props => {
                                     <span onClick={handleClickOpen}>
                                         Log Out
                                     </span>
-                                    {/* <span onClick={() => signOut()}>
-                                        Logout
-                                    </span> */}
                                 </li>
                             </ul>
                         )}
 
                         {!currentUser && (
                              <ul>
-                             {/* <li>
-                                 <Link to="/registration">
-                                     Register
-                                 </Link>
-                             </li> */}
                              <li>
                                  <Link to="/login">
                                      Login
