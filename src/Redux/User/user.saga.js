@@ -1,4 +1,4 @@
-//takeLatest - 
+//takeLatest - need to refractor codes
 import { takeLatest, call, all, put} from 'redux-saga/effects';
 import { auth, handleUserProfile, getCurrentUser, GoogleProvider, FacebookProvider } from './../../firebase/firebase.utils';
 import UserTypes from './user.types';
