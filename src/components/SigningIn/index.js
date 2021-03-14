@@ -90,7 +90,6 @@ const SigninIn = props => {
                                 <br></br>
                                 <Button type="submit" className="btn">
                                     <Typography variant="h6" align="center" display="block">
-                                        {/* This styling could be enhanced in Button - styles.scss */}
                                         Log In
                                     </Typography>
                                 </Button>
@@ -128,10 +127,6 @@ const SigninIn = props => {
                                                     fontSize: '30px'
                                                 }}/>
                                             </IconButton>
-
-                                                           
-                                    
-                                    
                                         </div>
                                     </div>
                                 </div>     
