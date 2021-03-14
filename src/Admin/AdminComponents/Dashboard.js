@@ -71,7 +71,7 @@ export default function Dashboard() {
                 </Typography>
                 </CardContent>
                 <CardActions>
-                <Link to="/Orders">
+                <Link to="/Users">
                     <Button size="medium">
                         <Typography variant="h6" component="h2" >
                             View All
