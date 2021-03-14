@@ -11,6 +11,7 @@ import Button from './../Forms/Button';
 import IconButton from '@material-ui/core/IconButton';
 
 import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import {
     FaFacebook,
@@ -93,26 +94,17 @@ const SigninIn = props => {
                                         Log In
                                     </Typography>
                                 </Button>
-
-                                <Link to="/registration">  
-                                     <Typography variant="h6" align="center" display="block" >
-                                          <FaMailBulk style={{
-                                              display: 'inline-block',
-                                               marginRight: '1rem',
-                                                fontSize: 'small',
-                                                color: '#e31837'
-                                                }}/>
-                                                Register with Email
-                                    </Typography>
-                                </Link>
+                               
                                   <br></br>                  
                                 <Divider/> 
                                         <Typography variant="subtitle2" align="center" display="block">
-                                                   Or Continue with social platforms
+                                                   Or Continue with 
                                         </Typography>
-                           
+
+                                   
                                     <div className="socialSignin">
                                         <div className="row">
+                                        <Tooltip title="Continue with Google">
                                             <IconButton onClick={handleGoogleSignIn} aria-label="googleSignIn" >
                                                 <FaGoogle style={{
                                                     color: '#EA4335',
@@ -120,13 +112,27 @@ const SigninIn = props => {
                                                     
                                                 }}/>
                                             </IconButton>
+                                        </Tooltip>
 
-                                            <IconButton onClick={handleFacebookSignIn} aria-label="fbSignIn" color="red">
+                                        <Tooltip title="Continue with Facebook">      
+                                            <IconButton onClick={handleFacebookSignIn} aria-label="fbSignIn">
                                                 <FaFacebook style={{
                                                     color: '#3b5998',
                                                     fontSize: '30px'
                                                 }}/>
                                             </IconButton>
+                                        </Tooltip>  
+
+                                        <Tooltip title="Register with email">
+                                          <Link to="/registration">
+                                              <IconButton aria-label="mailRegister">
+                                                  <FaMailBulk style={{
+                                                      color: '#e31837',
+                                                      fontSize: '30px'
+                                                  }}/>
+                                              </IconButton>
+                                          </Link>
+                                        </Tooltip>        
                                         </div>
                                     </div>
                                 </div>     
