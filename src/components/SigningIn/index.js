@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from './../Forms/Button';
 
+import IconButton from '@material-ui/core/IconButton';
+
 import TextField from '@material-ui/core/TextField';
 
 import {
@@ -86,57 +88,49 @@ const SigninIn = props => {
                              
                            
                                 <br></br>
-                                <Button type="submit">
+                                <Button type="submit" className="btn">
                                     <Typography variant="h6" align="center" display="block">
                                         {/* This styling could be enhanced in Button - styles.scss */}
                                         Log In
                                     </Typography>
                                 </Button>
+
+                                <Link to="/registration">  
+                                     <Typography variant="h6" align="center" display="block" >
+                                          <FaMailBulk style={{
+                                              display: 'inline-block',
+                                               marginRight: '1rem',
+                                                fontSize: 'small',
+                                                color: '#e31837'
+                                                }}/>
+                                                Register with Email
+                                    </Typography>
+                                </Link>
+                                  <br></br>                  
+                                <Divider/> 
+                                        <Typography variant="subtitle2" align="center" display="block">
+                                                   Or Continue with social platforms
+                                        </Typography>
                            
                                     <div className="socialSignin">
                                         <div className="row">
-                                        <Divider/> 
-                                        <Typography variant="subtitle2" align="center" display="block">
-                                                   or
-                                        </Typography>
+                                            <IconButton onClick={handleGoogleSignIn} aria-label="googleSignIn" >
+                                                <FaGoogle style={{
+                                                    color: '#EA4335',
+                                                    fontSize: '30px'
+                                                    
+                                                }}/>
+                                            </IconButton>
 
-                                            {/* Put a google Icon after the <Button> */}
-                                            <Button onClick={handleGoogleSignIn} style={{backgroundColor: '#EA4335'}}>
-                                                <Typography variant="h6" align="center" display="block">
-                                                    <FaGoogle style={{
-                                                        display: 'inline-block',
-                                                        marginRight: '1rem',
-                                                        fontSize: 'large'
-                                                        }}
-                                                    />
-                                                    Continue With Google
-                                                </Typography>
-                                            </Button>
-                        
-                                            <Button onClick={handleFacebookSignIn} style={{backgroundColor: '#3b5998'}}>
-                                                <Typography variant="h6" align="center" display="block">
-                                                    <FaFacebook style={{
-                                                        display: 'inline-block',
-                                                        marginRight: '1rem',
-                                                        fontSize: 'large'
-                                                        }}/>
-                                                    Continue With Facebook
-                                                </Typography>
-                                            </Button>
+                                            <IconButton onClick={handleFacebookSignIn} aria-label="fbSignIn" color="red">
+                                                <FaFacebook style={{
+                                                    color: '#3b5998',
+                                                    fontSize: '30px'
+                                                }}/>
+                                            </IconButton>
 
                                                            
-                                            <Link to="/registration">
-                                                <Button>
-                                                    <Typography variant="h6" align="center" display="block" >
-                                                        <FaMailBulk style={{
-                                                        display: 'inline-block',
-                                                        marginRight: '1rem',
-                                                        fontSize: 'large'
-                                                        }}/>
-                                                        Register with Email
-                                                    </Typography>
-                                                </Button>
-                                            </Link>
+                                    
                                     
                                         </div>
                                     </div>

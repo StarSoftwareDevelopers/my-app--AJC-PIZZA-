@@ -3,8 +3,8 @@ import {useDispatch} from 'react-redux';
 import {Route, Switch } from 'react-router-dom'; 
 import { userAuthSession } from './Redux/User/user.actions';
 
-//HOC (Higher Order Component)
-import WithAuth from './HOC/withAuth';
+//HOC (Higher Order Component
+import WithAuth from './Higher-Order-Com/withAuth';
 
   //layout
 import MainLayout from  './layout/mainLayout';
