@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useState, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -37,15 +38,21 @@ const useStyles = makeStyles({
     
   });
 
-  function addUser() {
-    firestore.collection('users').get().then(snap => {
-      const size = snap.size // will return the collection size
-      console.log(size)
-   });
-  };
 
 export default function Dashboard() {
-    const classes = useStyles();  
+    const classes = useStyles(); 
+    const [size, setSize] = useState(null);
+
+    //useEffect for counting the total users registered
+    useEffect(() => {
+      firestore
+        .collection("users")
+        .get()
+        .then((snap) => {
+          setSize(snap.size)
+        });
+    }, [])
+ 
 
     return (
       <Card style={{
@@ -60,7 +67,7 @@ export default function Dashboard() {
                 <PeopleIcon style={{ color: green[500]}}/>  Total Users
                 </Typography>
                 <Typography variant="h4" component="h2">
-                   100
+                  {size}
                 </Typography>
                 </CardContent>
                 <CardActions>
