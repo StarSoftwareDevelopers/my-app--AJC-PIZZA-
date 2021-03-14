@@ -20,6 +20,7 @@ sagaMiddleware.run(rootSaga);
 
 // export const middlewares = [ thunk, logger ]
 
+//to check for redux dev tools
 // const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 // export const store = createStore(reducerRoot, composeEnhancers(applyMiddleware(...middlewares)))
 
