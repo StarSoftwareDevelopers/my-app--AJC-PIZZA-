@@ -4,12 +4,13 @@ import { firestore} from './../../firebase/firebase.utils';
 import {Link} from 'react-router-dom'; 
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, Card } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+
 
 import './styles.scss';
 
@@ -67,8 +68,8 @@ const MyAccount = () => {
                         <Typography variant="h5" style={{
                         
                         }}>
-                            Name: {currentUser.displayName}
-                        </Typography>
+                            Name {currentUser.displayName}
+                        </Typography>                   
                         
                         <h4>Email: {currentUser.email}</h4>
                         <h4>Joined at: {currentUser.createdDate.toDate().toString()}</h4>
