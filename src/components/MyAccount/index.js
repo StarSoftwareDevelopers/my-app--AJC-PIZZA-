@@ -3,11 +3,15 @@ import { useSelector } from 'react-redux';
 import { firestore} from './../../firebase/firebase.utils';
 import {Link} from 'react-router-dom'; 
 
-import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+
+import './styles.scss';
 
 const mapState = ({ user }) => ({
     currentUser: user.currentUser
@@ -42,45 +46,46 @@ const MyAccount = () => {
     }
 
 
-    
     return (
         <div>
             <br></br>
-            <Grid item xs={9}>
-                <Card  className={classes.root} variant="outlined">
-
-                            <Link to="/cart">
-                                <Button variant="outlined" color="primary">
-                                    Edit Profile 
-                                </Button>
-                            </Link>
-                
+            
+           <Container>
+               <div className="container">
                     <Typography variant="h4" align="center" style={{
-                        margin: '1rem',
-                        padding: '1rem' 
+                        marginBottom: '1.5rem'
                     }}>
                         My Account
+                        <Tooltip title={<h4 style={{ color: "#fff" }}>Edit</h4>}>
+                            <IconButton aria-label="delete">
+                                <EditIcon color="primary"/>
+                            </IconButton>
+                        </Tooltip>
                     </Typography>
-                    <Typography variant="h5" style={{
                     
-                    }}>
-                        Name: {currentUser.displayName}
-                    </Typography>
-                    
-                    <h4>Email: {currentUser.email}</h4>
-                    <h4>Joined at: {currentUser.createdDate.toDate().toString()}</h4>
-                    <h4>Address: {currentUser.address}</h4>
-                    
-                   <form onSubmit={addAddress}>
-                    <input type="text" placeholder="enter address" 
-                        onChange={e => setAddress(e.target.value)}
-                    />
-                    <button type="submit">
-                        Add
-                    </button>
-                   </form>
-                </Card>
-            </Grid>
+                    <div className="profileData">
+                        <Typography variant="h5" style={{
+                        
+                        }}>
+                            Name: {currentUser.displayName}
+                        </Typography>
+                        
+                        <h4>Email: {currentUser.email}</h4>
+                        <h4>Joined at: {currentUser.createdDate.toDate().toString()}</h4>
+                        <h4>Address: {currentUser.address}</h4>
+                        
+                        <form onSubmit={addAddress}>
+                            <input type="text" placeholder="enter address" 
+                                onChange={e => setAddress(e.target.value)}
+                            />
+                            <button type="submit">
+                                Add
+                            </button>
+                            
+                        </form>
+                   </div>
+                   </div>
+            </Container>
             <br></br>
         </div>
 
