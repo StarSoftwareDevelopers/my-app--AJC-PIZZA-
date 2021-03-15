@@ -8,7 +8,7 @@ class UserTable extends Component {
         this.state = { users: []};
       }
 
-    columns = ["Display Name", "Email", "Address"];
+    columns = ["Display Name", "Email", "Address","Phone Number"];
     options = {
         filter: true,
         selectableRows: 'none',
