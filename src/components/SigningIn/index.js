@@ -70,14 +70,14 @@ const SigninIn = props => {
                                  
                             <TextField autoFocus margin="dense"
                             type="email" label= "Email" 
-                             fullWidth variant="outlined"     
+                             fullWidth variant="outlined" required
                              onChange={ e => setEmail(e.target.value)}
                             />
                                 <br></br>
                             
                                 <TextField margin="dense"
                             type="password" label= "Password" 
-                             fullWidth variant="outlined"     
+                             fullWidth variant="outlined" helperText="Password must be more than 6 characters long"    
                              onChange={ e => setPassword(e.target.value)}
                             />
                             

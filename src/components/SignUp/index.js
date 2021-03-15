@@ -52,6 +52,7 @@ const Signup = props => {
    
   }
 
+
         return(
            <div className="container">
              <div className="wrap">
@@ -87,7 +88,7 @@ const Signup = props => {
 
                          <TextField  margin="dense"
                             type="password" label= "Password" 
-                             fullWidth variant="outlined"     
+                             fullWidth variant="outlined" helperText="Password must be more than 6 characters long"    
                              onChange={ e => setPassword(e.target.value)}
                             />
 
