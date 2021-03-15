@@ -1,6 +1,9 @@
 const trialandError = props => {
     return (
-        <div>try</div>
+        <div>try
+          <h1>Tried </h1>
+        </div>
+        
       );
 }
  
