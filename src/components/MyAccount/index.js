@@ -23,21 +23,8 @@ const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 800,
-    backgroundColor: "whitesmoke",
-    boxShadow: "black",
-    display: "center",
-  },
-  Grid: {
-    justify: "center",
-  },
-});
-
 const MyAccount = () => {
   const { currentUser } = useSelector(mapState);
-  const classes = useStyles();
   const [displayName, setdisplayName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
