@@ -62,6 +62,11 @@ const Header = props => {
                                     </Link>
                                 </li>
                                 <li>
+                                 <Link to="/about">
+                                    About
+                                 </Link>
+                             </li>
+                                <li>
                                     <span onClick={handleClickOpen}>
                                         Log Out
                                     </span>
