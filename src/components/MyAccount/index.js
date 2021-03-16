@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { firestore } from "./../../firebase/firebase.utils";
+import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, InputAdornment } from "@material-ui/core";
@@ -67,7 +68,7 @@ const MyAccount = () => {
               marginBottom: "1.5rem",
             }}
           >
-            My Account
+            {currentUser.displayName}'s Account
             <Tooltip title={<h4 style={{ color: "#fff" }}>Edit</h4>}>
               <IconButton aria-label="delete">
                 <EditIcon color="primary" />
@@ -82,10 +83,9 @@ const MyAccount = () => {
                 margin="dense"
                 type="text"
                 label="Full Name"
-                value={displayName}
-                placeholder={currentUser.displayName}
+                defaultValue={currentUser.displayName}
                 fullWidth
-                onChange={(e) => setdisplayName(e.target.value)}
+                onChange={(e) => setdisplayName(e.target.defaultValue)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -98,10 +98,11 @@ const MyAccount = () => {
                 }}
               />
               <TextField
+                disabled
                 margin="dense"
                 type="email"
                 label="Email"
-                value={currentUser.email}
+                defaultValue={currentUser.email}
                 fullWidth
                 InputProps={{
                   startAdornment: (
@@ -118,8 +119,7 @@ const MyAccount = () => {
                 margin="dense"
                 type="text"
                 label="Address"
-                value={address}
-                placeholder={currentUser.address}
+                defaultValue={currentUser.address}
                 fullWidth
                 onChange={(e) => setAddress(e.target.value)}
                 InputProps={{
@@ -138,12 +138,17 @@ const MyAccount = () => {
                 label="Phone Number"
                 data-cy="user-phone"
                 defaultCountry={"ph"}
+                value={currentUser.phone}
+                onChange={(e) => setPhone(e.target.value)}
                 InputLabelProps={{
                   style: { fontSize: "17px" },
                 }}
               />
               <Button type="submit">Update</Button>
             </form>
+            <Link to="/recovery">
+              <Typography variant="body1">Reset Password?</Typography>
+            </Link>
           </div>
         </div>
       </Container>
