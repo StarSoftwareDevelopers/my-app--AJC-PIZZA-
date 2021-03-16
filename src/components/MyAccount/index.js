@@ -42,17 +42,22 @@ const MyAccount = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
 
-  // add field for address //
-  const addAddress = (e) => {
-    const userRef = firestore.collection("users").doc(currentUser.id);
-    e.preventDefault();
-    const res = userRef.set(
-      {
-        address,
-      },
-      { merge: true }
-    );
-    console.log("added");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const userRef = firestore.collection("users").doc(currentUser.id);
+      const res = userRef.set(
+        {
+          displayName,
+          address,
+          phone,
+        },
+        { merge: true }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -77,15 +82,16 @@ const MyAccount = () => {
           </Typography>
 
           <div className="profileData">
-            <form>
+            <form onSubmit={handleSubmit}>
               <TextField
                 id="input"
                 margin="dense"
                 type="text"
                 label="Full Name"
-                defaultValue={currentUser.displayName}
+                placeholder={currentUser.displayName}
+                value={displayName}
                 fullWidth
-                onChange={(e) => setdisplayName(e.target.defaultValue)}
+                onChange={(e) => setdisplayName(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -119,7 +125,8 @@ const MyAccount = () => {
                 margin="dense"
                 type="text"
                 label="Address"
-                defaultValue={currentUser.address}
+                placeholder={currentUser.address}
+                value={address}
                 fullWidth
                 onChange={(e) => setAddress(e.target.value)}
                 InputProps={{
@@ -133,16 +140,13 @@ const MyAccount = () => {
                   style: { fontSize: "17px" },
                 }}
               />
+              {currentUser.phone}
               <MuiPhoneNumber
                 fullWidth
+                name="phone"
                 label="Phone Number"
                 data-cy="user-phone"
                 defaultCountry={"ph"}
-                value={currentUser.phone}
-                onChange={(e) => setPhone(e.target.value)}
-                InputLabelProps={{
-                  style: { fontSize: "17px" },
-                }}
               />
               <Button type="submit">Update</Button>
             </form>
