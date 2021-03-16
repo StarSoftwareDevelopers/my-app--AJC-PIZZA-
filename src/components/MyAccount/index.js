@@ -140,13 +140,14 @@ const MyAccount = () => {
                   style: { fontSize: "17px" },
                 }}
               />
-              {currentUser.phone}
               <MuiPhoneNumber
                 fullWidth
                 name="phone"
                 label="Phone Number"
+                value={currentUser.phone}
                 data-cy="user-phone"
                 defaultCountry={"ph"}
+                onChange={(e) => setPhone(e)}
               />
               <Button type="submit">Update</Button>
             </form>
