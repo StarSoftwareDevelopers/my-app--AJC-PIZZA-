@@ -70,7 +70,7 @@ const SigninIn = props => {
                                  
                             <TextField autoFocus margin="dense"
                             type="email" label= "Email" 
-                             fullWidth variant="outlined" required
+                             fullWidth variant="outlined"
                              onChange={ e => setEmail(e.target.value)}
                              required
                             />

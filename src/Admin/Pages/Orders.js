@@ -1,6 +1,6 @@
 import OrderTable from './../AdminComponents/Table/OrdersTable';
 import Container from '@material-ui/core/Container';
-import OrdersTabScreen from './../AdminComponents/Table/OrdersTabScreen';
+// import OrdersTabScreen from './../AdminComponents/Table/OrdersTabScreen';
 
 const Orders = () => {
     return ( 

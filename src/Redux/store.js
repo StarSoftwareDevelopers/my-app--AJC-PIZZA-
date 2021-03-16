@@ -12,17 +12,8 @@ export const middleWares = [thunk, sagaMiddleware, logger];
 export const store = createStore(reducerRoot, applyMiddleware(...middleWares),); 
 sagaMiddleware.run(rootSaga);
 
-// import { createStore, applyMiddleware, compose } from 'redux';
-// import logger from 'redux-logger';
-// import thunk from 'redux-thunk';
-
-// import reducerRoot from './reducerRoot';
-
-// export const middlewares = [ thunk, logger ]
-
-//to check for redux dev tools
 // const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-// export const store = createStore(reducerRoot, composeEnhancers(applyMiddleware(...middlewares)))
+//for the redux dev tools
 
 
 export default store;

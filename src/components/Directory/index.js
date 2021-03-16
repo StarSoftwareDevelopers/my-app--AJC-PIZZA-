@@ -14,13 +14,11 @@ const Directory = props => {
                     }}
                     >
                         <content>
-                <items>
                 <h1>AJC Homemade Pizza</h1>
                 <p>The Best Pizza in Ayala</p>
                 <Link to ="/dashboardC">
                     Order Now
                 </Link>
-                </items>
             </content>
                 </div>
             </div>
