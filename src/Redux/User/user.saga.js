@@ -51,7 +51,7 @@ export function* emailSignIn({ payload: { email, password } }) {
 export function* onEmailSignInStart() {
   //takes two things, the 1st one is the action we're listening for
   //2nd is the nmame of the generator function that will handle this event when it is called
-  yield takeLatest(UserTypes.EMAIL_SIGN_IN_START, emailSignIn);
+  yield takeLatest(UserTypes.LOGIN_WITH_EMAIL, emailSignIn);
 }
 
 //if the user is currently signed in
@@ -69,7 +69,7 @@ export function* isUserAuthenticated() {
 }
 
 export function* userAuthSession() {
-  yield takeLatest(UserTypes.USER_AUTH_SESSION, isUserAuthenticated);
+  yield takeLatest(UserTypes.AUTHENTICATE_USER, isUserAuthenticated);
 }
 
 //generator function for signout
@@ -84,7 +84,7 @@ export function* signOutUser() {
 }
 
 export function* onSignOutUserStart() {
-  yield takeLatest(UserTypes.SIGN_OUT_USER_START, signOutUser);
+  yield takeLatest(UserTypes.LOGOUT_USER, signOutUser);
 }
 
 //generator function for signup
@@ -111,7 +111,7 @@ export function* signUp({
 
 //signup
 export function* onSignUpStart() {
-  yield takeLatest(UserTypes.SIGN_UP_USER_START, signUp);
+  yield takeLatest(UserTypes.USER_REGISTRY, signUp);
 }
 
 //generator function to handle this asychronous code for reset password
@@ -126,7 +126,7 @@ export function* resetPass({ payload: { email } }) {
 
 //reset password
 export function* onResetPassStart() {
-  yield takeLatest(UserTypes.RESET_PASS_START, resetPass);
+  yield takeLatest(UserTypes.PASSWORD_RESET, resetPass);
 }
 
 //google signIn
@@ -140,7 +140,7 @@ export function* googleSignIn() {
 }
 
 export function* onGoogleSignInStart() {
-  yield takeLatest(UserTypes.GOOGLE_SIGN_IN_START, googleSignIn);
+  yield takeLatest(UserTypes.LOGIN_WITH_GOOGLE, googleSignIn);
 }
 
 //faceook
@@ -154,7 +154,7 @@ export function* facebookSignIn() {
 }
 
 export function* onFacebookSignInStart() {
-  yield takeLatest(UserTypes.FACEBOOK_SIGN_IN_START, facebookSignIn);
+  yield takeLatest(UserTypes.LOGIN_WITH_FACEBOOK, facebookSignIn);
 }
 
 export default function* userSaga() {

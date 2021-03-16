@@ -1,57 +1,57 @@
 //all redux actions
-import UserTypes from "./user.types";
+import UserTypes from './user.types';
 
 //naming conventions in redux saga
 export const emailSignInStart = (userCredentials) => ({
-  type: UserTypes.EMAIL_SIGN_IN_START,
-  payload: userCredentials,
+    type: UserTypes.LOGIN_WITH_EMAIL,
+    payload: userCredentials,
 });
 
 export const signInSuccess = (user) => ({
-  type: UserTypes.SIGN_IN_SUCCESS,
-  payload: user,
+    type: UserTypes.PROCESSED_LOGIN,
+    payload: user,
 });
 
 export const userAuthSession = () => ({
-  type: UserTypes.USER_AUTH_SESSION,
+    type: UserTypes.AUTHENTICATE_USER,
 });
 
 export const signOutUserStart = () => ({
-  type: UserTypes.SIGN_OUT_USER_START,
+    type: UserTypes.LOGOUT_USER,
 });
 
 export const signOutSuccess = () => ({
-  type: UserTypes.SIGN_OUT_SUCCESS,
+    type: UserTypes.PROCESSED_LOGOUT,
 });
 
-export const signUpStart = (userCredentials) => ({
-  type: UserTypes.SIGN_UP_USER_START,
-  payload: userCredentials,
+export const signUpStart = userCredentials => ({
+    type: UserTypes.USER_REGISTRY,
+    payload: userCredentials,
 });
 
-export const errorUser = (err) => ({
-  type: UserTypes.ERROR_USER,
-  payload: err,
+export const errorUser = err => ({
+    type: UserTypes.USER_ERROR,
+    payload: err,
 });
 
-export const resetPassStart = (userCredentials) => ({
-  type: UserTypes.RESET_PASS_START,
-  payload: userCredentials,
+export const resetPassStart = userCredentials => ({
+    type: UserTypes.PASSWORD_RESET,
+    payload: userCredentials,
 });
 
 export const resetPassSuccess = () => ({
-  type: UserTypes.RESET_PASS_SUCCESS,
-  payload: true,
+    type: UserTypes.PROCESSED_PASSWORD_RESET,
+    payload: true,
 });
 
 export const resetStateUser = () => ({
-  type: UserTypes.RESET_STATE_USER,
+    type: UserTypes.STATE_OF_USER_RESET,
 });
 
 export const googleSignInStart = () => ({
-  type: UserTypes.GOOGLE_SIGN_IN_START,
+    type: UserTypes.LOGIN_WITH_GOOGLE,
 });
 
 export const facebookSignInStart = () => ({
-  type: UserTypes.FACEBOOK_SIGN_IN_START,
+    type: UserTypes.LOGIN_WITH_FACEBOOK,
 });

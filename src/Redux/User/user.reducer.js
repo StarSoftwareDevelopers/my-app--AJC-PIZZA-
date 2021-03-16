@@ -8,24 +8,24 @@ const INITIAL_STATE ={
 
 const userReducer = (state=INITIAL_STATE, action) => {
    switch(action.type){
-       case UserTypes.SIGN_IN_SUCCESS:
+       case UserTypes.PROCESSED_LOGIN:
            return {
                ...state,
                currentUser: action.payload,
                errorUser: []
            }
-        case UserTypes.RESET_PASS_SUCCESS:
+        case UserTypes.PROCESSED_PASSWORD_RESET:
             return{
                 ...state,
                 resetPassSuccess: action.payload
             }
-        case UserTypes.ERROR_USER:
+        case UserTypes.USER_ERROR:
             return {
                 ...state,
                 errorUser: action.payload
             }
-        case UserTypes.RESET_STATE_USER:
-        case UserTypes.SIGN_OUT_SUCCESS:
+        case UserTypes.STATE_OF_USER_RESET:
+        case UserTypes.PROCESSED_LOGOUT:
             return{
                 ...state,
                 ...INITIAL_STATE
