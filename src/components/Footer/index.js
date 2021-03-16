@@ -29,13 +29,13 @@ const Footer = props => {
                        </SocialLogo>
                        <SocialIcons>
                        <SocialIconsLink href="/" target="_blank" aria-label="Facebook" rel="moopener noreferrer">
-                           <FaFacebook />
+                           <FaFacebook style={{color: '#4267B2'}} />
                        </SocialIconsLink>
                        <SocialIconsLink href="/" target="_blank" aria-label="Instagram" rel="moopener noreferrer">
-                           <FaInstagram />
+                           <FaInstagram style={{color: '#fb3958'}} />
                        </SocialIconsLink>
                        <SocialIconsLink href="/" target="_blank" aria-label="Twitter" rel="moopener noreferrer">
-                           <FaTwitter />
+                           <FaTwitter style={{color: '#1DA1F2'}}/>
                        </SocialIconsLink>
                        </SocialIcons>
                    </SocialMediaWrap>
