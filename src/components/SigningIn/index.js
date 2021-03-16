@@ -72,13 +72,14 @@ const SigninIn = props => {
                             type="email" label= "Email" 
                              fullWidth variant="outlined"     
                              onChange={ e => setEmail(e.target.value)}
+                             required
                             />
                                 <br></br>
                             
                                 <TextField margin="dense"
                             type="password" label= "Password" 
                              fullWidth variant="outlined"     
-                             onChange={ e => setPassword(e.target.value)}
+                             onChange={ e => setPassword(e.target.value)} required
                             />
                             
                                 <Link to="/recovery">
@@ -132,7 +133,7 @@ const SigninIn = props => {
                                                   }}/>
                                               </IconButton>
                                           </Link>
-                                        </Tooltip>        
+                                        </Tooltip>    
                                         </div>
                                     </div>
                                 </div>     

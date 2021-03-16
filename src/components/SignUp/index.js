@@ -76,25 +76,25 @@ const Signup = props => {
                         <TextField autoFocus margin="dense"
                             type="text" label= "Full Name" 
                              fullWidth variant="outlined"     
-                             onChange={ e => setdisplayName(e.target.value)}
+                             onChange={ e => setdisplayName(e.target.value)} required 
                             />
 
                         <TextField margin="dense"
                             type="email" label= "Email" 
                              fullWidth variant="outlined"     
-                             onChange={ e => setEmail(e.target.value)}
+                             onChange={ e => setEmail(e.target.value)}  required 
                             />
 
                          <TextField  margin="dense"
                             type="password" label= "Password" 
                              fullWidth variant="outlined"     
-                             onChange={ e => setPassword(e.target.value)}
+                             onChange={ e => setPassword(e.target.value)}  required 
                             />
 
                           <TextField  margin="dense"
                             type="password" label= "Confirm Password" 
                              fullWidth variant="outlined"     
-                             onChange={ e => setConfirmPassword(e.target.value)}
+                             onChange={ e => setConfirmPassword(e.target.value)}  required 
                             />
                         <br/> <br/>
                        <Button type="submit">
