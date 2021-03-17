@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { firestore } from "./../../firebase/firebase.utils";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, InputAdornment } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import EditIcon from "@material-ui/icons/Edit";
@@ -17,33 +16,43 @@ import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 import MuiPhoneNumber from "material-ui-phone-number";
 
 import "./styles.scss";
-import Button from "../Forms/Button";
+import Button from "./../Forms/Button";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
 const MyAccount = () => {
+  const history = useHistory();
   const { currentUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const userRef = firestore.collection("users").doc(currentUser.id);
-      const res = userRef.set(
-        {
-          displayName,
-          address,
-          phone,
-        },
-        { merge: true }
-      );
-    } catch (err) {
-      console.log(err);
+    // event.preventDefault();
+    if (
+      (displayName === "" || displayName == null) &&
+      (address == "" || address === null)
+    ) {
+      //show error for user that both fields have to be completed
+      console.log("Please fill up all of those fields");
+    } else {
+      //do the form submit
+      try {
+        const userRef = firestore.collection("users").doc(currentUser.id);
+        const res = userRef.set(
+          {
+            displayName,
+            address,
+            phone,
+          },
+          { merge: true }
+        );
+        history.push("/account");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -78,6 +87,7 @@ const MyAccount = () => {
                 placeholder={currentUser.displayName}
                 value={displayName}
                 fullWidth
+                required
                 onChange={(e) => setdisplayName(e.target.value)}
                 InputProps={{
                   startAdornment: (
@@ -116,6 +126,7 @@ const MyAccount = () => {
                 value={address}
                 fullWidth
                 onChange={(e) => setAddress(e.target.value)}
+                required
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -132,6 +143,7 @@ const MyAccount = () => {
                 name="phone"
                 label="Phone Number"
                 value={currentUser.phone}
+                required
                 data-cy="user-phone"
                 defaultCountry={"ph"}
                 onChange={(e) => setPhone(e)}
