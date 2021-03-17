@@ -31,28 +31,19 @@ const MyAccount = () => {
 
   const handleSubmit = async (event) => {
     // event.preventDefault();
-    if (
-      (displayName === "" || displayName == null) &&
-      (address == "" || address === null)
-    ) {
-      //show error for user that both fields have to be completed
-      console.log("Please fill up all of those fields");
-    } else {
-      //do the form submit
-      try {
-        const userRef = firestore.collection("users").doc(currentUser.id);
-        const res = userRef.set(
-          {
-            displayName,
-            address,
-            phone,
-          },
-          { merge: true }
-        );
-        history.push("/account");
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      const userRef = firestore.collection("users").doc(currentUser.id);
+      const res = userRef.set(
+        {
+          displayName,
+          address,
+          phone,
+        },
+        { merge: true }
+      );
+      history.push("/account");
+    } catch (err) {
+      console.log(err);
     }
   };
 
