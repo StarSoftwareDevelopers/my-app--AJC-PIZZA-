@@ -13,10 +13,10 @@ const Directory = props => {
                         backgroundImage: `url(${PizzaWelcome})`
                     }}
                     >
-                        <content>
+                   <content>
                 <h1>AJC Homemade Pizza</h1>
                 <p>The Best Pizza in Ayala</p>
-                <Link to ="/dashboardC">
+                <Link to ="/browsing">
                     Order Now
                 </Link>
             </content>

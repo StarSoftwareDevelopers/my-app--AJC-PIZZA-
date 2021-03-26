@@ -34,55 +34,61 @@ const Header = props => {
         setOpen(false);
     };
 
+    //<img src={Logo} alt="AJC Logo" />
+
     return (
         <header className="header">
             <div className="wrap">
                     <div className="logo">
-                    <Link to = "/">
-                        <img src={Logo} alt="AJC Logo" />
-                    </Link>
+                        <h1><b>AJC Pizza</b></h1>
                     </div>
                     <div className="callingAction">
+                        <ul>
+                            <li>
+                                <Link to = "/">
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/browsing">
+                                    Order
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to ="/cart">
+                                    My Cart 1
+                                </Link>
+                            </li>
 
-                        {currentUser && (
-                            <ul>
-                                <li>
-                                    <Link to="/dashboardC">
-                                        Order
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/cart">
-                                        My Cart
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/account">
-                                        My Account
-                                    </Link>
-                                </li>
-                                <li>
-                                    <span onClick={handleClickOpen}>
-                                        Log Out
-                                    </span>
-                                </li>
-                            </ul>
-                        )}
+                        {currentUser && [
+                           
+                            <li>
+                                <Link to="/account">
+                                    My Account
+                                </Link>
+                            </li>,
+                            <li>
+                                <span onClick={handleClickOpen}>
+                                    Log Out
+                                </span>
+                            </li>
+                        ]}
 
-                        {!currentUser && (
-                             <ul>
+                        {!currentUser && [
                              <li>
                                  <Link to="/login">
                                      Login
                                  </Link>
-                             </li>
+                             </li>,
                              <li>
                                  <Link to="/about">
                                     About
                                  </Link>
                              </li>
-                         </ul>
-                        )}
+                        
+                        ]}
+                        </ul>
+                        
                        
                     </div>
 

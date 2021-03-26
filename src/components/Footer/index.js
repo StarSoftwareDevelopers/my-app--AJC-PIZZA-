@@ -17,7 +17,7 @@ import {
     SocialIconsLink
 } from './FooterElem';
 
-
+//
 const Footer = props => {
     return (
        <FooterContainer>
