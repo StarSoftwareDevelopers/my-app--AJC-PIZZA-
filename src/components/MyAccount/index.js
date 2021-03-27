@@ -16,7 +16,7 @@ import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 import MuiPhoneNumber from "material-ui-phone-number";
 
 import "./styles.scss";
-import Button from "../Forms/Button";
+import Button from "./../Forms/Button";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -30,8 +30,7 @@ const MyAccount = () => {
   const [phone, setPhone] = useState(currentUser.phone);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
+    // event.preventDefault();
     try {
       const userRef = firestore.collection("users").doc(currentUser.id);
       const res = userRef.set(
@@ -42,6 +41,7 @@ const MyAccount = () => {
         },
         { merge: true }
       );
+      history.push("/account");
     } catch (err) {
       console.log(err);
     }
@@ -78,6 +78,7 @@ const MyAccount = () => {
                 placeholder={currentUser.displayName}
                 value={displayName}
                 fullWidth
+                required
                 onChange={(e) => setdisplayName(e.target.value)}
                 InputProps={{
                   startAdornment: (
@@ -116,6 +117,7 @@ const MyAccount = () => {
                 value={address}
                 fullWidth
                 onChange={(e) => setAddress(e.target.value)}
+                required
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -132,6 +134,7 @@ const MyAccount = () => {
                 name="phone"
                 label="Phone Number"
                 value={currentUser.phone}
+                required
                 data-cy="user-phone"
                 defaultCountry={"ph"}
                 onChange={(e) => setPhone(e)}

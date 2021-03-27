@@ -253,7 +253,6 @@ export default function PersistentDrawerLeft() {
               <Typography variant="h5">Users</Typography>
             </ListItem>
           </Link>
-
           <ListItem button key="LogOut">
             <ListItemIcon>
               <ExitToAppIcon fontSize="large" />

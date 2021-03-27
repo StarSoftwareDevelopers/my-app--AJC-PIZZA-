@@ -3,18 +3,19 @@ import {Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-
+import Chicken from './../../assets/chickenpizza.jpg';
 import Typography from '@material-ui/core/Typography';
+import './style.scss';
 
 const useStyles = makeStyles({
     root: {
         textSizeAdjust: 9,
-      minWidth: 275,
+      minWidth: 250,
     },
     bullet: {
       display: 'inline-block',
       margin: '0 2px',
-      transform: 'scale(0.8)',
+      transform: 'scale(0.9)',
     },
     title: {
       fontSize: 14,
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
       marginBottom: 12,
     },
     GridContainer: {
-      padding: '10px'
+      padding: '5px'
     },    
   });
 
@@ -70,6 +71,8 @@ export default function CardFeedback() {
                     purchase AJC's very own 
                     pizzas. 
                 </Typography>
+                
+                
                 </CardContent>
             </Card>
       </Grid>
@@ -150,3 +153,7 @@ export default function CardFeedback() {
     );
  
   }
+
+  /*<div className="imege">
+  <img src={Chicken} alt="Chicken Pizza" width="200" height="150" />
+  </div>*/

@@ -1,0 +1,101 @@
+.items {
+    margin: 2rem 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+
+    @media screen and (max-width: 650px) {
+        width: 100%;
+        height: 50%;
+    }
+
+    .itemRes {
+        flex-wrap: wrap;
+        display: flex;
+        margin: 3rem -10px 0;
+    }
+}
+
+
+
+.buttoning {
+    font-size: 1.0rem;
+    text-align: center;
+    margin-left: 10px;
+    padding: 1rem 4rem;
+    border: none;
+    background: #e31837;
+    color: #fff;
+    transition: 0.1s ease-out;
+    font-family: 'Montserrat', sans-serif;
+
+    &:hover {
+        background: #ffc500;
+        transition: 0.1s ease-out;
+        color: #000;
+        cursor: pointer;
+}
+    }
+
+    
+.itemdes {
+    /*display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    padding-bottom: 100px;*/
+
+    width: 33.333333333333333%;
+    //float: center; //adjust to left later on
+    padding: 0 10px;
+    margin: 0 auto 2rem;
+    //height: 45.0rem;
+
+    .pic {
+        width: 100%;
+        display: block;
+
+        img {
+            margin: 0;
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .pizzainfo {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        padding: 1rem;
+
+        ul, ul li {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            li {
+                list-style-type: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0 0 5px;
+
+                .name {
+                    line-height: 1.2;
+                    font-weight: 400;
+                    font-size: 2.5rem;
+                }
+                .pricee {
+                    line-height: 1;
+                    font-weight: 400;
+                    font-size: 1.5rem;
+                }
+
+                .addedtoCart {
+                    margin: 1rem 0 0 0;
+                }
+            }
+        }
+    }
+}

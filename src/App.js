@@ -13,6 +13,7 @@ import HomeLayout from "./layout/HomeLayout";
 
 //pages
 import Homepage from "./pages/Homepage";
+import Browsing from "./pages/Browse";
 import Registration from "./pages/Registration";
 import Recovery from "./pages/Recovery";
 import Login from "./pages/Login";
@@ -24,7 +25,7 @@ import About from "./pages/About";
 import AdminRoute from "./Admin/AdminRoute/index";
 import AppBar from "./Admin/AdminComponents/AppBar";
 import Home from "./Admin/Pages/Home";
-
+import Header from './components/Header'
 import "./default.scss";
 
 const App = (props) => {
@@ -36,6 +37,10 @@ const App = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+  /*NOTE! Temporarily changed in /order in App.js 
+    because <MainLayout /> will put the Footer at the side,
+    followed scss styling of SimpleTut because of sizing of images*/
   return (
     <div className="App">
       <Switch>
@@ -86,12 +91,13 @@ const App = (props) => {
         />
         <Route
           exact
-          path="/dashboardC"
+          path="/browsing"
           render={() => (
             <WithAuth>
-              <MainLayout>
-                <DashboardC />
-              </MainLayout>
+                <Header />
+                <div className="main">
+                <Browsing />
+                </div>
             </WithAuth>
           )}
         />
@@ -106,6 +112,7 @@ const App = (props) => {
             </WithAuth>
           )}
         />
+        
         <Route
           exact
           path="/cart"

@@ -35,7 +35,6 @@ const Header = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
   const admin = validateAdmin(currentUser);
 
   return (
@@ -82,7 +81,6 @@ const Header = (props) => {
             </ul>
           )}
         </div>
-
         <Dialog
           open={open}
           onClose={handleClose}
