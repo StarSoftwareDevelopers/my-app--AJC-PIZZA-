@@ -56,7 +56,7 @@ const Header = (props) => {
           {currentUser && (
             <ul>
               <li>
-                <Link to="/dashboardC">Order</Link>
+                <Link to="/order">Order</Link>
               </li>
               <li>
                 <Link to="/cart">My Cart</Link>
