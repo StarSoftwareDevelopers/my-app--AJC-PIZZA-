@@ -17,7 +17,6 @@ import Browsing from "./pages/Browse";
 import Registration from "./pages/Registration";
 import Recovery from "./pages/Recovery";
 import Login from "./pages/Login";
-import DashboardC from "./pages/Dashboard";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Cart from "./pages/Cart";
 import About from "./pages/About";
