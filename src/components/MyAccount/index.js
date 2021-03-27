@@ -41,10 +41,10 @@ const MyAccount = () => {
         },
         { merge: true }
       );
-      history.push("/account");
     } catch (err) {
       console.log(err);
     }
+    history.push("/account");
   };
 
   return (
