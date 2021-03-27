@@ -56,6 +56,7 @@ const Menu = () => {
           open={open}
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
+          maxWidth="sm"
         >
           <DialogTitle id="form-dialog-title">Add New Menu</DialogTitle>
           <DialogContent>
