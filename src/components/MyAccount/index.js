@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { firestore } from "./../../firebase/firebase.utils";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, InputAdornment } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import EditIcon from "@material-ui/icons/Edit";
@@ -24,10 +23,11 @@ const mapState = ({ user }) => ({
 });
 
 const MyAccount = () => {
+  const history = useHistory();
   const { currentUser } = useSelector(mapState);
-  const [displayName, setdisplayName] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
+  const [displayName, setdisplayName] = useState(currentUser.displayName);
+  const [address, setAddress] = useState(currentUser.address);
+  const [phone, setPhone] = useState(currentUser.phone);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -148,22 +148,5 @@ const MyAccount = () => {
     </div>
   );
 };
-
-// <Typography variant="h5" style={{}}>
-//               Name {currentUser.displayName}
-//             </Typography>
-
-//             <h4>Email: {currentUser.email}</h4>
-//             <h4>Joined at: {currentUser.createdDate.toDate().toString()}</h4>
-//             <h4>Address: {currentUser.address}</h4>
-
-//             <form onSubmit={addAddress}>
-//               <input
-// //                 type="text"
-// //                 placeholder="enter address"
-// //                 onChange={(e) => setAddress(e.target.value)}
-// //               />
-// //               <button type="submit">Add</button>
-//             </form>
 
 export default MyAccount;
