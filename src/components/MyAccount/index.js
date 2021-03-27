@@ -30,7 +30,7 @@ const MyAccount = () => {
   const [phone, setPhone] = useState(currentUser.phone);
 
   const handleSubmit = async (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     try {
       const userRef = firestore.collection("users").doc(currentUser.id);
       const res = userRef.set(
