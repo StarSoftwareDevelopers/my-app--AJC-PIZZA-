@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/storage";
 import { firebaseConfig } from "./config";
 
 firebase.initializeApp(firebaseConfig);
@@ -8,9 +9,7 @@ firebase.initializeApp(firebaseConfig);
 //instances of Auth and Firestore
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
-
-//try
-export default firebase;
+export const storage = firebase.storage();
 
 //utility function for the onclick event with the Sign in of Google button
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();

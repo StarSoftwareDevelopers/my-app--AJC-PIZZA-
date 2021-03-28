@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { firestore, storage } from "../../firebase/firebase.utils";
+
 import { InputAdornment } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -6,7 +8,7 @@ import { Link } from "react-router-dom";
 import "./../Admin.scss";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
-import MenuTable from "./../AdminComponents/Table/MenuTable";
+import MUIMenuTable from "./../AdminComponents/Table/MenuTableMUi";
 
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -15,7 +17,71 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 const Menu = () => {
-  const [open, setOpen] = React.useState(false);
+  const [productName, setProductName] = useState("");
+  const [productDesc, setProductDesc] = useState("");
+  const [productPrice, setProductPrice] = useState(0);
+  const [productImg, setProductImg] = useState(null);
+  const [error, setError] = useState("");
+
+  const types = ["image/png", "image/jpeg"];
+
+  const productImgHandler = (e) => {
+    let selectedFile = e.target.files[0];
+    if (selectedFile && types.includes(selectedFile.type)) {
+      setProductImg(selectedFile);
+      setError("");
+    } else {
+      setProductImg(null);
+      setError("Please select a valid image either png or jpg");
+    }
+  };
+
+  // add products
+  const addProducts = (e) => {
+    e.preventDefault();
+    const upload = storage
+      .ref(`product-images/${productImg.name}`)
+      .put(productImg);
+    upload.on(
+      "img_upload",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(progress);
+      },
+      (err) => {
+        setErrors(err.message);
+      },
+      () => {
+        storage
+          .ref("product-images")
+          .child(productImg.name)
+          .getDownloadURL()
+          .then((url) => {
+            firestore
+              .collection("Products")
+              .add({
+                productName: productName,
+                productDesc: productDesc,
+                productPrice: productPrice,
+                productImg: url,
+              })
+              .then(() => {
+                alert("Product Added Successfuly");
+                setProductName("");
+                setProductPrice(0);
+                setProductDesc("");
+                setProductImg("");
+                setErrors("");
+                document.getElementById("file").value = "";
+              })
+              .catch((err) => setError(err.message));
+          });
+      }
+    );
+  };
+
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -51,16 +117,16 @@ const Menu = () => {
         </Link>
         <br></br>
         <br></br>
-        <MenuTable />
+
         <Dialog
           open={open}
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
           maxWidth="sm"
         >
-          <DialogTitle id="form-dialog-title">Add New Menu</DialogTitle>
-          <DialogContent>
-            <form>
+          <form onSubmit={addProducts}>
+            <DialogTitle id="form-dialog-title">Add New Menu</DialogTitle>
+            <DialogContent>
               <TextField
                 autoFocus
                 margin="dense"
@@ -68,6 +134,9 @@ const Menu = () => {
                 label="Product Name"
                 type="text"
                 fullWidth
+                required
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
               />
               <TextField
                 margin="dense"
@@ -75,6 +144,9 @@ const Menu = () => {
                 label="Product Description"
                 type="text"
                 fullWidth
+                required
+                value={productDesc}
+                onChange={(e) => setProductDesc(e.target.value)}
               />
               <TextField
                 margin="dense"
@@ -90,19 +162,32 @@ const Menu = () => {
                     <InputAdornment position="start">.00</InputAdornment>
                   ),
                 }}
+                required
+                value={productPrice}
+                onChange={(e) => setProductPrice(e.target.value)}
               />
-              <input type="file" name="myImage" accept="image/*" />
-            </form>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleClose} color="primary">
-              Save
-            </Button>
-          </DialogActions>
+              <input
+                id="file"
+                type="file"
+                name="myImage"
+                accept="image/*"
+                required
+                onChange={productImgHandler}
+              />
+              {error & <span>{error}</span>}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button type="submit" onClick={handleClose} color="primary">
+                Save
+              </Button>
+            </DialogActions>
+          </form>
         </Dialog>
+        {/* <MenuTable /> */}
+        <MUIMenuTable />
       </Card>
     </Container>
   );
