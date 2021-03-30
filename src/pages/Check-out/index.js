@@ -9,7 +9,6 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import TextField from "@material-ui/core/TextField";
 
 const checkOut = (props) => {
-  const [paymentMethod, setpaymentMethod] = useState("COD");
   return (
     <div>
       <Container fixed>

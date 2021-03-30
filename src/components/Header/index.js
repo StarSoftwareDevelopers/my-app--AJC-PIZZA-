@@ -62,7 +62,7 @@ const Header = (props) => {
                 <Link to="/cart">My Cart</Link>
               </li>
               <li>
-                <Link to="#">Order Status</Link>
+                <Link to="/order-status">Order Status</Link>
               </li>
               <li>
                 <Link to="/account">My Account</Link>

@@ -21,6 +21,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import Cart from "./pages/Cart";
 import About from "./pages/About";
 import CheckOut from "./pages/Check-out";
+import StatusPage from "./pages/OrderStatusPage";
 
 import AdminRoute from "./Admin/AdminRoute/index";
 import AppBar from "./Admin/AdminComponents/AppBar";
@@ -126,6 +127,17 @@ const App = (props) => {
             <WithAuth>
               <MainLayout>
                 <CheckOut />
+              </MainLayout>
+            </WithAuth>
+          )}
+        />
+        <Route
+          exact
+          path="/order-status"
+          render={() => (
+            <WithAuth>
+              <MainLayout>
+                <StatusPage />
               </MainLayout>
             </WithAuth>
           )}
