@@ -8,7 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import StoreIcon from "@material-ui/icons/Store";
 import DescriptionIcon from "@material-ui/icons/Description";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
-import { green, orange, blue } from "@material-ui/core/colors";
+import ContactSupportIcon from "@material-ui/icons/ContactSupport";
+import { green, orange, blue, red } from "@material-ui/core/colors";
+
+import ContactUs from "./../../components/ContactUs";
 
 const useStyles = makeStyles({
   root: {
@@ -36,7 +39,7 @@ const About = () => {
     <div>
       <Card
         style={{
-          padding: ".5rem",
+          padding: "1.5rem",
           marginRight: "1.5rem",
         }}
       >
@@ -66,6 +69,18 @@ const About = () => {
             <Card className={classes.root} variant="outlined">
               <CardContent>
                 <Typography className={classes.title} gutterBottom>
+                  <ContactSupportIcon style={{ color: red[500] }} />
+                  Contact Us
+                </Typography>
+                <ContactUs />
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography className={classes.title} gutterBottom>
                   <VerifiedUserIcon style={{ color: green[500] }} /> Privacy
                   Policy
                 </Typography>
@@ -87,7 +102,7 @@ const About = () => {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={4}>
+          <Grid>
             <Card className={classes.root} variant="outlined">
               <CardContent>
                 <Typography className={classes.title} gutterBottom>
