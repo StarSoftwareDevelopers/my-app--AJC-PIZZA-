@@ -77,6 +77,7 @@ const MyAccount = () => {
                 label="Full Name"
                 placeholder={currentUser.displayName}
                 value={displayName}
+                color="secondary"
                 fullWidth
                 required
                 onChange={(e) => setdisplayName(e.target.value)}
@@ -96,6 +97,7 @@ const MyAccount = () => {
                 margin="dense"
                 type="email"
                 label="Email"
+                color="secondary"
                 defaultValue={currentUser.email}
                 fullWidth
                 InputProps={{
@@ -118,6 +120,7 @@ const MyAccount = () => {
                 fullWidth
                 onChange={(e) => setAddress(e.target.value)}
                 required
+                color="secondary"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -135,6 +138,7 @@ const MyAccount = () => {
                 label="Phone Number"
                 value={currentUser.phone}
                 required
+                color="secondary"
                 data-cy="user-phone"
                 defaultCountry={"ph"}
                 onChange={(e) => setPhone(e)}
