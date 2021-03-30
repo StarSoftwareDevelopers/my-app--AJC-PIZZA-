@@ -81,6 +81,7 @@ const EmailPass = (props) => {
                 margin="dense"
                 type="email"
                 label="Email"
+                color="secondary"
                 fullWidth
                 variant="outlined"
                 onChange={(e) => setEmail(e.target.value)}
