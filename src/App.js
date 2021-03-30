@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Cart from "./pages/Cart";
 import About from "./pages/About";
+import CheckOut from "./pages/Check-out";
 
 import AdminRoute from "./Admin/AdminRoute/index";
 import AppBar from "./Admin/AdminComponents/AppBar";
@@ -114,6 +115,17 @@ const App = (props) => {
             <WithAuth>
               <MainLayout>
                 <Cart />
+              </MainLayout>
+            </WithAuth>
+          )}
+        />
+        <Route
+          exact
+          path="/check-out"
+          render={() => (
+            <WithAuth>
+              <MainLayout>
+                <CheckOut />
               </MainLayout>
             </WithAuth>
           )}
