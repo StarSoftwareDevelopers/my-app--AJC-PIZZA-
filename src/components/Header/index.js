@@ -62,7 +62,13 @@ const Header = (props) => {
                 <Link to="/cart">My Cart</Link>
               </li>
               <li>
+                <Link to="#">Order Status</Link>
+              </li>
+              <li>
                 <Link to="/account">My Account</Link>
+              </li>
+              <li>
+                <Link to="#">About</Link>
               </li>
               <li>
                 <span onClick={handleClickOpen}>Log Out</span>
