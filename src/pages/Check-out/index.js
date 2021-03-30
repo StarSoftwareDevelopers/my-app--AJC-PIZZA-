@@ -146,7 +146,7 @@ const checkOut = (props) => {
                 fullWidth
               />
 
-              <Button className="btn">Place an Order</Button>
+              <Button>Place an Order</Button>
             </form>
           </Card>
         </Typography>
