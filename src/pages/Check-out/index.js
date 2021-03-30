@@ -21,7 +21,7 @@ const checkOut = (props) => {
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
   return (
-    <div>
+    <div className="wrap">
       <Container fixed>
         <Typography
           component="div"
@@ -129,10 +129,6 @@ const checkOut = (props) => {
                 }}
               />
               <br></br>
-              <br></br>
-              <Typography align="center" variant="h5" color="Secondary">
-                Payment Details
-              </Typography>
               <Typography align="left" variant="subtitle1" color="Secondary">
                 Choose Payment Option
               </Typography>
