@@ -32,25 +32,25 @@ const OrderStatus = (props) => {
           >
             <br></br>
             <Typography variant="h4" align="center">
-              Order ID: {" 10873876"}
+              Order ID: <b> {" 10873876"} </b>
             </Typography>
             <Typography variant="h4" align="center">
-              Pizza: {"Tunna Pizza "}
+              Pizza: <b>{"Tunna Pizza "}</b>
             </Typography>
             <Typography variant="h4" align="center">
-              Quantity: {"1 "}
+              Quantity: <b>{"1 "}</b>
             </Typography>
             <br></br>
             <Divider variant="middle" />
             <br></br>
             <Typography variant="h4" align="center">
-              Total: {"130.00 "}
+              Total: <b>{"130.00 "}</b>
             </Typography>
             <Typography variant="h4" align="center">
-              Mode of Payment: {" COD"}
+              Mode of Payment: <b> {" COD"}</b>
             </Typography>
             <Typography variant="h4" align="center">
-              Expected Delivery Date: {"12-20-2021 "}
+              Expected Delivery Date: <b>{"12-20-2021 "}</b>
             </Typography>
           </Card>
         </Typography>
