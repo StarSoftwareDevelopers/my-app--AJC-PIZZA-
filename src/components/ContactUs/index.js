@@ -28,7 +28,6 @@ const ContactUs = (props) => {
         />
         <TextField
           margin="dense"
-          disabled
           type="email"
           label="Email"
           fullWidth
