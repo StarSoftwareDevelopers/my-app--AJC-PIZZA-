@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./check-out.scss";
 import Button from "./../../components/Forms/Button";
 import Card from "@material-ui/core/Card";
@@ -8,7 +9,17 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PaymentIcon from "@material-ui/icons/Payment";
 import TextField from "@material-ui/core/TextField";
 
+import MuiPhoneNumber from "material-ui-phone-number";
+
+const mapState = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
 const checkOut = (props) => {
+  const { currentUser } = useSelector(mapState);
+  const [displayName, setdisplayName] = useState(currentUser.displayName);
+  const [address, setAddress] = useState(currentUser.address);
+  const [phone, setPhone] = useState(currentUser.phone);
   return (
     <div>
       <Container fixed>
@@ -58,7 +69,7 @@ const checkOut = (props) => {
               marginRight: "10%",
               padding: "2rem",
               marginTop: "2rem",
-              height: "450px",
+              height: "460px",
             }}
           >
             <Typography align="center" variant="h5" color="Secondary">
@@ -69,6 +80,7 @@ const checkOut = (props) => {
                 margin="dense"
                 type="text"
                 label="Full Name"
+                value={currentUser.displayName}
                 fullWidth
                 variant="outlined"
                 color="secondary"
@@ -78,6 +90,8 @@ const checkOut = (props) => {
                 margin="dense"
                 type="email"
                 label="Email"
+                disabled
+                value={currentUser.email}
                 fullWidth
                 variant="outlined"
                 color="secondary"
@@ -87,10 +101,21 @@ const checkOut = (props) => {
                 margin="dense"
                 type="text"
                 label="Address"
+                value={currentUser.address}
                 color="secondary"
                 fullWidth
                 variant="outlined"
                 required
+              />
+              <MuiPhoneNumber
+                fullWidth
+                name="phone"
+                label="Phone Number"
+                value={currentUser.phone}
+                required
+                color="secondary"
+                data-cy="user-phone"
+                defaultCountry={"ph"}
               />
               <TextField
                 id="date"
