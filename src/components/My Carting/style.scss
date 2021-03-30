@@ -1,78 +1,46 @@
 .carter {
-    margin: 2rem auto;
+  margin: 2rem auto;
 
-    h1 {
-        display: block;
-        width: 100%;
-
-    }
-
-    h1, p {
-        text-align: center;
-    }
-
-    .cartHead {
-        border-bottom: 4px solid lightgray;
-    }
-
-    .carts {
-        max-width: 100.0rem;
-        margin: 0 auto;
-    }
-
-    .cartHead,
-    .carts {
-        text-align: left;
-        width: 100%;
-
-        th, td {
-            width: 22%;
-        }
-    }
-
-    .cartItems {
-        td img {
-            width: 100%;
-            display: block;
-            min-width: 75px;
-        }
-    }
-    a {
-        /*font-size: 1.5rem;
-        margin-left: .5px;
-        padding: .1rem;
-        border-radius: 4.9rem;
-        background: #e31837;
-        color: #fff;
-        transition: 0.1s ease-out;
-        font-family: 'Montserrat', sans-serif;*/
-
-        width: 150px;
-        padding: 10px;
-        height: 50px;
-        border: none;
-        outline: none;
-        border-radius: 50%;
-        cursor: pointer;
-        background-color: red;
-        color: #fff;
-        text-transform: uppercase;
-        font-size: 1rem;
-        margin: 10px 0;
-        text-align: center;
-        //justify-content: center;
-        margin-left: 10px;
-        margin-right: 0;
-  
-        &:hover {
-            background: #CF0000;
-            transition: 0.1s ease-out;
-            color: #fff;
-            cursor: pointer;
+  h1 {
+    display: block;
+    width: 100%;
   }
-        }
-        @media screen and (max-width: 650px) {
-            width: 100%;
-            height: 50%;
-          }
+
+  h1,
+  p {
+    text-align: center;
+  }
+
+  .cartHead {
+    border-bottom: 4px solid lightgray;
+  }
+
+  .carts {
+    max-width: 100rem;
+    margin: 0 auto;
+  }
+
+  .cartHead,
+  .carts {
+    text-align: left;
+    width: 100%;
+
+    th,
+    td {
+      width: 22%;
+    }
+  }
+
+  .cartItems {
+    td img {
+      width: 100%;
+      display: block;
+      min-width: 75px;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 100%;
+    height: 50%;
+  }
 }
