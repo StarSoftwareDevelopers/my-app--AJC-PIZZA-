@@ -71,6 +71,7 @@ const SigninIn = (props) => {
                 margin="dense"
                 type="email"
                 label="Email"
+                color="secondary"
                 fullWidth
                 variant="outlined"
                 onChange={(e) => setEmail(e.target.value)}
@@ -85,6 +86,7 @@ const SigninIn = (props) => {
                 type="password"
                 label="Password"
                 fullWidth
+                color="secondary"
                 variant="outlined"
                 helperText="Password must be more than 6 characters long"
                 onChange={(e) => setPassword(e.target.value)}
