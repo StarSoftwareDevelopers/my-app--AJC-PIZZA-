@@ -72,6 +72,7 @@ const checkOut = (props) => {
                 label="Full Name"
                 fullWidth
                 variant="outlined"
+                color="secondary"
                 required
               />
               <TextField
@@ -80,12 +81,14 @@ const checkOut = (props) => {
                 label="Email"
                 fullWidth
                 variant="outlined"
+                color="secondary"
                 required
               />
               <TextField
                 margin="dense"
                 type="text"
                 label="Address"
+                color="secondary"
                 fullWidth
                 variant="outlined"
                 required
@@ -94,6 +97,7 @@ const checkOut = (props) => {
                 id="date"
                 label="Delivery Date"
                 type="date"
+                color="secondary"
                 fullWidth
                 defaultValue="2017-05-24"
                 InputLabelProps={{
@@ -112,6 +116,7 @@ const checkOut = (props) => {
               <TextField
                 margin="dense"
                 id="gcash-num"
+                color="secondary"
                 label="Gcash Number"
                 type="number"
                 fullWidth
