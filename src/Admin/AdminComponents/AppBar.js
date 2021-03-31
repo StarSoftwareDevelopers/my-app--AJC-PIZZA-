@@ -32,6 +32,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./../Pages/Home";
 import Menu from "./../Pages/Menu";
 import Users from "./../Pages/User";
+import Feedback from "./../Pages/Feedback";
 
 import "./../Admin.scss";
 import Notifications from "../Pages/Notifications";
@@ -310,6 +311,15 @@ export default function PersistentDrawerLeft() {
             render={() => (
               <AdminRoute>
                 <Users />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            exact
+            path="/Feedback"
+            render={() => (
+              <AdminRoute>
+                <Feedback />
               </AdminRoute>
             )}
           />

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useSelector } from "react-redux";
+import { firestore } from "./../../firebase/firebase.utils";
 
 // https://reactjs.org/docs/forms.html#controlled-components
 //might need to check about formik
@@ -13,10 +14,25 @@ const ContactUs = (props) => {
   const { currentUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState("");
   const [email, setEmail] = useState("");
+  const [msg, setMsg] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    try {
+      firestore.collection("feedback").add({
+        displayName: displayName,
+        email: email,
+        message: msg,
+      });
+      alert("sent successfully");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextField
           id="input"
           margin="dense"
@@ -25,6 +41,7 @@ const ContactUs = (props) => {
           color="secondary"
           fullWidth
           required
+          onChange={(e) => setdisplayName(e.target.value)}
         />
         <TextField
           margin="dense"
@@ -33,6 +50,7 @@ const ContactUs = (props) => {
           fullWidth
           required
           color="secondary"
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <TextField
@@ -44,8 +62,10 @@ const ContactUs = (props) => {
           color="secondary"
           required
           rowsMax={Infinity}
+          onChange={(e) => setMsg(e.target.value)}
         />
         <Button
+          type="submit"
           variant="outlined"
           color="secondary"
           style={{ marginLeft: "25%", marginTop: "1rem" }}
