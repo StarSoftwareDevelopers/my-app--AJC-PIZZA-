@@ -72,7 +72,7 @@ const checkOut = (props) => {
               height: "460px",
             }}
           >
-            <Typography align="center" variant="h5" color="Secondary">
+            <Typography align="center" variant="h5" color="secondary">
               Billing Details
             </Typography>
             <form>
@@ -130,10 +130,10 @@ const checkOut = (props) => {
               />
               <br></br>
               <br />
-              <Typography align="center" variant="h5" color="Secondary">
+              <Typography align="center" variant="h5" color="secondary">
                 Payment Details
               </Typography>
-              <Typography align="left" variant="subtitle1" color="Secondary">
+              <Typography align="left" variant="subtitle1" color="secondary">
                 Choose Payment Option
               </Typography>
 
