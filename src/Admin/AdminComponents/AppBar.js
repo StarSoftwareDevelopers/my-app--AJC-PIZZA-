@@ -28,7 +28,6 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import StoreIcon from "@material-ui/icons/Store";
 
 import { Route, Switch } from "react-router-dom";
-import { auth } from "./../../firebase/firebase.utils";
 
 import Home from "./../Pages/Home";
 import Menu from "./../Pages/Menu";

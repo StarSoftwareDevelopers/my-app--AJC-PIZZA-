@@ -1,0 +1,27 @@
+.productTable {
+  table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1rem;
+    width: 100%;
+    min-width: 400px;
+
+    tr {
+      &:nth-child(even) {
+        text-align: left;
+        font-weight: bold;
+      }
+
+      tr {
+        &:nth-of-type(even) {
+          background-color: whitesmoke;
+        }
+      }
+
+      .img {
+        width: 15rem;
+        margin: 0 auto;
+      }
+    }
+  }
+}
