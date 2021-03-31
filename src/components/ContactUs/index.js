@@ -31,6 +31,7 @@ const ContactUs = (props) => {
           type="email"
           label="Email"
           fullWidth
+          required
           color="secondary"
         />
 
@@ -41,6 +42,7 @@ const ContactUs = (props) => {
           multiline
           margin="dense"
           color="secondary"
+          required
           rowsMax={Infinity}
         />
         <Button
