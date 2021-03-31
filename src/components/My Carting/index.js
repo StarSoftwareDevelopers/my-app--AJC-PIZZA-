@@ -47,14 +47,14 @@ const MyCarting = ({}) => {
                     <h3>Total:</h3>
                   </td>
                 </tr>
-                <Link to="/check-out">
-                  <Button>Checkout</Button>
-                </Link>
               </table>
             </tr>
           </thead>
         </table>
       </div>
+      <Link to="/check-out">
+        <Button>Checkout</Button>
+      </Link>
     </div>
   );
 };
