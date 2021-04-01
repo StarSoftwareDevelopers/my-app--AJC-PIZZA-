@@ -19,7 +19,7 @@ import tunapizza from "./../../assets/tunapizza.jpg";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    transition: "transform 0.15s ease-in-out",
+    transition: "transform 1s",
     "&:hover": { transform: "scale3d(1.05, 1.05, 1)", color: " #e31837" },
   },
   bullet: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
   media: {
     height: 300,
-    transition: "transform 0.5s ease-in-out",
+    transition: "transform 1s",
     "&:hover": {
       transform: "scale(1.6)",
     },

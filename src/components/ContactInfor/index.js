@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     height: 300,
-    transition: "transform 0.15s ease-in-out",
+    transition: "transform 1s",
     "&:hover": {
       transform: "scale3d(1.05, 1.05, 1)",
       color: " #e31837",
