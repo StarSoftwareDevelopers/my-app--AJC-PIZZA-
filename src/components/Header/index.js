@@ -52,7 +52,7 @@ const Header = (props) => {
             className="nav-links"
             style={{
               transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
-              marginRight: "-550px",
+              marginRight: "-770px",
             }}
           >
             <li>
@@ -65,7 +65,7 @@ const Header = (props) => {
             className="nav-links"
             style={{
               transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
-              marginRight: "-245px",
+              marginRight: "-500px",
             }}
           >
             <li>
@@ -93,6 +93,7 @@ const Header = (props) => {
             className="nav-links"
             style={{
               transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
+              marginRight: "-500px",
             }}
           >
             <li>
