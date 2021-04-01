@@ -38,6 +38,10 @@ const useStyles = makeStyles({
   },
   media: {
     height: 300,
+    transition: "transform 0.20s ease-in-out",
+    "&:hover": {
+      transform: "scale(1.6)",
+    },
   },
   avatar: {
     backgroundColor: "#e31837",
