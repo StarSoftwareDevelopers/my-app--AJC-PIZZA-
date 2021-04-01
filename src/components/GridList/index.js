@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     transition: "transform 0.15s ease-in-out",
-    "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
+    "&:hover": { transform: "scale3d(1.05, 1.05, 1)", color: " #e31837" },
   },
   bullet: {
     display: "inline-block",

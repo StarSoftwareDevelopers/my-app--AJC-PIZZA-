@@ -75,9 +75,9 @@ const ContactUs = (props) => {
           type="submit"
           variant="outlined"
           color="secondary"
-          style={{ marginLeft: "25%", marginTop: "1rem" }}
+          style={{ marginLeft: "0px", marginTop: "1rem" }}
         >
-          Submit Feedback
+          Submit
         </Button>
       </form>
     </div>

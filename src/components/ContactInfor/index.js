@@ -8,21 +8,23 @@ import Typography from "@material-ui/core/Typography";
 import StoreIcon from "@material-ui/icons/Store";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import ContactSupportIcon from "@material-ui/icons/ContactSupport";
-import { green, orange, blue, red } from "@material-ui/core/colors";
+import { green, orange, red } from "@material-ui/core/colors";
 
 import ContactUs from "./../../components/ContactUs";
 
 import PhoneIcon from "@material-ui/icons/Phone";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import ScheduleIcon from "@material-ui/icons/Schedule";
-import { ClassSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
     height: 300,
     transition: "transform 0.15s ease-in-out",
-    "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
+    "&:hover": {
+      transform: "scale3d(1.05, 1.05, 1)",
+      color: " #e31837",
+    },
     backgroundColor: "whitesmoke",
   },
   bullet: {
