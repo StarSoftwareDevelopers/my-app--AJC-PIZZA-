@@ -7,10 +7,17 @@ const Feedback = () => {
   return (
     <div>
       <Link to="/Users">
-        <Typography variant="h5">Users</Typography>
+        <Typography
+          variant="h5"
+          display="inline"
+          style={{ marginRight: "2rem" }}
+        >
+          Users
+        </Typography>
       </Link>
+
       <Link to="/Feedback">
-        <Typography variant="h5" display="block">
+        <Typography variant="h5" display="inline">
           Feedback
         </Typography>
       </Link>
