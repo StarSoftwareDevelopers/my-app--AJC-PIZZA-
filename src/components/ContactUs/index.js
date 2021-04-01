@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { firestore } from "./../../firebase/firebase.utils";
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
+
 const ContactUs = (props) => {
   const { currentUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState("");
@@ -25,6 +26,9 @@ const ContactUs = (props) => {
         message: msg,
       });
       alert("sent successfully");
+      setdisplayName("");
+      setEmail("");
+      setMsg("");
     } catch (err) {
       console.log(err);
     }
@@ -41,6 +45,7 @@ const ContactUs = (props) => {
           color="secondary"
           fullWidth
           required
+          value={displayName}
           onChange={(e) => setdisplayName(e.target.value)}
         />
         <TextField
@@ -50,6 +55,7 @@ const ContactUs = (props) => {
           fullWidth
           required
           color="secondary"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
@@ -61,6 +67,7 @@ const ContactUs = (props) => {
           margin="dense"
           color="secondary"
           required
+          value={msg}
           rowsMax={Infinity}
           onChange={(e) => setMsg(e.target.value)}
         />
