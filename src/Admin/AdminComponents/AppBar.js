@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     backgroundColor: "white",
-    color: "orange",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -131,7 +130,7 @@ export default function PersistentDrawerLeft() {
       >
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="secondary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -145,11 +144,13 @@ export default function PersistentDrawerLeft() {
             aria-label="account of current user"
             aria-controls="menu-appbar"
             className={classes.title}
+            color="secondary"
           >
             <Link to="/admin">AJC HOMEMADE PIZZA</Link>
           </Typography>
           <div>
             <Typography
+              color="secondary"
               noWrap
               variant="h5"
               style={{

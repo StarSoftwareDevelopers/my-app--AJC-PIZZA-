@@ -89,7 +89,11 @@ const Menu = () => {
       </Typography>
       <Card style={{ padding: "1rem" }}>
         <Link to="#">
-          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleClickOpen}
+          >
             Add New Menu
           </Button>
         </Link>
@@ -112,6 +116,7 @@ const Menu = () => {
                 fullWidth
                 required
                 value={productName}
+                color="secondary"
                 onChange={(e) => setProductName(e.target.value)}
               />
               <TextField
@@ -121,6 +126,7 @@ const Menu = () => {
                 type="text"
                 fullWidth
                 required
+                color="secondary"
                 value={productDesc}
                 onChange={(e) => setProductDesc(e.target.value)}
               />
@@ -130,6 +136,7 @@ const Menu = () => {
                 label="Price"
                 type="number"
                 fullWidth
+                color="secondary"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start"> ₱</InputAdornment>
@@ -150,6 +157,7 @@ const Menu = () => {
                 margin="dense"
                 rowsMax={Infinity}
                 required
+                color="secondary"
                 onChange={(e) => setProductImg(e.target.value)}
               />
             </DialogContent>
@@ -163,7 +171,7 @@ const Menu = () => {
             </DialogActions>
           </form>
         </Dialog>
-        <Typography variant="h4" align="center" style={{ color: "orange" }}>
+        <Typography variant="h4" align="center" color="secondary">
           List of Products
         </Typography>
         <div className="productTable">
