@@ -74,7 +74,11 @@ const Gallery = () => {
               <Typography gutterBottom variant="h5" component="h2">
                 Chicken Pizza
               </Typography>
-              <Typography variant="body1" color="textSecondary" component="p">
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+              >
                 The best pizza I ever tasted in my whole life. I would recommend
                 you to purchase AJC's very own pizzas.
               </Typography>
@@ -112,7 +116,11 @@ const Gallery = () => {
               <Typography gutterBottom variant="h5" component="h2">
                 Hawaiian Pizza
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+              >
                 The best pizza I ever tasted in my whole life. I would recommend
                 you to purchase AJC's very own pizzas.
               </Typography>
@@ -149,7 +157,11 @@ const Gallery = () => {
               <Typography gutterBottom variant="h5" component="h2">
                 Tuna Pizza
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+              >
                 The best pizza I ever tasted in my whole life. I would recommend
                 you to purchase AJC's very own pizzas.
               </Typography>
