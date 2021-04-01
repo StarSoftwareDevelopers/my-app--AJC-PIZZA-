@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../Redux/User/user.actions";
 import Logo from "./../../assets/AJC Pizza Logo.png";
@@ -11,6 +11,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
+import { IconButton } from "@material-ui/core";
+
+import MenuIcon from "@material-ui/icons/Menu";
 
 import { validateAdmin } from "./../../Admin/AdminRoute/route";
 
@@ -47,14 +50,14 @@ const Header = (props) => {
         </div>
         <div className="callingAction">
           {admin && (
-            <ul>
+            <ul className="navLinks">
               <li>
                 <Link to="/admin">My Admin</Link>
               </li>
             </ul>
           )}
           {currentUser && (
-            <ul>
+            <ul className="navLinks">
               <li>
                 <Link to="/order">Order</Link>
               </li>
@@ -77,7 +80,7 @@ const Header = (props) => {
           )}
 
           {!currentUser && (
-            <ul>
+            <ul className="navLinks">
               <li>
                 <Link to="/login">Login</Link>
               </li>
@@ -86,6 +89,9 @@ const Header = (props) => {
               </li>
             </ul>
           )}
+          <div className="hamburger-toggle">
+            <MenuIcon fontSize="large" />
+          </div>
         </div>
         <Dialog
           open={open}
