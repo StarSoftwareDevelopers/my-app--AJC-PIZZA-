@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
   media: {
     height: 300,
-    transition: "transform 0.20s ease-in-out",
+    transition: "transform 0.5s ease-in-out",
     "&:hover": {
       transform: "scale(1.6)",
     },
