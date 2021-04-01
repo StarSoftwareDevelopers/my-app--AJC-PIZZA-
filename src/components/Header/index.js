@@ -100,7 +100,7 @@ const Header = (props) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} color="secondary">
               Cancel
             </Button>
             <Button
@@ -108,7 +108,7 @@ const Header = (props) => {
                 signOut();
                 handleClose();
               }}
-              color="primary"
+              color="secondary"
               autoFocus
             >
               LogOut

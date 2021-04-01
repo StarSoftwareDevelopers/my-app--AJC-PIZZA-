@@ -162,10 +162,10 @@ const Menu = () => {
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} color="primary">
+              <Button onClick={handleClose} color="secondary">
                 Cancel
               </Button>
-              <Button type="submit" onClick={handleClose} color="primary">
+              <Button type="submit" onClick={handleClose} color="secondary">
                 Save
               </Button>
             </DialogActions>
