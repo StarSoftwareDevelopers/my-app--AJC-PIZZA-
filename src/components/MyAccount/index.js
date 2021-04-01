@@ -41,6 +41,7 @@ const MyAccount = () => {
         },
         { merge: true }
       );
+      alert("Successfully updated");
     } catch (err) {
       console.log(err);
     }
