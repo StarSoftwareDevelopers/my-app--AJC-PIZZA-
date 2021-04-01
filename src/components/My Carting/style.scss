@@ -16,9 +16,15 @@
   }
 
   .carts {
-    max-width: 100rem;
+    max-width: 100.0rem;
     margin: 0 auto;
+
+    table {
+      width: 100%;
+    }
   }
+
+  
 
   .cartHead,
   .carts {
@@ -39,8 +45,39 @@
     }
   }
 
-  @media screen and (max-width: 650px) {
+  .cartButtonings {
     width: 100%;
-    height: 50%;
+    display: block;
+  }
+
+  .cartButtoning {
+    cursor: pointer;
+  }
+
+
+
+  @media only screen and (max-width: 980px) {
+    
+    .cartHead {
+      display: none;
+    }
+
+    .cartItems {
+      border: 1px solid black;
+    }
+
+    .carter .card td{
+      width: 100%;
+      display: block;
+
+    }
+
+    .carter .cartButtoning.remove {
+      padding: 1.0rem;
+      background-color: black;
+      color: white;
+      width: 100%;
+      display: block;
+    }
   }
 }

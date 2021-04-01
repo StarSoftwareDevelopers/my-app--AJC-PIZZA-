@@ -50,7 +50,7 @@ const Menu = () => {
         console.log(progress);
       },
       (err) => {
-        setErrors(err.message);
+        setError(err.message);
       },
       () => {
         storage
@@ -72,7 +72,7 @@ const Menu = () => {
                 setProductPrice(0);
                 setProductDesc("");
                 setProductImg("");
-                setErrors("");
+                setError("");
                 document.getElementById("file").value = "";
               })
               .catch((err) => setError(err.message));

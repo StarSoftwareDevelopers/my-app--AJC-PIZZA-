@@ -15,7 +15,7 @@ const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
-const checkOut = (props) => {
+const CheckingOut = (props) => {
   const { currentUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
@@ -155,4 +155,4 @@ const checkOut = (props) => {
   );
 };
 
-export default checkOut;
+export default CheckingOut;
