@@ -51,8 +51,8 @@ const Header = (props) => {
           <ul
             className="nav-links"
             style={{
-              transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
-              marginRight: "-770px",
+              transform: menuOpen ? "translateX(200px)" : "translate(-500px)",
+              marginRight: "-800px",
             }}
           >
             <li>

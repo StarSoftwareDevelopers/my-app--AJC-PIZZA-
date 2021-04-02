@@ -149,6 +149,10 @@ const MyAccount = () => {
             <Link to="/recovery">
               <Typography variant="body1">Reset Password?</Typography>
             </Link>
+            <br></br>
+            <Link to="#">
+              <Typography variant="body1">Deactivate Account?</Typography>
+            </Link>
           </div>
         </div>
       </Container>
