@@ -61,7 +61,7 @@ const ContactUs = (props) => {
 
         <TextField
           type="text"
-          label="Enter Message"
+          label="Enter Feedback"
           fullWidth
           multiline
           margin="dense"
