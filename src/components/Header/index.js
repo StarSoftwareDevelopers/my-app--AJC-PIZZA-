@@ -54,7 +54,7 @@ const Header = (props) => {
             className="nav-links"
             style={{
               transform: menuOpen ? "translateX(200px)" : "translate(-500px)",
-              marginRight: "-800px",
+              marginRight: "-500px",
             }}
           >
             <li>
