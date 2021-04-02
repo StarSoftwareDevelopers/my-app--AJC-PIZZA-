@@ -87,7 +87,7 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
-                Order Now
+                Order Now for only ₱130.00
               </Button>
             </Link>
           </CardActions>
@@ -129,7 +129,7 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
-                Order Now
+                Order Now for only ₱130.00
               </Button>
             </Link>
           </CardActions>
@@ -170,7 +170,7 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
-                Order Now
+                Order Now for only ₱130.00
               </Button>
             </Link>
           </CardActions>
