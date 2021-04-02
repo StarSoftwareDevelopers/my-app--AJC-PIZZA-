@@ -1,97 +1,40 @@
-import React from "react";
-import Chicken from "./../../../assets/chickenpizza.jpg";
-import Tuna from "./../../../assets/tunapizza.jpg";
-import Vegetable from "./../../../assets/vegetablepizza.jpg";
-import Hawaiian from "./../../../assets/hawaiianpizza.jpg";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "./../../../Redux/Products/productActions";
+import Pizzas from "./../Products";
+import "./styles.scss";
 
-import "./../style.scss";
+const mapState = ({ productsData }) => ({
+  products: productsData.products,
+});
 
 const Item = ({}) => {
+  const { products } = useSelector(mapState);
+  const dispatch = useDispatch();
+  const {} = useSelector;
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
   return (
-    <div className="itemdes">
-      <div className="itemRes">
-        <div className="pic">
-          <img src={Chicken} alt="chickenpizza" />
-        </div>
-        <div className="pizzainfo">
-          <ul>
-            <li>
-              <span className="name">Chicken Pizza</span>
-            </li>
-            <li>
-              <span className="pricee">₱ 130.00</span>
-            </li>
-            <li>
-              <div className="addedtoCart">
-                <div className="buttoning">Add to Cart</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div className="items">
+      {products.map((products, pos) => {
+        const { productName, productDesc, productImg, productPrice } = products;
+        if (
+          !productImg ||
+          !productName ||
+          !productDesc ||
+          typeof productPrice === "undefined"
+        )
+          return null;
 
-      <div className="itemRes">
-        <div className="pic">
-          <img src={Hawaiian} alt="hawaiianpizza" />
-        </div>
-        <div className="pizzainfo">
-          <ul>
-            <li>
-              <span className="name">Hawaiian Pizza</span>
-            </li>
-            <li>
-              <span className="pricee">₱ 130.00</span>
-            </li>
-            <li>
-              <div className="addedtoCart">
-                <div className="buttoning">Add to Cart</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+        const productList = {
+          ...products,
+        };
 
-      <div className="itemRes">
-        <div className="pic">
-          <img src={Vegetable} alt="vegetablepizza" />
-        </div>
-        <div className="pizzainfo">
-          <ul>
-            <li>
-              <span className="name">Vegetable Pizza</span>
-            </li>
-            <li>
-              <span className="pricee">₱ 130.00</span>
-            </li>
-            <li>
-              <div className="addedtoCart">
-                <div className="buttoning">Add to Cart</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="itemRes">
-        <div className="pic">
-          <img src={Tuna} alt="tunapizza" />
-        </div>
-        <div className="pizzainfo">
-          <ul>
-            <li>
-              <span className="name">Tuna Pizza</span>
-            </li>
-            <li>
-              <span className="pricee">₱ 130.00</span>
-            </li>
-            <li>
-              <div className="addedtoCart">
-                <div className="buttoning">Add to Cart</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+        return <Pizzas {...productList} />;
+      })}
     </div>
   );
 };

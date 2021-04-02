@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../Redux/User/user.actions";
+import { countCartItems } from "./../../Redux/Cart/cartHeader";
 import "./header.scss";
 import { Link } from "react-router-dom";
 
@@ -16,13 +17,14 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { validateAdmin } from "./../../Admin/AdminRoute/route";
 
-const mapState = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapState = (state) => ({
+  currentUser: state.user.currentUser,
+  numCartItems: countCartItems(state),
 });
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector(mapState);
+  const { currentUser, countCartItems } = useSelector(mapState);
   const [open, setOpen] = React.useState(false);
 
   //for the navbar burger
@@ -60,6 +62,7 @@ const Header = (props) => {
             </li>
           </ul>
         )}
+
         {currentUser && (
           <ul
             className="nav-links"
@@ -72,7 +75,7 @@ const Header = (props) => {
               <Link to="/order">Order</Link>
             </li>
             <li>
-              <Link to="/cart">My Cart</Link>
+              <Link to="/cart">My Cart{countCartItems}</Link>
             </li>
             <li>
               <Link to="/order-status">Order Status</Link>
