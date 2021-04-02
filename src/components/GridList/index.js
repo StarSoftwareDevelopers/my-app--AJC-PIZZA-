@@ -12,7 +12,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
 
-import chickenpizza from "./../../assets/chickenpizza.jpg";
+import vegetablepizza from "./../../assets/vegetablepizza.jpg";
 import hawaiianpizza from "./../../assets/hawaiianpizza.jpg";
 import tunapizza from "./../../assets/tunapizza.jpg";
 
@@ -67,7 +67,7 @@ const Gallery = () => {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={chickenpizza}
+              image={vegetablepizza}
               title="Chicken Pizza"
             />
             <CardContent>
