@@ -69,7 +69,7 @@ const checkOut = (props) => {
               marginRight: "10%",
               padding: "2rem",
               marginTop: "2rem",
-              height: "460px",
+              height: "520px",
             }}
           >
             <Typography align="center" variant="h5" color="secondary">
@@ -136,7 +136,9 @@ const checkOut = (props) => {
               <Typography align="left" variant="subtitle1" color="secondary">
                 Choose Payment Option
               </Typography>
-
+              <input type="radio" value="cod" name="paymentMethod" />{" "}
+              COD(Cash-on-Delivery)<br></br>
+              <input type="radio" value="gcash" name="paymentMethod" /> Gcash
               <TextField
                 margin="dense"
                 id="gcash-num"
@@ -145,7 +147,6 @@ const checkOut = (props) => {
                 type="number"
                 fullWidth
               />
-
               <Button>Place an Order</Button>
             </form>
           </Card>
