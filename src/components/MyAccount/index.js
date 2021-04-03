@@ -41,6 +41,7 @@ const MyAccount = () => {
         },
         { merge: true }
       );
+      alert("Successfully updated");
     } catch (err) {
       console.log(err);
     }
@@ -147,6 +148,10 @@ const MyAccount = () => {
             </form>
             <Link to="/recovery">
               <Typography variant="body1">Reset Password?</Typography>
+            </Link>
+            <br></br>
+            <Link to="#">
+              <Typography variant="body1">Deactivate Account?</Typography>
             </Link>
           </div>
         </div>

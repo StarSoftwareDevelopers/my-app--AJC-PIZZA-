@@ -1,230 +1,40 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { addProduct } from './../../../Redux/Cart/cartActions';
-import Button from './../../Forms/Button';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "./../../../Redux/Products/productActions";
+import Pizzas from "./../Products";
+import "./styles.scss";
 
-const Item = (product) => {
-
-  const dispatch = useDispatch();
-  const {
-    ProductsID, productImg, productName, productDesc, productPrice
-  } = product;
-
-  if(!ProductsID || !productImg || !productName || !productDesc || typeof productPrice === 'undefined') return null;
-  
-  const configAddToCartBtn = {
-    typeof: 'button'
-  };
-
-  const AddtoCartHandling = (product) => {
-    if (!product) return;
-    dispatch(
-      addProduct(product)
-    )
-  };
-
-  return (
-    <div className="itemdes">
-      <div className="pic">
-        <img src={productImg} alt={productName} />
-      </div>
-
-      <div className="pizzainfo">
-        <ul>
-          <li>
-            <span className="name">
-              {productName}
-            </span>
-          </li>
-          <li>
-            <span className="pricee">
-              ₱ {productPrice}
-            </span>
-          </li>
-          <li>
-            <span className="desc">
-              {productDesc}
-            </span>
-          </li>
-          <li>
-            <div className="addedtoCart">
-            <Button {...configAddToCartBtn} onClick={() => AddtoCartHandling(product)}>
-              Add To Cart</Button>
-            </div>
-          </li>
-
-        </ul>
-      </div>
-
-      
-    </div>
-  );
-};
-
-export default Item;
-
-/*import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import Button from './../../forms/Button';
-import { useDispatch } from 'react-redux';
-import { addProduct } from './../../../Redux/Cart/cartActions';
-
-const Item = (product) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const {
-    documentID,
-    productImg,
-    productName,
-    productPrice
-  } = product;
-  if (!documentID || !productImg || !productName ||
-    typeof productPrice === 'undefined') return null;
-
-  const configAddToCartBtn = {
-    type: 'button'
-  };
-
-  const handleAddToCart = (product) => {
-    if (!product) return;
-    dispatch(
-      addProduct(product)
-    );
-    history.push('/cart');
-  };
-
-  return (
-    <div className="itemdes">
-      <div className="pic">
-        <Link to={`/product/${documentID}`}>
-          <img src={productImg} alt={productName} />
-        </Link>
-      </div>
-
-      <div className="pizzainfo">
-        <ul>
-          <li>
-            <span className="name">
-              <Link to={`/product/${documentID}`}>
-                {productName}
-              </Link>
-            </span>
-          </li>
-          <li>
-            <span className="pricee">
-              ₱{productPrice}
-            </span>
-          </li>
-          <li>
-            <div className="addedtoCart">
-              <Button {...configAddToCartBtn} onClick={() => handleAddToCart(product)}>
-                Add to cart
-              </Button>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-  );
-};
-
-export default Item;*/
-
-/*import React from "react";
-import Chicken from "./../../../assets/chickenpizza.jpg";
-import Tuna from "./../../../assets/tunapizza.jpg";
-import Vegetable from "./../../../assets/vegetablepizza.jpg";
-import Hawaiian from "./../../../assets/hawaiianpizza.jpg";
-
-import "./../style.scss";
+const mapState = ({ productsData }) => ({
+  products: productsData.products,
+});
 
 const Item = ({}) => {
+  const { products } = useSelector(mapState);
+  const dispatch = useDispatch();
+  const {} = useSelector;
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
   return (
-    <div className="itemdes">
-      <div className="itemRes">
-        <div className="pic">
-          <img src={Chicken} alt="chickenpizza" />
-        </div>
-        <div className="pizzainfo">
-          <ul>
-            <li>
-              <span className="name">Chicken Pizza</span>
-            </li>
-            <li>
-              <span className="pricee">₱ 130.00</span>
-            </li>
-            <li>
-              <div className="addedtoCart">
-                <div className="buttoning">Add to Cart</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div className="items">
+      {products.map((products, pos) => {
+        const { productName, productDesc, productImg, productPrice } = products;
+        if (
+          !productImg ||
+          !productName ||
+          !productDesc ||
+          typeof productPrice === "undefined"
+        )
+          return null;
 
-      <div className="itemRes">
-        <div className="pic">
-          <img src={Hawaiian} alt="hawaiianpizza" />
-        </div>
-        <div className="pizzainfo">
-          <ul>
-            <li>
-              <span className="name">Hawaiian Pizza</span>
-            </li>
-            <li>
-              <span className="pricee">₱ 130.00</span>
-            </li>
-            <li>
-              <div className="addedtoCart">
-                <div className="buttoning">Add to Cart</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+        const productList = {
+          ...products,
+        };
 
-      <div className="itemRes">
-        <div className="pic">
-          <img src={Vegetable} alt="vegetablepizza" />
-        </div>
-        <div className="pizzainfo">
-          <ul>
-            <li>
-              <span className="name">Vegetable Pizza</span>
-            </li>
-            <li>
-              <span className="pricee">₱ 130.00</span>
-            </li>
-            <li>
-              <div className="addedtoCart">
-                <div className="buttoning">Add to Cart</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="itemRes">
-        <div className="pic">
-          <img src={Tuna} alt="tunapizza" />
-        </div>
-        <div className="pizzainfo">
-          <ul>
-            <li>
-              <span className="name">Tuna Pizza</span>
-            </li>
-            <li>
-              <span className="pricee">₱ 130.00</span>
-            </li>
-            <li>
-              <div className="addedtoCart">
-                <div className="buttoning">Add to Cart</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+        return <Pizzas {...productList} />;
+      })}
     </div>
   );
 };

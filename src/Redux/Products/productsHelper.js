@@ -21,7 +21,7 @@ export const handleGetProduct = () => {
   return new Promise((resolve, reject) => {
     firestore
       .collection("products")
-      .orderBy('createdDate')
+      .orderBy("createdDate")
       .get()
       .then((snapshot) => {
         const arrayProducts = snapshot.docs.map((doc) => {
@@ -47,6 +47,24 @@ export const handleDelete = (documentID) => {
       .delete()
       .then(() => {
         resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+//not sure here
+export const handleFetch = (productID) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("products")
+      .doc(productID)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists) {
+          resolve(snapshot.data());
+        }
       })
       .catch((err) => {
         reject(err);

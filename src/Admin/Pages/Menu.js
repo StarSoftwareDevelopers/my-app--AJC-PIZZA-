@@ -127,6 +127,10 @@ const Menu = () => {
                 fullWidth
                 required
                 color="secondary"
+<<<<<<< HEAD
+=======
+                rowsMax={Infinity}
+>>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
                 value={productDesc}
                 onChange={(e) => setProductDesc(e.target.value)}
               />

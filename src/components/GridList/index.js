@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
+import {
+  Grid,
+  makeStyles,
+  Card,
+  CardContent,
+  CardActionArea,
+  Typography,
+  CardHeader,
+  Button,
+  CardMedia,
+  CardActions,
+  Avatar,
+} from "@material-ui/core/";
 
-import chickenpizza from "./../../assets/chickenpizza.jpg";
+import vegetablepizza from "./../../assets/vegetablepizza.jpg";
 import hawaiianpizza from "./../../assets/hawaiianpizza.jpg";
 import tunapizza from "./../../assets/tunapizza.jpg";
 
@@ -67,7 +69,11 @@ const Gallery = () => {
           <CardActionArea>
             <CardMedia
               className={classes.media}
+<<<<<<< HEAD
               image={chickenpizza}
+=======
+              image={vegetablepizza}
+>>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
               title="Chicken Pizza"
             />
             <CardContent>
@@ -87,7 +93,11 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
+<<<<<<< HEAD
                 Order Now
+=======
+                Order Now for only ₱130.00
+>>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
               </Button>
             </Link>
           </CardActions>
@@ -129,7 +139,11 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
+<<<<<<< HEAD
                 Order Now
+=======
+                Order Now for only ₱130.00
+>>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
               </Button>
             </Link>
           </CardActions>
@@ -170,7 +184,11 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
+<<<<<<< HEAD
                 Order Now
+=======
+                Order Now for only ₱130.00
+>>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
               </Button>
             </Link>
           </CardActions>
