@@ -1,3 +1,4 @@
+//order page
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     transition: "transform 1s",
     "&:hover": { transform: "scale3d(1.05, 1.05, 1)", color: " #e31837" },
     textAlign: "center",
+    justifyContent: "center",
   },
 }));
 
@@ -72,7 +74,14 @@ const Pizzas = (product) => {
         alignItems="center"
       >
         {data.map((elem) => (
-          <Grid item xs={12} sm={6} md={3} key={data.indexOf(elem)}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            key={data.indexOf(elem)}
+            style={{ margin: "0 auto" }}
+          >
             <Card className={classes.Card}>
               <CardHeader title={productName} subheader={productDesc} />
               <CardMedia
