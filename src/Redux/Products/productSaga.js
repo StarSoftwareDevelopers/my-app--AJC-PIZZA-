@@ -64,9 +64,6 @@ export function* deletingProducts() {
   yield takeLatest(productTypes.DELETE_PRODUCTS, deleteProduct);
 }
 
-<<<<<<< HEAD
-=======
-//not sure here
 export function* fetchProduct({ payload }) {
   try {
     const product = yield handleFetch(payload);
@@ -81,15 +78,11 @@ export function* fetchingProducts() {
   yield takeLatest(productTypes.FETCH_PRODUCTS, fetchProduct);
 }
 
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
 export default function* productSaga() {
   yield all([
     call(addingProducts),
     call(gettingProducts),
     call(deletingProducts),
-<<<<<<< HEAD
-=======
-    call(fetchingProducts), //not sure here
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
+    call(fetchingProducts),
   ]);
 }

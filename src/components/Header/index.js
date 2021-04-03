@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "./../../Redux/User/user.actions";
-<<<<<<< HEAD
-=======
 import { countCartItems } from "./../../Redux/Cart/cartHeader";
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
 import "./header.scss";
 import { Link } from "react-router-dom";
 
@@ -27,11 +24,7 @@ const mapState = (state) => ({
 
 const Header = (props) => {
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  const { currentUser } = useSelector(mapState);
-=======
   const { currentUser, countCartItems } = useSelector(mapState);
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
   const [open, setOpen] = React.useState(false);
 
   //for the navbar burger
@@ -60,13 +53,8 @@ const Header = (props) => {
           <ul
             className="nav-links"
             style={{
-<<<<<<< HEAD
-              transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
-              marginRight: "-770px",
-=======
               transform: menuOpen ? "translateX(200px)" : "translate(-500px)",
               marginRight: "-500px",
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
             }}
           >
             <li>
@@ -74,10 +62,6 @@ const Header = (props) => {
             </li>
           </ul>
         )}
-<<<<<<< HEAD
-=======
-
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
         {currentUser && (
           <ul
             className="nav-links"
@@ -87,20 +71,10 @@ const Header = (props) => {
             }}
           >
             <li>
-<<<<<<< HEAD
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/order">Order</Link>
-            </li>
-            <li>
-              <Link to="/cart">My Cart</Link>
-=======
               <Link to="/order">Order</Link>
             </li>
             <li>
               <Link to="/cart">My Cart{countCartItems}</Link>
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
             </li>
             <li>
               <Link to="/order-status">Order Status</Link>

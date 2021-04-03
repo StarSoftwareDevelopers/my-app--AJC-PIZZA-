@@ -69,11 +69,7 @@ const Gallery = () => {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-<<<<<<< HEAD
-              image={chickenpizza}
-=======
               image={vegetablepizza}
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
               title="Chicken Pizza"
             />
             <CardContent>
@@ -93,11 +89,7 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
-<<<<<<< HEAD
-                Order Now
-=======
                 Order Now for only ₱130.00
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
               </Button>
             </Link>
           </CardActions>
@@ -139,11 +131,7 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
-<<<<<<< HEAD
-                Order Now
-=======
                 Order Now for only ₱130.00
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
               </Button>
             </Link>
           </CardActions>
@@ -184,11 +172,7 @@ const Gallery = () => {
           <CardActions>
             <Link to="/order">
               <Button variant="contained" size="small" color="secondary">
-<<<<<<< HEAD
-                Order Now
-=======
                 Order Now for only ₱130.00
->>>>>>> 2469d92c9e830c0cc692b62519a2e8db41ca4640
               </Button>
             </Link>
           </CardActions>

@@ -39,7 +39,7 @@ const Item = ({}) => {
   );
 };
 
-export default Item;*/
+export default Item;
 
 /*import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
