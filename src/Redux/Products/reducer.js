@@ -2,7 +2,7 @@ import productTypes from "./productTypes";
 
 const initialState = {
   products: [],
-  product: {}, //not sure here
+  product: {}, //
 };
 
 const prodReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const prodReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
-    //not sure here
+    //
     case productTypes.SET_STATE_PRODUCTS:
       return {
         ...state,

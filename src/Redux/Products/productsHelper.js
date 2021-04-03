@@ -54,7 +54,7 @@ export const handleDelete = (documentID) => {
   });
 };
 
-//not sure here
+//
 export const handleFetch = (productID) => {
   return new Promise((resolve, reject) => {
     firestore
