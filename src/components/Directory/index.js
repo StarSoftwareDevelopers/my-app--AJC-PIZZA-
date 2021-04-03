@@ -13,11 +13,9 @@ const Directory = (props) => {
             backgroundImage: `url(${PizzaWelcome})`,
           }}
         >
-          <content>
-            <h1>AJC Homemade Pizza</h1>
-            <p>The Best Pizza in Ayala</p>
-            <Link to="/order">Order Now</Link>
-          </content>
+          <h1>AJC Homemade Pizza</h1>
+          <p>The Best Pizza in Ayala</p>
+          <Link to="/order">Order Now</Link>
         </div>
       </div>
     </div>

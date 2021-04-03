@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { firestore, storage } from "../../firebase/firebase.utils";
+import React, { useState, useEffect } from "react";
+import "./styles.scss";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProducts,
+  getProducts,
+  deleteProducts,
+} from "./../../Redux/Products/productActions";
 
 import { InputAdornment } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
@@ -8,7 +14,8 @@ import { Link } from "react-router-dom";
 import "./../Admin.scss";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
-import MUIMenuTable from "./../AdminComponents/Table/MenuTableMUi";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import IconButton from "@material-ui/core/IconButton";
 
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -16,69 +23,40 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+const mapState = ({ productsData }) => ({
+  products: productsData.products,
+});
+
 const Menu = () => {
+  const { products } = useSelector(mapState);
+  const dispatch = useDispatch();
   const [productName, setProductName] = useState("");
   const [productDesc, setProductDesc] = useState("");
   const [productPrice, setProductPrice] = useState(0);
-  const [productImg, setProductImg] = useState(null);
-  const [error, setError] = useState("");
+  const [productImg, setProductImg] = useState("");
 
-  const types = ["image/png", "image/jpeg"];
+  useEffect(() => {
+    dispatch(getProducts(products));
+  }, []);
 
-  const productImgHandler = (e) => {
-    let selectedFile = e.target.files[0];
-    if (selectedFile && types.includes(selectedFile.type)) {
-      setProductImg(selectedFile);
-      setError("");
-    } else {
-      setProductImg(null);
-      setError("Please select a valid image either png or jpg");
-    }
+  const resetForm = () => {
+    setProductName("");
+    setProductDesc("");
+    setProductPrice(0);
+    setProductImg("");
   };
 
-  // add products
-  const addProducts = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const upload = storage
-      .ref(`product-images/${productImg.name}`)
-      .put(productImg);
-    upload.on(
-      "img_upload",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(progress);
-      },
-      (err) => {
-        setError(err.message);
-      },
-      () => {
-        storage
-          .ref("product-images")
-          .child(productImg.name)
-          .getDownloadURL()
-          .then((url) => {
-            firestore
-              .collection("Products")
-              .add({
-                productName: productName,
-                productDesc: productDesc,
-                productPrice: productPrice,
-                productImg: url,
-              })
-              .then(() => {
-                alert("Product Added Successfuly");
-                setProductName("");
-                setProductPrice(0);
-                setProductDesc("");
-                setProductImg("");
-                setError("");
-                document.getElementById("file").value = "";
-              })
-              .catch((err) => setError(err.message));
-          });
-      }
+    dispatch(
+      addProducts({
+        productName,
+        productDesc,
+        productPrice,
+        productImg,
+      })
     );
+    resetForm();
   };
 
   const [open, setOpen] = useState(false);
@@ -90,6 +68,7 @@ const Menu = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <Container
       maxWidth="lg"
@@ -108,15 +87,16 @@ const Menu = () => {
       >
         Menu
       </Typography>
-
       <Card style={{ padding: "1rem" }}>
         <Link to="#">
-          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleClickOpen}
+          >
             Add New Menu
           </Button>
         </Link>
-        <br></br>
-        <br></br>
 
         <Dialog
           open={open}
@@ -124,7 +104,7 @@ const Menu = () => {
           aria-labelledby="form-dialog-title"
           maxWidth="sm"
         >
-          <form onSubmit={addProducts}>
+          <form onSubmit={handleSubmit}>
             <DialogTitle id="form-dialog-title">Add New Menu</DialogTitle>
             <DialogContent>
               <TextField
@@ -136,6 +116,7 @@ const Menu = () => {
                 fullWidth
                 required
                 value={productName}
+                color="secondary"
                 onChange={(e) => setProductName(e.target.value)}
               />
               <TextField
@@ -145,6 +126,7 @@ const Menu = () => {
                 type="text"
                 fullWidth
                 required
+                color="secondary"
                 value={productDesc}
                 onChange={(e) => setProductDesc(e.target.value)}
               />
@@ -154,6 +136,7 @@ const Menu = () => {
                 label="Price"
                 type="number"
                 fullWidth
+                color="secondary"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start"> ₱</InputAdornment>
@@ -166,28 +149,78 @@ const Menu = () => {
                 value={productPrice}
                 onChange={(e) => setProductPrice(e.target.value)}
               />
-              <input
-                id="file"
-                type="file"
-                name="myImage"
-                accept="image/*"
+              <TextField
+                type="text"
+                label="Picture Link"
+                fullWidth
+                multiline
+                margin="dense"
+                rowsMax={Infinity}
                 required
-                onChange={productImgHandler}
+                color="secondary"
+                onChange={(e) => setProductImg(e.target.value)}
               />
-              {error & <span>{error}</span>}
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} color="primary">
+              <Button onClick={handleClose} color="secondary">
                 Cancel
               </Button>
-              <Button type="submit" onClick={handleClose} color="primary">
+              <Button type="submit" onClick={handleClose} color="secondary">
                 Save
               </Button>
             </DialogActions>
           </form>
         </Dialog>
-        {/* <MenuTable /> */}
-        <MUIMenuTable />
+        <Typography variant="h4" align="center" color="secondary">
+          List of Products
+        </Typography>
+        <div className="productTable">
+          <table>
+            <tbody>
+              <tr>
+                <th></th>
+              </tr>
+              <tr>
+                <td>
+                  <table border="0" cellPadding="10" cellSpacing="10">
+                    <tbody>
+                      {products.map((product, index) => {
+                        const {
+                          productName,
+                          productDesc,
+                          productImg,
+                          productPrice,
+                          documentID,
+                        } = product;
+                        return (
+                          <tr key={index}>
+                            <td>
+                              <img className="img" src={productImg} />
+                            </td>
+                            <td>{productName}</td>
+                            <td>{productDesc}</td>
+                            <td>{productPrice}</td>
+                            <td>
+                              <IconButton
+                                aria-label="delete"
+                                color="secondary"
+                                onClick={() =>
+                                  dispatch(deleteProducts(documentID))
+                                }
+                              >
+                                <DeleteForeverIcon fontSize="large" />
+                              </IconButton>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </Card>
     </Container>
   );

@@ -28,11 +28,11 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import StoreIcon from "@material-ui/icons/Store";
 
 import { Route, Switch } from "react-router-dom";
-import { auth } from "./../../firebase/firebase.utils";
 
 import Home from "./../Pages/Home";
 import Menu from "./../Pages/Menu";
 import Users from "./../Pages/User";
+import Feedback from "./../Pages/Feedback";
 
 import "./../Admin.scss";
 import Notifications from "../Pages/Notifications";
@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     backgroundColor: "white",
-    color: "orange",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -131,7 +130,7 @@ export default function PersistentDrawerLeft() {
       >
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="secondary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -145,11 +144,13 @@ export default function PersistentDrawerLeft() {
             aria-label="account of current user"
             aria-controls="menu-appbar"
             className={classes.title}
+            color="secondary"
           >
             <Link to="/admin">AJC HOMEMADE PIZZA</Link>
           </Typography>
           <div>
             <Typography
+              color="secondary"
               noWrap
               variant="h5"
               style={{
@@ -311,6 +312,15 @@ export default function PersistentDrawerLeft() {
             render={() => (
               <AdminRoute>
                 <Users />
+              </AdminRoute>
+            )}
+          />
+          <Route
+            exact
+            path="/Feedback"
+            render={() => (
+              <AdminRoute>
+                <Feedback />
               </AdminRoute>
             )}
           />

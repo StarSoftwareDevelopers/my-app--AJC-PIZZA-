@@ -1,9 +1,9 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import UserTable from "./../AdminComponents/Table/UserTable";
+import FeedbackTable from "./../AdminComponents/Table/FeedbackTable";
 
-const Users = () => {
+const Feedback = () => {
   return (
     <div>
       <Link to="/Users">
@@ -21,9 +21,9 @@ const Users = () => {
           Feedback
         </Typography>
       </Link>
-      <UserTable />
+      <FeedbackTable />
     </div>
   );
 };
 
-export default Users;
+export default Feedback;

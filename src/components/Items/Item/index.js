@@ -1,4 +1,137 @@
-import React from "react";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from './../../../Redux/Cart/cartActions';
+import Button from './../../Forms/Button';
+
+const Item = (product) => {
+
+  const dispatch = useDispatch();
+  const {
+    ProductsID, productImg, productName, productDesc, productPrice
+  } = product;
+
+  if(!ProductsID || !productImg || !productName || !productDesc || typeof productPrice === 'undefined') return null;
+  
+  const configAddToCartBtn = {
+    typeof: 'button'
+  };
+
+  const AddtoCartHandling = (product) => {
+    if (!product) return;
+    dispatch(
+      addProduct(product)
+    )
+  };
+
+  return (
+    <div className="itemdes">
+      <div className="pic">
+        <img src={productImg} alt={productName} />
+      </div>
+
+      <div className="pizzainfo">
+        <ul>
+          <li>
+            <span className="name">
+              {productName}
+            </span>
+          </li>
+          <li>
+            <span className="pricee">
+              ₱ {productPrice}
+            </span>
+          </li>
+          <li>
+            <span className="desc">
+              {productDesc}
+            </span>
+          </li>
+          <li>
+            <div className="addedtoCart">
+            <Button {...configAddToCartBtn} onClick={() => AddtoCartHandling(product)}>
+              Add To Cart</Button>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      
+    </div>
+  );
+};
+
+export default Item;
+
+/*import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import Button from './../../forms/Button';
+import { useDispatch } from 'react-redux';
+import { addProduct } from './../../../Redux/Cart/cartActions';
+
+const Item = (product) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const {
+    documentID,
+    productImg,
+    productName,
+    productPrice
+  } = product;
+  if (!documentID || !productImg || !productName ||
+    typeof productPrice === 'undefined') return null;
+
+  const configAddToCartBtn = {
+    type: 'button'
+  };
+
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    dispatch(
+      addProduct(product)
+    );
+    history.push('/cart');
+  };
+
+  return (
+    <div className="itemdes">
+      <div className="pic">
+        <Link to={`/product/${documentID}`}>
+          <img src={productImg} alt={productName} />
+        </Link>
+      </div>
+
+      <div className="pizzainfo">
+        <ul>
+          <li>
+            <span className="name">
+              <Link to={`/product/${documentID}`}>
+                {productName}
+              </Link>
+            </span>
+          </li>
+          <li>
+            <span className="pricee">
+              ₱{productPrice}
+            </span>
+          </li>
+          <li>
+            <div className="addedtoCart">
+              <Button {...configAddToCartBtn} onClick={() => handleAddToCart(product)}>
+                Add to cart
+              </Button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  );
+};
+
+export default Item;*/
+
+/*import React from "react";
 import Chicken from "./../../../assets/chickenpizza.jpg";
 import Tuna from "./../../../assets/tunapizza.jpg";
 import Vegetable from "./../../../assets/vegetablepizza.jpg";
@@ -96,7 +229,7 @@ const Item = ({}) => {
   );
 };
 
-export default Item;
+export default Item;*/
 
 /*import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
