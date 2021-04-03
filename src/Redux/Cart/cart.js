@@ -5,8 +5,8 @@ export const existingItem = ({ prevCartItems, nextCartItem }) => {
 };
 
 export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
-  const itemExist = existingItem({ prevCartItems, nextCartItem });
   const counter = 1;
+  const itemExist = existingItem({ prevCartItems, nextCartItem });
 
   if (itemExist) {
     return prevCartItems.map((cartItem) =>
@@ -22,9 +22,14 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
   return [
     ...prevCartItems,
     {
-      ...nextCartItem,
-      // qty: 1,
       qty: counter,
+      ...nextCartItem,
     },
   ];
+};
+
+export const handleDelete = ({ prevCartItems, removeCartItem }) => {
+  return prevCartItems.filter(
+    (item) => item.documentID !== removeCartItem.documentID
+  );
 };

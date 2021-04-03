@@ -64,6 +64,7 @@ export function* deletingProducts() {
   yield takeLatest(productTypes.DELETE_PRODUCTS, deleteProduct);
 }
 
+//
 export function* fetchProduct({ payload }) {
   try {
     const product = yield handleFetch(payload);
@@ -73,7 +74,7 @@ export function* fetchProduct({ payload }) {
   }
 }
 
-//not sure here
+//
 export function* fetchingProducts() {
   yield takeLatest(productTypes.FETCH_PRODUCTS, fetchProduct);
 }

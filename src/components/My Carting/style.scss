@@ -1,12 +1,13 @@
 .carter {
   margin: 2rem auto;
 
-  h1 {
+  h2 {
     display: block;
     width: 100%;
+    margin-bottom: 1rem;
   }
 
-  h1,
+  h2,
   p {
     text-align: center;
   }
@@ -19,8 +20,9 @@
     max-width: 100.0rem;
     margin: 0 auto;
 
-    table {
-      width: 100%;
+    .svg {
+      height: 300px;
+      align-items: center;
     }
   }
 
@@ -34,6 +36,7 @@
     th,
     td {
       width: 22%;
+      padding: 0.5rem;
     }
   }
 

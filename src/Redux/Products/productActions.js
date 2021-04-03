@@ -19,13 +19,13 @@ export const deleteProducts = (productID) => ({
   payload: productID,
 });
 
-//not sure here
+//
 export const fetchProducts = (productID) => ({
   type: productTypes.FETCH_PRODUCTS,
   payload: productID,
 });
 
-//not sure here
+//
 export const setStateProduct = (product) => ({
   type: productTypes.SET_STATE_PRODUCTS,
   payload: product,
