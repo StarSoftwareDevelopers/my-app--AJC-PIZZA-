@@ -3,17 +3,18 @@ import Button from "./../../components/Forms/Button";
 import Itemized from "./Itemized";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCartItems } from "./../../Redux/Cart/cartHeader";
+import { selectCartItems, cartTotal } from "./../../Redux/Cart/cartHeader";
 import { createStructuredSelector } from "reselect";
 
 import undraw_add_to_cart_vkjp from "./../../assets/undraw_add_to_cart_vkjp.svg";
 
 const mapState = createStructuredSelector({
   cartItems: selectCartItems,
+  total: cartTotal,
 });
 
 const MyCarting = ({}) => {
-  const { cartItems } = useSelector(mapState);
+  const { cartItems, total } = useSelector(mapState);
   return (
     <div className="carter">
       <h2>MY CART ITEMS</h2>
@@ -73,7 +74,7 @@ const MyCarting = ({}) => {
                     <tbody>
                       <tr align="right">
                         <td>
-                          <h3>Total:</h3>
+                          <h3>Total: {total}</h3>
                         </td>
                       </tr>
                     </tbody>

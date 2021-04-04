@@ -144,7 +144,7 @@ const MyAccount = () => {
                 defaultCountry={"ph"}
                 onChange={(e) => setPhone(e)}
               />
-              <ButtonForm type="submit">Update </ButtonForm>
+              <ButtonForm type="submit">Update</ButtonForm>
             </form>
             <Link to="/recovery">
               <Typography variant="body1">Reset Password?</Typography>
