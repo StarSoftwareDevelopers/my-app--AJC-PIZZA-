@@ -23,6 +23,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
           removeCartItem: action.payload,
         }),
       };
+    case cartTypes.CHECKOUT_CART:
+      return {
+        ...state,
+        ...INITIAL_STATE,
+      };
     default:
       return state;
   }

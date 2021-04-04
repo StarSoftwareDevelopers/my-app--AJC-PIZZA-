@@ -1,26 +1,51 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { cartTotal, countCartItems } from "./../../Redux/Cart/cartHeader";
+import { createStructuredSelector } from "reselect";
+import { checkingOutCart } from "./../../Redux/Cart/cartActions";
+
 import "./check-out.scss";
-import { Card, Typography, Container, TextField } from "@material-ui/core";
-
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import {
+  Card,
+  Typography,
+  Container,
+  TextField,
+  Button,
+} from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
-
 import MuiPhoneNumber from "material-ui-phone-number";
-
-import FormButton from "./../../components/Forms/Button";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
+const mapCartItems = createStructuredSelector({
+  total: cartTotal,
+  cartCount: countCartItems,
+});
+
 const CheckingOut = (product) => {
+  const { total, cartCount } = useSelector(mapCartItems);
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { currentUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
 
-  const { productName, productImg, productPrice, qty, documentID } = product;
+  useEffect(() => {
+    if (cartCount < 1) {
+      history.push("/order-status");
+    }
+  }, [cartCount]);
+
+  const handleCheckOut = (event) => {
+    event.preventDefault();
+    dispatch(checkingOutCart());
+    console.log("clicked");
+  };
+
   return (
     <div>
       <Container fixed>
@@ -43,17 +68,18 @@ const CheckingOut = (product) => {
 
             <tr>
               <td>Pizza :</td>
-              <td>
-                <PaymentIcon
-                  style={{ marginRight: "1rem", color: " #e31837" }}
-                />
-                Price
-              </td>
+              <td></td>
             </tr>
             <br></br>
             <tr>
-              <td>Total</td>
-              <td>Total Price</td>
+              <td>
+                {" "}
+                <PaymentIcon
+                  style={{ marginRight: "1rem", color: " #e31837" }}
+                />
+                Total Price:
+              </td>
+              <td>₱{total}.00</td>
             </tr>
           </table>
           <Card
@@ -121,8 +147,6 @@ const CheckingOut = (product) => {
                   shrink: true,
                 }}
               />
-              <br></br>
-              <br />
               <Typography align="center" variant="h5" color="secondary">
                 Payment Details
               </Typography>
@@ -140,7 +164,19 @@ const CheckingOut = (product) => {
                 type="number"
                 fullWidth
               />
-              <FormButton>Place an Order</FormButton>
+              <Typography align="center" style={{ marginTop: "1rem" }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  style={{
+                    backgroundColor: "#e31837",
+                    color: "white",
+                  }}
+                  onClick={handleCheckOut}
+                >
+                  Place an Order
+                </Button>
+              </Typography>
             </form>
           </Card>
         </Typography>
