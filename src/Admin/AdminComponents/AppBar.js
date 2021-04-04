@@ -1,22 +1,30 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
+
+//links
+import { Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+
+//core material-ui imports
+import {
+  Drawer,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@material-ui/core";
+
+//icons
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-
-import { Link } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -27,17 +35,16 @@ import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import StoreIcon from "@material-ui/icons/Store";
 
-import { Route, Switch } from "react-router-dom";
-
+//pages
 import Home from "./../Pages/Home";
 import Menu from "./../Pages/Menu";
 import Users from "./../Pages/User";
 import Feedback from "./../Pages/Feedback";
-
 import "./../Admin.scss";
 import Notifications from "../Pages/Notifications";
 import Orders from "../Pages/Orders";
 
+//AdminAuth
 import AdminRoute from "./../AdminRoute/index";
 
 const drawerWidth = 240;
