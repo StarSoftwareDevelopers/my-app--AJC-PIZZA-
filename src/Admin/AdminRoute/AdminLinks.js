@@ -9,6 +9,7 @@ import Notifications from "./../Pages/Notifications";
 import Users from "./../Pages/User";
 import AdminMgt from "./../Pages/Admin";
 import Staff from "./../Pages/Staff";
+import Feedback from "./../Pages/Feedback";
 
 const AdminLinks = () => {
   return (
