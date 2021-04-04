@@ -85,21 +85,15 @@ const Pizzas = (product) => {
 
   return (
     <div className={classes.root}>
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        justify="flex-start"
-        alignItems="center"
-      >
+      <Grid container spacing={2} direction="row" justify="center">
         {data.map((elem) => (
           <Grid
             item
-            xs={6}
-            sm={6}
-            md={3}
+            lg={6}
+            sm={4}
+            md={6}
             key={data.indexOf(elem)}
-            style={{ margin: "0 auto" }}
+            style={{ textAlign: "center" }}
           >
             <Card className={classes.Card}>
               <CardHeader title={productName} subheader={productDesc} />

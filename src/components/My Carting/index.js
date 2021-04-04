@@ -1,5 +1,6 @@
 import "./style.scss";
 import Button from "./../../components/Forms/Button";
+import { Typography } from "@material-ui/core";
 import Itemized from "./Itemized";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -17,7 +18,9 @@ const MyCarting = ({}) => {
   const { cartItems, total } = useSelector(mapState);
   return (
     <div className="carter">
-      <h2>MY CART ITEMS</h2>
+      <Typography variant="h3" align="center">
+        My Cart Items
+      </Typography>
       <div className="carts">
         {cartItems.length > 0 ? (
           <table border="0" cellPadding="0" cellSpacing="0">
@@ -247,6 +250,3 @@ const Checkout = ({ }) => {
 };
 
 export default Checkout;*/
-
-
-
