@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.scss";
 import { Link } from "react-router-dom";
+import { Typography } from "@material-ui/core";
 
 import PizzaWelcome from "./../../assets/pizzacarousel.png";
 const Directory = (props) => {
@@ -13,7 +14,7 @@ const Directory = (props) => {
             backgroundImage: `url(${PizzaWelcome})`,
           }}
         >
-          <h1>AJC Homemade Pizza</h1>
+          <Typography variant="h1">AJC HOMEMADE PIZZA</Typography>
           <p>The Best Pizza in Ayala</p>
           <Link to="/order">Order Now</Link>
         </div>
