@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./check-out.scss";
-import Button from "./../../components/Forms/Button";
-import Card from "@material-ui/core/Card";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
+import {
+  Button,
+  Card,
+  Typography,
+  Container,
+  TextField,
+} from "@material-ui/core";
+
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PaymentIcon from "@material-ui/icons/Payment";
-import TextField from "@material-ui/core/TextField";
 
 import MuiPhoneNumber from "material-ui-phone-number";
+
+import FormButton from "./../../components/Forms/Button";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -147,7 +152,7 @@ const CheckingOut = (props) => {
                 type="number"
                 fullWidth
               />
-              <Button>Place an Order</Button>
+              <FormButton>Place an Order</FormButton>
             </form>
           </Card>
         </Typography>
