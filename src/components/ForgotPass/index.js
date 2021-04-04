@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { resetPassStart, resetStateUser } from "../../Redux/User/user.actions";
 import "./styles.scss";
-import Button from "../Forms/Button";
+import ButtonForm from "../Forms/Button";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
@@ -88,9 +88,9 @@ const EmailPass = (props) => {
                 required
               />
 
-              <Button type="submit">
+              <ButtonForm type="submit">
                 <Typography variant="h6">Reset Password</Typography>
-              </Button>
+              </ButtonForm>
             </form>
           </div>
         </ThemeProvider>

@@ -10,7 +10,7 @@ import {
 import "./style.scss";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import Button from "./../Forms/Button";
+import ButtonForm from "./../Forms/Button";
 
 import IconButton from "@material-ui/core/IconButton";
 
@@ -100,11 +100,11 @@ const SigninIn = (props) => {
               </Link>
 
               <br></br>
-              <Button type="submit" className="btn">
+              <ButtonForm type="submit" className="btn">
                 <Typography variant="h6" align="center" display="block">
                   Log In
                 </Typography>
-              </Button>
+              </ButtonForm>
 
               <br></br>
               <Divider />
