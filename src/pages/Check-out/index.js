@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./check-out.scss";
-import {
-  Button,
-  Card,
-  Typography,
-  Container,
-  TextField,
-} from "@material-ui/core";
+import { Card, Typography, Container, TextField } from "@material-ui/core";
 
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PaymentIcon from "@material-ui/icons/Payment";
@@ -20,11 +14,13 @@ const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
-const CheckingOut = (props) => {
+const CheckingOut = (product) => {
   const { currentUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
+
+  const { productName, productImg, productPrice, qty, documentID } = product;
   return (
     <div>
       <Container fixed>
@@ -44,17 +40,9 @@ const CheckingOut = (props) => {
               <th>Order Details</th>
               <th>Details</th>
             </tr>
+
             <tr>
-              <td>Cart</td>
-              <td>
-                <ShoppingCartIcon
-                  style={{ marginRight: "1rem", color: " #e31837" }}
-                />
-                1
-              </td>
-            </tr>
-            <tr>
-              <td>Pizza</td>
+              <td>Pizza :</td>
               <td>
                 <PaymentIcon
                   style={{ marginRight: "1rem", color: " #e31837" }}
