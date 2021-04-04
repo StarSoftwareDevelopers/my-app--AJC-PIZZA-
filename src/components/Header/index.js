@@ -49,12 +49,13 @@ const Header = (props) => {
         <div className="logo">
           <Link to="/">AJC PIZZA</Link>
         </div>
+
         {admin && (
           <ul
             className="nav-links"
             style={{
-              transform: menuOpen ? "translateX(200px)" : "translate(-700px)",
-              marginRight: "-600px",
+              transform: menuOpen ? "translateX(210px)" : "translate(-1000px)",
+              marginRight: "-1500px",
             }}
           >
             <li>
