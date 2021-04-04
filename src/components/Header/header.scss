@@ -6,6 +6,7 @@
   li {
     list-style-type: none;
     margin-right: 1.5rem;
+    color: #e31837;
   }
 
   nav {
@@ -40,33 +41,27 @@
         font-size: 18px;
         font-weight: normal;
         text-transform: uppercase;
+        color: "#e31837";
       }
       a {
         text-transform: uppercase;
-        color: black;
-        opacity: 40%;
+        color: #e31837;
         text-decoration: none;
         transition: 0.2s ease-out;
+
+        &:hover {
+          color: " #ffc500";
+          transition: 0.2s ease-out;
+        }
       }
 
-      a:hover {
-        color: #e31837;
-        opacity: 100%;
-        transition: 0.2s ease-out;
-      }
       span {
         line-height: 1;
         font-size: 1.5rem;
         text-transform: uppercase;
-        color: black;
+
         text-decoration: none;
         cursor: pointer;
-        opacity: 40%;
-
-        &:hover {
-          color: #e31837;
-          opacity: 100%;
-        }
       }
     }
   }
