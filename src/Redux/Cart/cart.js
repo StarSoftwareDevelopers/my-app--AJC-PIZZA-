@@ -22,8 +22,9 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
   return [
     ...prevCartItems,
     {
-      qty: counter,
+      
       ...nextCartItem,
+      qty: counter,
     },
   ];
 };

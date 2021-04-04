@@ -84,6 +84,6 @@ export default function* productSaga() {
     call(addingProducts),
     call(gettingProducts),
     call(deletingProducts),
-    call(fetchingProducts), //not sure here
+    call(fetchingProducts),
   ]);
 }

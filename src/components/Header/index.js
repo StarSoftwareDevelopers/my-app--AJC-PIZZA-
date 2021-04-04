@@ -24,7 +24,7 @@ const mapState = (state) => ({
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const { currentUser, countCartItems } = useSelector(mapState);
+  const { currentUser, numCartItems } = useSelector(mapState);
   const [open, setOpen] = React.useState(false);
 
   //for the navbar burger
@@ -63,50 +63,60 @@ const Header = (props) => {
           </ul>
         )}
 
-        {currentUser && (
-          <ul
+        <ul
             className="nav-links"
             style={{
               transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
               marginRight: "-500px",
             }}
           >
+        {currentUser && [
+          
+            <li>
+              <Link to="/">Home</Link>
+            </li>,
             <li>
               <Link to="/order">Order</Link>
-            </li>
+            </li>,
             <li>
-              <Link to="/cart">My Cart{countCartItems}</Link>
-            </li>
+              <Link to="/cart">My Cart {numCartItems}</Link>
+            </li>,
             <li>
               <Link to="/order-status">Order Status</Link>
-            </li>
+            </li>,
             <li>
               <Link to="/account">My Account</Link>
-            </li>
+            </li>,
             <li>
               <Link to="/about">About</Link>
-            </li>
+            </li>,
             <li>
               <span onClick={handleClickOpen}>Log Out</span>
             </li>
-          </ul>
-        )}
-        {!currentUser && (
-          <ul
+          
+        ]}
+
+        {!currentUser && [
+          /*<ul
             className="nav-links"
             style={{
               transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
               marginRight: "-500px",
-            }}
-          >
+            }}>*/
+            <li>
+              <Link to="/">Home</Link>
+            </li>,
             <li>
               <Link to="/login">Login</Link>
-            </li>
+            </li>,
             <li>
               <Link to="/about">About</Link>
             </li>
-          </ul>
-        )}
+          
+        ]}
+
+</ul>
+        
         <IconButton className="menu" onClick={() => setMenuOpen(!menuOpen)}>
           <MenuIcon fontSize="large" />
         </IconButton>
