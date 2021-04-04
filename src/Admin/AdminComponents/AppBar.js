@@ -1,10 +1,11 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { signOutUserStart } from "./../../Redux/User/user.actions";
+import { useDispatch } from "react-redux";
 
 //links
 import { Link } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
 
 //core material-ui imports
 import {
@@ -35,17 +36,9 @@ import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import StoreIcon from "@material-ui/icons/Store";
 
-//pages
-import Home from "./../Pages/Home";
-import Menu from "./../Pages/Menu";
-import Users from "./../Pages/User";
-import Feedback from "./../Pages/Feedback";
 import "./../Admin.scss";
-import Notifications from "../Pages/Notifications";
-import Orders from "../Pages/Orders";
-
 //AdminAuth
-import AdminRoute from "./../AdminRoute/index";
+import AdminLinks from "./../AdminRoute/AdminLinks";
 
 const drawerWidth = 240;
 
@@ -116,7 +109,12 @@ const useStyles = makeStyles((theme) => ({
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
+
+  const signOut = () => {
+    dispatch(signOutUserStart());
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -265,7 +263,14 @@ export default function PersistentDrawerLeft() {
             <ListItemIcon>
               <ExitToAppIcon fontSize="large" />
             </ListItemIcon>
-            <Typography variant="h5">Log Out</Typography>
+            <Typography
+              variant="h5"
+              onClick={() => {
+                signOut();
+              }}
+            >
+              Log Out
+            </Typography>
           </ListItem>
         </List>
       </Drawer>
@@ -276,62 +281,7 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Switch>
-          <Route
-            exact
-            path="/admin"
-            render={() => (
-              <AdminRoute>
-                <Home />
-              </AdminRoute>
-            )}
-          />
-          <Route
-            exact
-            path="/Menu"
-            render={() => (
-              <AdminRoute>
-                <Menu />
-              </AdminRoute>
-            )}
-          />
-          <Route
-            exact
-            path="/Orders"
-            render={() => (
-              <AdminRoute>
-                <Orders />
-              </AdminRoute>
-            )}
-          />
-          <Route
-            exact
-            path="/Notifications"
-            render={() => (
-              <AdminRoute>
-                <Notifications />
-              </AdminRoute>
-            )}
-          />
-          <Route
-            exact
-            path="/Users"
-            render={() => (
-              <AdminRoute>
-                <Users />
-              </AdminRoute>
-            )}
-          />
-          <Route
-            exact
-            path="/Feedback"
-            render={() => (
-              <AdminRoute>
-                <Feedback />
-              </AdminRoute>
-            )}
-          />
-        </Switch>
+        <AdminLinks />
       </main>
     </div>
   );
