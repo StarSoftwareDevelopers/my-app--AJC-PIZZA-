@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { cartTotal, countCartItems } from "./../../Redux/Cart/cartHeader";
+import {
+  cartTotal,
+  countCartItems,
+  selectCartItems,
+} from "./../../Redux/Cart/cartHeader";
 import { createStructuredSelector } from "reselect";
 import { checkingOutCart } from "./../../Redux/Cart/cartActions";
+import { firestore } from "./../../firebase/firebase.utils";
 
 import "./check-out.scss";
 import {
@@ -23,16 +28,18 @@ const mapState = ({ user }) => ({
 const mapCartItems = createStructuredSelector({
   total: cartTotal,
   cartCount: countCartItems,
+  items: selectCartItems,
 });
 
 const CheckingOut = (product) => {
-  const { total, cartCount } = useSelector(mapCartItems);
+  const { total, cartCount, items } = useSelector(mapCartItems);
   const history = useHistory();
   const dispatch = useDispatch();
   const { currentUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
+  const [deliveryDate, setDeliveryDate] = useState();
 
   useEffect(() => {
     if (cartCount < 1) {
@@ -40,10 +47,34 @@ const CheckingOut = (product) => {
     }
   }, [cartCount]);
 
-  const handleCheckOut = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+    const order = {
+      totalOrders: total,
+      orderItems: items.map((item) => {
+        const { documentID, productImg, productName, productPrice, qty } = item;
+
+        return {
+          documentID,
+          productImg,
+          productName,
+          productPrice,
+          qty,
+        };
+      }),
+    };
+
+    try {
+      firestore.collection("orders").add({
+        order,
+        displayName: displayName,
+        address: address,
+        phone: phone,
+      });
+    } catch (err) {
+      console.log(err);
+    }
     dispatch(checkingOutCart());
-    console.log("clicked");
   };
 
   return (
@@ -67,7 +98,7 @@ const CheckingOut = (product) => {
             </tr>
 
             <tr>
-              <td>Pizza :</td>
+              <td>Pizza : </td>
               <td></td>
             </tr>
             <br></br>
@@ -94,7 +125,7 @@ const CheckingOut = (product) => {
             <Typography align="center" variant="h5" color="secondary">
               Billing Details
             </Typography>
-            <form>
+            <form onSubmit={handleSubmit}>
               <TextField
                 margin="dense"
                 type="text"
@@ -104,17 +135,7 @@ const CheckingOut = (product) => {
                 variant="outlined"
                 color="secondary"
                 required
-              />
-              <TextField
-                margin="dense"
-                type="email"
-                label="Email"
-                disabled
-                value={currentUser.email}
-                fullWidth
-                variant="outlined"
-                color="secondary"
-                required
+                onChange={(e) => setdisplayName(e.target.value)}
               />
               <TextField
                 margin="dense"
@@ -125,6 +146,7 @@ const CheckingOut = (product) => {
                 fullWidth
                 variant="outlined"
                 required
+                onChange={(e) => setAddress(e.target.value)}
               />
               <MuiPhoneNumber
                 fullWidth
@@ -135,6 +157,7 @@ const CheckingOut = (product) => {
                 color="secondary"
                 data-cy="user-phone"
                 defaultCountry={"ph"}
+                onChange={(e) => setPhone(e.target.value)}
               />
               <TextField
                 id="date"
@@ -142,10 +165,11 @@ const CheckingOut = (product) => {
                 type="date"
                 color="secondary"
                 fullWidth
-                defaultValue="2017-05-24"
+                value={deliveryDate}
                 InputLabelProps={{
                   shrink: true,
                 }}
+                onChange={(e) => setDeliveryDate(e.target.value)}
               />
               <Typography align="center" variant="h5" color="secondary">
                 Payment Details
@@ -172,7 +196,7 @@ const CheckingOut = (product) => {
                     backgroundColor: "#e31837",
                     color: "white",
                   }}
-                  onClick={handleCheckOut}
+                  type="submit"
                 >
                   Place an Order
                 </Button>
