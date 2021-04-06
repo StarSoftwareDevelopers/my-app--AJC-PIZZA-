@@ -6,10 +6,9 @@ import {
   countCartItems,
   selectCartItems,
 } from "./../../Redux/Cart/cartHeader";
+import { firestore } from " ./../../src/firebase/firebase.utils";
 import { createStructuredSelector } from "reselect";
 import { checkingOutCart } from "./../../Redux/Cart/cartActions";
-import { firestore } from "./../../firebase/firebase.utils";
-
 import "./check-out.scss";
 import {
   Card,
@@ -49,24 +48,26 @@ const CheckingOut = (product) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const order = {
-      totalOrders: total,
-      orderItems: items.map((item) => {
-        const { documentID, productImg, productName, productPrice, qty } = item;
 
-        return {
-          documentID,
-          productImg,
-          productName,
-          productPrice,
-          qty,
-        };
-      }),
-    };
+    // const order = {
+    //   // totalOrders: total,
+    //   orderItems: items.map((item) => {
+    //     const { documentID, productImg, productName, productPrice, qty } = item;
+
+    //     return {
+    //       documentID,
+    //       productImg,
+    //       productName,
+    //       productPrice,
+    //       qty,
+    //     };
+    //   }),
+    // };
 
     try {
       firestore.collection("orders").add({
-        order,
+        items,
+        total,
         displayName: displayName,
         address: address,
         phone: phone,
@@ -96,11 +97,14 @@ const CheckingOut = (product) => {
               <th>Order Details</th>
               <th>Details</th>
             </tr>
-
-            <tr>
-              <td>Pizza : </td>
-              <td></td>
-            </tr>
+            {items.map((item, index) => (
+              <tr key={(item, index)}>
+                <td>Pizza:</td>
+                <td>
+                  {item.productName}({item.qty})
+                </td>
+              </tr>
+            ))}
             <br></br>
             <tr>
               <td>
@@ -130,7 +134,8 @@ const CheckingOut = (product) => {
                 margin="dense"
                 type="text"
                 label="Full Name"
-                value={currentUser.displayName}
+                placeholder={currentUser.displayName}
+                value={displayName}
                 fullWidth
                 variant="outlined"
                 color="secondary"
@@ -141,7 +146,8 @@ const CheckingOut = (product) => {
                 margin="dense"
                 type="text"
                 label="Address"
-                value={currentUser.address}
+                placeholder={currentUser.address}
+                value={address}
                 color="secondary"
                 fullWidth
                 variant="outlined"
@@ -152,12 +158,12 @@ const CheckingOut = (product) => {
                 fullWidth
                 name="phone"
                 label="Phone Number"
-                value={currentUser.phone}
+                placeholder={currentUser.phone}
                 required
                 color="secondary"
                 data-cy="user-phone"
                 defaultCountry={"ph"}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setPhone(e)}
               />
               <TextField
                 id="date"

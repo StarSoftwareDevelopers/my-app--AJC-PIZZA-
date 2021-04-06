@@ -203,6 +203,7 @@ const Menu = () => {
                             <td>{productName}</td>
                             <td>{productDesc}</td>
                             <td>{productPrice}</td>
+                            <td>Edit</td>
                             <td>
                               <IconButton
                                 aria-label="delete"

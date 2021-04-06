@@ -10,6 +10,7 @@ import {
   DialogTitle,
   Card,
 } from "@material-ui/core";
+import StaffTable from "./../AdminComponents/Table/StaffTable";
 
 const Staff = () => {
   const [open, setOpen] = useState(false);
@@ -96,6 +97,9 @@ const Staff = () => {
               </DialogActions>
             </form>
           </Dialog>
+          <br></br>
+          <br />
+          <StaffTable />
         </Card>
       </Container>
     </div>

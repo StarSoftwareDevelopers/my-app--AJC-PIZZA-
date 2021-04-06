@@ -19,13 +19,13 @@ const Itemized = (product) => {
     );
   };
 
-  const addQty = (product) => {
-    dispatch(
-      addProduct({
-        product,
-      })
-    );
-  };
+  // const addQty = (product) => {
+  //   dispatch(
+  //     addProduct({
+  //       product,
+  //     })
+  //   );
+  // };
 
   return (
     <table className="cartItems" cellPadding="10" cellSpacing="0" border="0">
@@ -41,7 +41,7 @@ const Itemized = (product) => {
             </IconButton>
             <span>{qty}</span>
             {/* {might not include muna this add qty} */}
-            <IconButton onClick={() => addQty(product)}>
+            <IconButton>
               <ArrowForwardIosIcon size="small" color="secondary" />
             </IconButton>
           </td>

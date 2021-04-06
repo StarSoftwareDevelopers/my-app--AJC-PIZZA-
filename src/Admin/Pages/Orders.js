@@ -1,16 +1,17 @@
-import OrderTable from './../AdminComponents/Table/OrdersTable';
-import Container from '@material-ui/core/Container';
-// import OrdersTabScreen from './../AdminComponents/Table/OrdersTabScreen';
+import OrderTable from "./../AdminComponents/Table/OrdersTable";
+import Container from "@material-ui/core/Container";
 
 const Orders = () => {
-    return ( 
-        <Container maxWidth = "lg" style={{
-            margin: "1rem"
-        }}>
-            {/* <OrdersTabScreen/> */}
-                 <OrderTable/>
+  return (
+    <Container
+      maxWidth="lg"
+      style={{
+        margin: "1rem",
+      }}
+    >
+      <OrderTable />
     </Container>
-     );
-}
- 
+  );
+};
+
 export default Orders;

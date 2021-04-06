@@ -115,7 +115,7 @@ const Header = (props) => {
         </ul>
 
         <IconButton className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-          <MenuIcon fontSize="large" />
+          <MenuIcon fontSize="large" aria-label="menu-button" />
         </IconButton>
       </nav>
       <Dialog
