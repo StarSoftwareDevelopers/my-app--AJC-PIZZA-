@@ -17,12 +17,16 @@
   }
 
   .carts {
-    max-width: 100.0rem;
     margin: 0 auto;
+    max-width: 100.0rem;
 
     .svg {
       height: 300px;
       align-items: center;
+    }
+
+    table {
+      width: 100%;
     }
   }
 

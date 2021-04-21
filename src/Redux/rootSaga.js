@@ -6,7 +6,8 @@ import userSaga from "./User/user.saga";
 import productSaga from "./Products/productSaga";
 
 //generator function
-export default function* rootSaga() {
+export default function* rootSaga() 
+{
   //to pass our sagas
-  yield all([call(userSaga), call(productSaga)]);
+  yield all([call(userSaga), call(productSaga),])
 }

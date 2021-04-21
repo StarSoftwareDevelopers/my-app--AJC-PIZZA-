@@ -1,3 +1,6 @@
+import React from 'react';
+
+
 import "./style.scss";
 import Button from "./../../components/Forms/Button";
 import Itemized from "./Itemized";
@@ -26,12 +29,12 @@ const MyCarting = ({}) => {
                   <table
                     className="cartHead"
                     border="0"
-                    cellPadding="0"
+                    cellPadding="10"
                     cellSpacing="0"
                   >
                     <tbody>
                       <tr>
-                        <th>Product</th>
+                        <th>Item</th>
                         <th>Name</th>
                         <th>Quantity</th>
                         <th>Price</th>
@@ -90,7 +93,7 @@ const MyCarting = ({}) => {
                     cellSpacing="0"
                   >
                     <tbody>
-                      <tr align="right">
+                      <tr align="center">
                         <td>
                           <Link to="/check-out">
                             <Button>Checkout</Button>
