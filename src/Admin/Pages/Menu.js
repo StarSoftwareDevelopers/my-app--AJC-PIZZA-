@@ -7,21 +7,23 @@ import {
   deleteProducts,
 } from "./../../Redux/Products/productActions";
 
-import { InputAdornment } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
+import {
+  InputAdornment,
+  Typography,
+  Container,
+  Card,
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+} from "@material-ui/core";
+
 import { Link } from "react-router-dom";
 import "./../Admin.scss";
-import Card from "@material-ui/core/Card";
-import Button from "@material-ui/core/Button";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import IconButton from "@material-ui/core/IconButton";
-
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 
 const mapState = ({ productsData }) => ({
   products: productsData.products,
@@ -201,6 +203,7 @@ const Menu = () => {
                             <td>{productName}</td>
                             <td>{productDesc}</td>
                             <td>{productPrice}</td>
+                            <td>Edit</td>
                             <td>
                               <IconButton
                                 aria-label="delete"

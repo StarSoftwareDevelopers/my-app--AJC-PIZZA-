@@ -38,20 +38,19 @@ const OrderTable = () => {
     });
   };
 
-  // const handleClick = () => {
-  //   window.confirm("Are you sure?")
-  // };
+  const handleClick = () => {
+    window.confirm("Are you sure?");
+  };
 
   const columns = [
-    "No.",
+    "OrderID.",
     "Order Date",
     "Delivery Date",
-    "Order ID",
+    "Address",
     "Customer Name",
     "Order Amount",
     "Payment Status",
     "Payment Amount",
-    "View Details",
     "Order Status",
   ];
 
@@ -60,42 +59,28 @@ const OrderTable = () => {
       "1",
       "2/24/2020",
       "2/25/2020",
-      "12345",
+      "5th House,Orythn, Terassen ",
       "Aelin Galathynius",
       "₱130.00",
       "Pending",
       "₱130.00",
-      <Button variant="outlined" color="primary">
-        View
-      </Button>,
-      //  <FormControl>
-      //   {/* <Select
-      //       labelId="select-demo"
-      //       id="status-select"
-      //       value={status}
-      //       onChange={handleChange}
-      //     >
-      //       {/* <option aria-label="None" value="" disabled/> */}
-      //      <MenuItem value ={10} onClick={handleClickOpen}>Confirmed</MenuItem>
-      //      <MenuItem value ={20}>Preparing</MenuItem>
-      //      <MenuItem value ={30}>On the Way</MenuItem>
-      //      <MenuItem value ={40}>On the Way (Delayed)</MenuItem>
-      //      <MenuItem value ={50}>Delivered</MenuItem>
-      //   </Select> */}
-      // </FormControl>
-    ],
-    [
-      "2",
-      "2/24/2020",
-      "2/25/2020",
-      "12346",
-      "Rowan Whitethorn",
-      "₱130.00",
-      "Pending",
-      "₱130.00",
-      <Button variant="outlined" color="primary">
-        View
-      </Button>,
+      <FormControl>
+        <Select
+          labelId="select-demo"
+          id="status-select"
+          value={status}
+          onChange={handleChange}
+        >
+          <option aria-label="None" value="" disabled />
+          <MenuItem value={1} onClick={handleClickOpen}>
+            Confirmed
+          </MenuItem>
+          <MenuItem value={2}>Preparing</MenuItem>
+          <MenuItem value={3}>On the Way</MenuItem>
+          <MenuItem value={4}>On the Way (Delayed)</MenuItem>
+          <MenuItem value={5}>Delivered</MenuItem>
+        </Select>
+      </FormControl>,
     ],
   ];
 

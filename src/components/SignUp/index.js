@@ -5,7 +5,7 @@ import { signUpStart } from "./../../Redux/User/user.actions";
 
 import "./styles.scss";
 import Typography from "@material-ui/core/Typography";
-import Button from "./../Forms/Button";
+import ButtonForm from "./../Forms/Button";
 import TextField from "@material-ui/core/TextField";
 
 const mapState = ({ user }) => ({
@@ -112,11 +112,11 @@ const Signup = (props) => {
               required
             />
             <br /> <br />
-            <Button type="submit">
+            <ButtonForm type="submit">
               <Typography variant="h6" align="center" display="block">
                 Register
               </Typography>
-            </Button>
+            </ButtonForm>
           </form>
         </div>
       </div>

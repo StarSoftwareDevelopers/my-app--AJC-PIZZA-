@@ -1,3 +1,4 @@
+//order page
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -9,10 +10,17 @@ import {
   Button,
   CardMedia,
   CardActions,
+  Snackbar,
 } from "@material-ui/core/";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import { useDispatch } from "react-redux";
 import { addProduct } from "./../../../Redux/Cart/cartActions";
+
+//MUI-ALERT
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     transition: "transform 1s",
     "&:hover": { transform: "scale3d(1.05, 1.05, 1)", color: " #e31837" },
     textAlign: "center",
+    justifyContent: "center",
   },
 }));
 
@@ -42,6 +51,19 @@ const Pizzas = (product) => {
 
   const data = [product];
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false); //for MUI ALERT
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   if (
     !documentID ||
@@ -59,20 +81,20 @@ const Pizzas = (product) => {
   const addToCart = (product) => {
     if (!product) return;
     dispatch(addProduct(product));
-    alert("Added to cart");
   };
 
   return (
     <div className={classes.root}>
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        justify="flex-start"
-        alignItems="center"
-      >
+      <Grid container spacing={2} direction="row" justify="center">
         {data.map((elem) => (
-          <Grid item xs={12} sm={6} md={3} key={data.indexOf(elem)}>
+          <Grid
+            item
+            lg={6}
+            sm={4}
+            md={6}
+            key={data.indexOf(elem)}
+            style={{ textAlign: "center" }}
+          >
             <Card className={classes.Card}>
               <CardHeader title={productName} subheader={productDesc} />
               <CardMedia
@@ -89,7 +111,10 @@ const Pizzas = (product) => {
               <CardActions>
                 <Button
                   {...configCart}
-                  onClick={() => addToCart(product)}
+                  onClick={() => {
+                    addToCart(product);
+                    handleClick();
+                  }}
                   variant="contained"
                   size="large"
                   color="secondary"
@@ -102,6 +127,11 @@ const Pizzas = (product) => {
           </Grid>
         ))}
       </Grid>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Added to Cart!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

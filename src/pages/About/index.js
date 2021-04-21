@@ -71,17 +71,17 @@ const About = () => {
                 </Typography>
                 <Typography variant="h6" align="justify">
                   We care about data privacy and security. Please review our
-                  Privacy Policy [CLICK HERE]/posted on the Site]. By using the
-                  Site, you agree to be bound by our Privacy Policy, which is
-                  incorporated into these Terms and Conditions. Please be
-                  advised the site is hosted in the Philippines. If you access
-                  the Site from the European Union, Asia, or any other region of
-                  the world with laws or other requirements governing personal
-                  data collection, use, or disclosure that differ from
-                  applicable laws in the Philippines, then through your
-                  continued use of the siye, you are transferring your data to
-                  the Philippines, and you expressly consent to have your data
-                  transferred to and processed in the Philippines.
+                  Privacy Policy. By using the Site, you agree to be bound by
+                  our Privacy Policy, which is incorporated into these Terms and
+                  Conditions. Please be advised the site is hosted in the
+                  Philippines. If you access the Site from the European Union,
+                  Asia, or any other region of the world with laws or other
+                  requirements governing personal data collection, use, or
+                  disclosure that differ from applicable laws in the
+                  Philippines, then through your continued use of the site, you
+                  are transferring your data to the Philippines, and you
+                  expressly consent to have your data transferred to and
+                  processed in the Philippines.
                 </Typography>
               </CardContent>
             </Card>
@@ -96,15 +96,14 @@ const About = () => {
                 <Typography variant="h6" align="justify">
                   These Terms and Conditions constitute a legally binding
                   agreement made between you, whether personally or on behalf of
-                  an entity (Star Developers) and [AJC Pizza Online Ordering
-                  System] Us, concerning your access to and use of the [website
-                  name.com] website as well as any other media form, media
-                  channel, mobile website or mobile application related, linked,
-                  or otherwise connected thereto (collectively, the “Site”). You
-                  agree that by accessing the Site, you have read, understood,
-                  and agree to be bound by all of these Terms and Conditions. If
-                  you do not agree with all of these Terms and Conditions, then
-                  you are expressly prohibited from using the Site and you must
+                  AJC HOMEMADE PIZZA, concerning your access to and use of this
+                  website as well as any other media form, media channel, mobile
+                  website or mobile application related, linked, or otherwise
+                  connected thereto (collectively, this site). You agree that by
+                  accessing the Site, you have read, understood, and agree to be
+                  bound by all of these Terms and Conditions. If you do not
+                  agree with all of these Terms and Conditions, then you are
+                  expressly prohibited from using the site and you must
                   discontinue use immediately. Supplemental terms and conditions
                   or documents that may be posted on the Site from time to time
                   are hereby expressly incorporated herein by reference. We

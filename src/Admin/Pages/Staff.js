@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Typography,
   Button,
   Container,
   TextField,
@@ -9,10 +10,9 @@ import {
   DialogTitle,
   Card,
 } from "@material-ui/core";
+import StaffTable from "./../AdminComponents/Table/StaffTable";
 
-import AdminTable from "./../AdminComponents/Table/AdminTable";
-
-const AdminMgt = () => {
+const Staff = () => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -36,7 +36,7 @@ const AdminMgt = () => {
             color="secondary"
             onClick={handleClickOpen}
           >
-            Add an Admin
+            Add a Staff
           </Button>
 
           <Dialog
@@ -46,7 +46,7 @@ const AdminMgt = () => {
             maxWidth="sm"
           >
             <form>
-              <DialogTitle id="form-dialog-title">Add Admin</DialogTitle>
+              <DialogTitle id="form-dialog-title">Add Staff</DialogTitle>
               <DialogContent>
                 <TextField
                   autoFocus
@@ -99,11 +99,11 @@ const AdminMgt = () => {
           </Dialog>
           <br></br>
           <br />
-          <AdminTable />
+          <StaffTable />
         </Card>
       </Container>
     </div>
   );
 };
 
-export default AdminMgt;
+export default Staff;

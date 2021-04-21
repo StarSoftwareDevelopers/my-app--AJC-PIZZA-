@@ -1,25 +1,83 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  cartTotal,
+  countCartItems,
+  selectCartItems,
+} from "./../../Redux/Cart/cartHeader";
+import { firestore } from " ./../../src/firebase/firebase.utils";
+import { createStructuredSelector } from "reselect";
+import { checkingOutCart } from "./../../Redux/Cart/cartActions";
 import "./check-out.scss";
-import Button from "./../../components/Forms/Button";
-import Card from "@material-ui/core/Card";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import {
+  Card,
+  Typography,
+  Container,
+  TextField,
+  Button,
+} from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
-import TextField from "@material-ui/core/TextField";
-
 import MuiPhoneNumber from "material-ui-phone-number";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
-const CheckingOut = (props) => {
+const mapCartItems = createStructuredSelector({
+  total: cartTotal,
+  cartCount: countCartItems,
+  items: selectCartItems,
+});
+
+const CheckingOut = (product) => {
+  const { total, cartCount, items } = useSelector(mapCartItems);
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { currentUser } = useSelector(mapState);
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
+  const [deliveryDate, setDeliveryDate] = useState();
+
+  useEffect(() => {
+    if (cartCount < 1) {
+      history.push("/order-status");
+    }
+  }, [cartCount]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // const order = {
+    //   // totalOrders: total,
+    //   orderItems: items.map((item) => {
+    //     const { documentID, productImg, productName, productPrice, qty } = item;
+
+    //     return {
+    //       documentID,
+    //       productImg,
+    //       productName,
+    //       productPrice,
+    //       qty,
+    //     };
+    //   }),
+    // };
+
+    try {
+      firestore.collection("orders").add({
+        items,
+        total,
+        displayName: displayName,
+        address: address,
+        phone: phone,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    dispatch(checkingOutCart());
+  };
+
   return (
     <div>
       <Container fixed>
@@ -39,28 +97,24 @@ const CheckingOut = (props) => {
               <th>Order Details</th>
               <th>Details</th>
             </tr>
+            {items.map((item, index) => (
+              <tr key={(item, index)}>
+                <td>Pizza:</td>
+                <td>
+                  {item.productName}({item.qty})
+                </td>
+              </tr>
+            ))}
+            <br></br>
             <tr>
-              <td>Cart</td>
               <td>
-                <ShoppingCartIcon
-                  style={{ marginRight: "1rem", color: " #e31837" }}
-                />
-                1
-              </td>
-            </tr>
-            <tr>
-              <td>Pizza</td>
-              <td>
+                {" "}
                 <PaymentIcon
                   style={{ marginRight: "1rem", color: " #e31837" }}
                 />
-                Price
+                Total Price:
               </td>
-            </tr>
-            <br></br>
-            <tr>
-              <td>Total</td>
-              <td>Total Price</td>
+              <td>₱{total}.00</td>
             </tr>
           </table>
           <Card
@@ -75,47 +129,41 @@ const CheckingOut = (props) => {
             <Typography align="center" variant="h5" color="secondary">
               Billing Details
             </Typography>
-            <form>
+            <form onSubmit={handleSubmit}>
               <TextField
                 margin="dense"
                 type="text"
                 label="Full Name"
-                value={currentUser.displayName}
+                placeholder={currentUser.displayName}
+                value={displayName}
                 fullWidth
                 variant="outlined"
                 color="secondary"
                 required
-              />
-              <TextField
-                margin="dense"
-                type="email"
-                label="Email"
-                disabled
-                value={currentUser.email}
-                fullWidth
-                variant="outlined"
-                color="secondary"
-                required
+                onChange={(e) => setdisplayName(e.target.value)}
               />
               <TextField
                 margin="dense"
                 type="text"
                 label="Address"
-                value={currentUser.address}
+                placeholder={currentUser.address}
+                value={address}
                 color="secondary"
                 fullWidth
                 variant="outlined"
                 required
+                onChange={(e) => setAddress(e.target.value)}
               />
               <MuiPhoneNumber
                 fullWidth
                 name="phone"
                 label="Phone Number"
-                value={currentUser.phone}
+                placeholder={currentUser.phone}
                 required
                 color="secondary"
                 data-cy="user-phone"
                 defaultCountry={"ph"}
+                onChange={(e) => setPhone(e)}
               />
               <TextField
                 id="date"
@@ -123,13 +171,12 @@ const CheckingOut = (props) => {
                 type="date"
                 color="secondary"
                 fullWidth
-                defaultValue="2017-05-24"
+                value={deliveryDate}
                 InputLabelProps={{
                   shrink: true,
                 }}
+                onChange={(e) => setDeliveryDate(e.target.value)}
               />
-              <br></br>
-              <br />
               <Typography align="center" variant="h5" color="secondary">
                 Payment Details
               </Typography>
@@ -147,7 +194,19 @@ const CheckingOut = (props) => {
                 type="number"
                 fullWidth
               />
-              <Button>Place an Order</Button>
+              <Typography align="center" style={{ marginTop: "1rem" }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  style={{
+                    backgroundColor: "#e31837",
+                    color: "white",
+                  }}
+                  type="submit"
+                >
+                  Place an Order
+                </Button>
+              </Typography>
             </form>
           </Card>
         </Typography>

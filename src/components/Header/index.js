@@ -49,12 +49,13 @@ const Header = (props) => {
         <div className="logo">
           <Link to="/">AJC PIZZA</Link>
         </div>
+
         {admin && (
           <ul
             className="nav-links"
             style={{
-              transform: menuOpen ? "translateX(200px)" : "translate(-700px)",
-              marginRight: "-600px",
+              transform: menuOpen ? "translateX(210px)" : "translate(-1000px)",
+              marginRight: "-1500px",
             }}
           >
             <li>
@@ -64,14 +65,13 @@ const Header = (props) => {
         )}
 
         <ul
-            className="nav-links"
-            style={{
-              transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
-              marginRight: "-500px",
-            }}
-          >
-        {currentUser && [
-          
+          className="nav-links"
+          style={{
+            transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
+            marginRight: "-500px",
+          }}
+        >
+          {currentUser && [
             <li>
               <Link to="/">Home</Link>
             </li>,
@@ -79,7 +79,7 @@ const Header = (props) => {
               <Link to="/order">Order</Link>
             </li>,
             <li>
-              <Link to="/cart">My Cart {numCartItems}</Link>
+              <Link to="/cart">My Cart ({numCartItems})</Link>
             </li>,
             <li>
               <Link to="/order-status">Order Status</Link>
@@ -92,12 +92,11 @@ const Header = (props) => {
             </li>,
             <li>
               <span onClick={handleClickOpen}>Log Out</span>
-            </li>
-          
-        ]}
+            </li>,
+          ]}
 
-        {!currentUser && [
-          /*<ul
+          {!currentUser && [
+            /*<ul
             className="nav-links"
             style={{
               transform: menuOpen ? "translateX(0px)" : "translate(-500px)",
@@ -111,14 +110,12 @@ const Header = (props) => {
             </li>,
             <li>
               <Link to="/about">About</Link>
-            </li>
-          
-        ]}
+            </li>,
+          ]}
+        </ul>
 
-</ul>
-        
         <IconButton className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-          <MenuIcon fontSize="large" />
+          <MenuIcon fontSize="large" aria-label="menu-button" />
         </IconButton>
       </nav>
       <Dialog

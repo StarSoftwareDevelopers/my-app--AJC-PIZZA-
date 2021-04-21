@@ -16,7 +16,7 @@ import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 import MuiPhoneNumber from "material-ui-phone-number";
 
 import "./styles.scss";
-import Button from "./../Forms/Button";
+import ButtonForm from "./../Forms/Button";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -144,7 +144,7 @@ const MyAccount = () => {
                 defaultCountry={"ph"}
                 onChange={(e) => setPhone(e)}
               />
-              <Button type="submit">Update</Button>
+              <ButtonForm type="submit">Update</ButtonForm>
             </form>
             <Link to="/recovery">
               <Typography variant="body1">Reset Password?</Typography>
