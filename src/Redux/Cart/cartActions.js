@@ -13,3 +13,8 @@ export const deleteProduct = (cartItem) => ({
 export const checkingOutCart = () => ({
   type: cartTypes.CHECKOUT_CART,
 });
+
+export const lessenCartItem = (cartItem) => ({
+  type: cartTypes.LESSEN_CART,
+  payload: cartItem
+});

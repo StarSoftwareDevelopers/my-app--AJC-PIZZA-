@@ -34,3 +34,20 @@ export const handleDelete = ({ prevCartItems, removeCartItem }) => {
     (item) => item.documentID !== removeCartItem.documentID
   );
 };
+
+export const handleLessenCart = ({ prevCartItems, lessCartItem }) => {
+  const existingCartItem = prevCartItems.find(cartItem =>
+    cartItem.documentID === lessCartItem.documentID);
+
+  if(existingCartItem.qty === 1) {
+    return prevCartItems.filter( cartItem => cartItem.documentID !== existingCartItem.documentID);
+  }
+
+  return prevCartItems.map(cartItem => cartItem.documentID === existingCartItem.documentID ?
+    {
+      ...cartItem,
+      qty: cartItem.qty - 1
+    } 
+    : cartItem)
+
+};

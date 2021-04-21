@@ -80,7 +80,7 @@ const MyCarting = ({}) => {
                     <tbody>
                       <tr align="right">
                         <td>
-                          <h3>Total: {total}</h3>
+                          <h3>Total: ₱ {total}</h3>
                         </td>
                       </tr>
                     </tbody>

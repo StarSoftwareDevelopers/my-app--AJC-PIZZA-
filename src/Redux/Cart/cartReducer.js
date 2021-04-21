@@ -1,5 +1,5 @@
 import cartTypes from "./cartTypes";
-import { handleAddToCart, handleDelete } from "./cart";
+import { handleAddToCart, handleDelete, handleLessenCart } from "./cart";
 
 const INITIAL_STATE = {
   cartItems: [],
@@ -22,6 +22,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
           prevCartItems: state.cartItems,
           removeCartItem: action.payload,
         }),
+      };
+
+    case cartTypes.LESSEN_CART:
+      return {
+        ...state,
+        cartItems: handleLessenCart({
+          prevCartItems: state.cartItems,
+          lessCartItem: action.payload
+        })
       };
     case cartTypes.CHECKOUT_CART:
       return {

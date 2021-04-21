@@ -67,7 +67,7 @@ class OrderStatus extends Component {
                 Order ID: <b> </b>
               </Typography>
               <Typography variant="h4" align="center">
-                Pizza: <b>{"Tunna Pizza "}</b>
+                Pizza: <b>{"Tuna Pizza "}</b>
               </Typography>
               <Typography variant="h4" align="center">
                 Quantity: <b>{"1 "}</b>
