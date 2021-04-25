@@ -15,9 +15,6 @@ export const storage = firebase.storage();
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 GoogleProvider.setCustomParameters({ prompt: "select_account" });
 
-export const FacebookProvider = new firebase.auth.FacebookAuthProvider();
-FacebookProvider.setCustomParameters({ prompt: "select_account" });
-
 export const handleUserProfile = async ({ userAuth, additionalData }) => {
   if (!userAuth) return;
   const { uid } = userAuth;

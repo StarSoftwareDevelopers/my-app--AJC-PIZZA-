@@ -1,5 +1,3 @@
-
-
 .directory {
   height: 100%;
 
@@ -16,14 +14,12 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-    
-      
+
       .content {
         height: calc (100vh -80px);
         max-height: 100%;
         width: 100vw;
-        padding: 0 rem calc((100vw - 1300px) /2);
-        
+        padding: 0 rem calc((100vw - 1300px) / 2);
       }
 
       .items {
@@ -39,13 +35,11 @@
         font-weight: bold;
         width: 650px;
         max-height: 100%;
-       
 
         @media screen and (max-width: 650px) {
-            width: 100%;
-            height: 50%;
-          }
-
+          width: 100%;
+          height: 50%;
+        }
       }
 
       h1 {
@@ -59,8 +53,7 @@
         line-height: 1;
         font-weight: bold;
         max-height: 100%;
-        font-family: 'Montserrat', sans-serif;
-        
+        font-family: "Montserrat", sans-serif;
       }
 
       p {
@@ -72,35 +65,29 @@
         line-height: 1;
         font-weight: bold;
         max-height: 100%;
-        font-family: 'Montserrat', sans-serif;
+        font-family: "Montserrat", sans-serif;
       }
 
       a {
-      font-size: 1.5rem;
-      margin-left: 10px;
-      padding: 1rem 4rem;
-      border: none;
-      background: #e31837;
-      color: #fff;
-      transition: 0.1s ease-out;
-      font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+        margin-left: 20%;
+        padding: 1rem 4rem;
+        border: none;
+        background: #e31837;
+        color: #fff;
+        transition: 0.1s ease-out;
+        font-family: "Montserrat", sans-serif;
 
-      &:hover {
+        &:hover {
           background: #ffc500;
           transition: 0.1s ease-out;
           color: #000;
           cursor: pointer;
-}
+        }
       }
-
-     
-
-      }
-
     }
   }
-
-
+}
 
 /*@media only screen and (max-width: 980px) {
 

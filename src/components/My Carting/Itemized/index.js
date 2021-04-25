@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteProduct, addProduct, lessenCartItem } from "./../../../Redux/Cart/cartActions";
+import {
+  deleteProduct,
+  addProduct,
+  lessenCartItem,
+} from "./../../../Redux/Cart/cartActions";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -19,21 +23,13 @@ const Itemized = (product) => {
     );
   };
 
-   const addQty = (product) => {
-     dispatch(
-       addProduct(
-         product
-       )
-     )
-   };
+  const addQty = (product) => {
+    dispatch(addProduct(product));
+  };
 
-   const lessQty = (product) => {
-     dispatch(
-      lessenCartItem(
-        product
-      )
-     )
-   };
+  const lessQty = (product) => {
+    dispatch(lessenCartItem(product));
+  };
 
   return (
     <table className="cartItems" cellPadding="10" cellSpacing="0" border="0">

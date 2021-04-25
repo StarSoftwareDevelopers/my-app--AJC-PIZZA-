@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import {
   emailSignInStart,
   googleSignInStart,
-  facebookSignInStart,
 } from "./../../Redux/User/user.actions";
 
 import "./style.scss";
@@ -122,20 +121,6 @@ const SigninIn = (props) => {
                       <FaGoogle
                         style={{
                           color: "#EA4335",
-                          fontSize: "30px",
-                        }}
-                      />
-                    </IconButton>
-                  </Tooltip>
-
-                  <Tooltip title="Continue with Facebook">
-                    <IconButton
-                      onClick={handleFacebookSignIn}
-                      aria-label="fbSignIn"
-                    >
-                      <FaFacebook
-                        style={{
-                          color: "#3b5998",
                           fontSize: "30px",
                         }}
                       />

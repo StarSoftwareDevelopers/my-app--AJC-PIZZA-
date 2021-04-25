@@ -26,12 +26,15 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: theme.spacing(2),
+    display: "block",
+    float: "left",
+    paddingLeft: "5rem",
   },
   media: {
-    height: 300,
+    height: 200,
   },
   Card: {
-    minWidth: 275,
+    width: 275,
     transition: "transform 1s",
     "&:hover": { transform: "scale3d(1.05, 1.05, 1)", color: " #e31837" },
     textAlign: "center",
@@ -85,7 +88,13 @@ const Pizzas = (product) => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2} direction="row" justify="center">
+      <Grid
+        container
+        direction="row"
+        justify="space-evenly"
+        alignItems="flex-start"
+        spacing={3}
+      >
         {data.map((elem) => (
           <Grid
             item
@@ -93,7 +102,9 @@ const Pizzas = (product) => {
             sm={4}
             md={6}
             key={data.indexOf(elem)}
-            style={{ textAlign: "center" }}
+            style={{
+              textAlign: "center",
+            }}
           >
             <Card className={classes.Card}>
               <CardHeader title={productName} subheader={productDesc} />
@@ -127,6 +138,7 @@ const Pizzas = (product) => {
           </Grid>
         ))}
       </Grid>
+
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Added to Cart!

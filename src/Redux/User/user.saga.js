@@ -6,7 +6,6 @@ import {
   handleUserProfile,
   getCurrentUser,
   GoogleProvider,
-  FacebookProvider,
 } from "./../../firebase/firebase.utils";
 import UserTypes from "./user.types";
 import {
@@ -143,20 +142,6 @@ export function* onGoogleSignInStart() {
   yield takeLatest(UserTypes.LOGIN_WITH_GOOGLE, googleSignIn);
 }
 
-//faceook
-export function* facebookSignIn() {
-  try {
-    const { user } = yield auth.signInWithPopup(FacebookProvider);
-    yield snapshotFromUserAuth(user);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-export function* onFacebookSignInStart() {
-  yield takeLatest(UserTypes.LOGIN_WITH_FACEBOOK, facebookSignIn);
-}
-
 export default function* userSaga() {
   yield all([
     call(onEmailSignInStart),
@@ -165,6 +150,5 @@ export default function* userSaga() {
     call(onSignUpStart),
     call(onResetPassStart),
     call(onGoogleSignInStart),
-    call(onFacebookSignInStart),
   ]);
 }
