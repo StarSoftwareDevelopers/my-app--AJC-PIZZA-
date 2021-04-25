@@ -1,6 +1,4 @@
-import React from 'react';
-
-
+import React from "react";
 import "./style.scss";
 import Button from "./../../components/Forms/Button";
 import { Typography } from "@material-ui/core";
@@ -115,7 +113,13 @@ const MyCarting = ({}) => {
             <p>
               <img src={undraw_add_to_cart_vkjp} className="svg" />
             </p>
-            <p>No cart items. Go shop now</p>
+
+            <p style={{ color: " #e31837", fontSize: "20px" }}>
+              No cart items.
+            </p>
+            <Link to="/order">
+              <Button>go shop now</Button>
+            </Link>
           </>
         )}
       </div>

@@ -29,9 +29,8 @@ const Items = ({}) => {
             // position: "fixed",
             padding: "1rem",
             color: "#e31837",
-            zIndex: "-1",
             marginLeft: "1.5rem",
-            width: "20%",
+            width: "15%",
           }}
         >
           <Typography variant="h6">
