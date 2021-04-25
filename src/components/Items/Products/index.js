@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     display: "block",
     float: "left",
-    paddingLeft: "5rem",
   },
   media: {
     height: 200,

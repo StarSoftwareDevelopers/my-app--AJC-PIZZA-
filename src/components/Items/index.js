@@ -30,7 +30,7 @@ const Items = ({}) => {
             padding: "1rem",
             color: "#e31837",
             marginLeft: "1.5rem",
-            width: "15%",
+            width: "20%",
           }}
         >
           <Typography variant="h6">
