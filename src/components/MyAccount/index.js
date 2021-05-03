@@ -3,8 +3,13 @@ import { useSelector } from "react-redux";
 import { firestore } from "./../../firebase/firebase.utils";
 import { Link, useHistory } from "react-router-dom";
 
-import { Typography, TextField, InputAdornment } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
+import {
+  Typography,
+  TextField,
+  InputAdornment,
+  Card,
+  Container,
+} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -17,6 +22,7 @@ import MuiPhoneNumber from "material-ui-phone-number";
 
 import "./styles.scss";
 import ButtonForm from "./../Forms/Button";
+import Map from "./../Google Maps";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -155,6 +161,9 @@ const MyAccount = () => {
             </Link>
           </div>
         </div>
+        {/* <Card>
+          <Map />
+        </Card> */}
       </Container>
       <br></br>
     </div>

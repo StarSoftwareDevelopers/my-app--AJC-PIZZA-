@@ -16,15 +16,13 @@ import {
 } from "./user.actions";
 import { resetPasswordAPI } from "./user.help";
 
-//helper generator function that others can use
 export function* snapshotFromUserAuth(user, additionalData = {}) {
   try {
-    //to know that they are signed in or logged out
     const userRef = yield call(handleUserProfile, {
       userAuth: user,
       additionalData,
     });
-    const snapshot = yield userRef.get(); //effectively handle updating the redux store with the user's info
+    const snapshot = yield userRef.get();
     yield put(
       signInSuccess({
         id: snapshot.id,
@@ -46,16 +44,10 @@ export function* emailSignIn({ payload: { email, password } }) {
   }
 }
 
-//generator function
 export function* onEmailSignInStart() {
-  //takes two things, the 1st one is the action we're listening for
-  //2nd is the nmame of the generator function that will handle this event when it is called
   yield takeLatest(UserTypes.LOGIN_WITH_EMAIL, emailSignIn);
 }
 
-//if the user is currently signed in
-//if the user does not exist
-//if they are signed in - restore the redux store with current user's info
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
@@ -71,7 +63,7 @@ export function* userAuthSession() {
   yield takeLatest(UserTypes.AUTHENTICATE_USER, isUserAuthenticated);
 }
 
-//generator function for signout
+//for signout
 export function* signOutUser() {
   try {
     yield auth.signOut();

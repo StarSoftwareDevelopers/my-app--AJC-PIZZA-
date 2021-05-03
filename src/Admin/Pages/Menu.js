@@ -7,6 +7,8 @@ import {
   deleteProducts,
 } from "./../../Redux/Products/productActions";
 
+import EditIcon from "@material-ui/icons/Edit";
+
 import {
   InputAdornment,
   Typography,
@@ -203,11 +205,17 @@ const Menu = () => {
                             <td>{productName}</td>
                             <td>{productDesc}</td>
                             <td>{productPrice}</td>
-                            <td>Edit</td>
+                            <td>
+                              <EditIcon
+                                fontSize="large"
+                                style={{ color: "#4CAF50" }}
+                              />
+                            </td>
                             <td>
                               <IconButton
                                 aria-label="delete"
-                                color="secondary"
+                                // color="secondary"
+                                style={{ color: " #d11a2a" }}
                                 onClick={() =>
                                   dispatch(deleteProducts(documentID))
                                 }

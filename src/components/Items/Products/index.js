@@ -39,6 +39,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     justifyContent: "center",
   },
+  Button: {
+    color: " #fff",
+    backgroundColor: "#e31837",
+    "&:hover": {
+      backgroundColor: " #ffc500",
+      color: "#000",
+    },
+  },
 }));
 
 const Pizzas = (product) => {
@@ -129,6 +137,7 @@ const Pizzas = (product) => {
                   size="large"
                   color="secondary"
                   style={{ margin: "0 auto" }}
+                  className={classes.Button}
                 >
                   Add to Cart
                 </Button>

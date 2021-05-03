@@ -142,7 +142,15 @@ const App = (props) => {
             </WithAuth>
           )}
         />
-        <AppBar />
+        <Route
+          render={() => (
+            <AdminRoute>
+              <AppBar />
+            </AdminRoute>
+          )}
+        />
+
+        {/* <AppBar /> */}
         <Route
           exact
           path="/admin"

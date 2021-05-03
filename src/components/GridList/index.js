@@ -8,7 +8,7 @@ import {
   CardActionArea,
   Typography,
   CardHeader,
-  Button,
+  // Button,
   CardMedia,
   CardActions,
   Avatar,
@@ -17,6 +17,7 @@ import {
 import vegetablepizza from "./../../assets/vegetablepizza.jpg";
 import hawaiianpizza from "./../../assets/hawaiianpizza.jpg";
 import tunapizza from "./../../assets/tunapizza.jpg";
+import Button from "./../Forms/Button";
 
 const useStyles = makeStyles({
   root: {
@@ -88,9 +89,7 @@ const Gallery = () => {
           </CardActionArea>
           <CardActions>
             <Link to="/order">
-              <Button variant="contained" size="small" color="secondary">
-                Order Now for only ₱130.00
-              </Button>
+              <Button>Order Now for only ₱130.00</Button>
             </Link>
           </CardActions>
         </Card>
@@ -130,9 +129,7 @@ const Gallery = () => {
           </CardActionArea>
           <CardActions>
             <Link to="/order">
-              <Button variant="contained" size="small" color="secondary">
-                Order Now for only ₱130.00
-              </Button>
+              <Button>Order Now for only ₱130.00</Button>
             </Link>
           </CardActions>
         </Card>
@@ -171,9 +168,7 @@ const Gallery = () => {
           </CardActionArea>
           <CardActions>
             <Link to="/order">
-              <Button variant="contained" size="small" color="secondary">
-                Order Now for only ₱130.00
-              </Button>
+              <Button>Order Now for only ₱130.00</Button>
             </Link>
           </CardActions>
         </Card>

@@ -10,15 +10,10 @@ import { firestore } from " ./../../src/firebase/firebase.utils";
 import { createStructuredSelector } from "reselect";
 import { checkingOutCart } from "./../../Redux/Cart/cartActions";
 import "./check-out.scss";
-import {
-  Card,
-  Typography,
-  Container,
-  TextField,
-  Button,
-} from "@material-ui/core";
+import { Card, Typography, Container, TextField } from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
 import MuiPhoneNumber from "material-ui-phone-number";
+import Button from "./../../components/Forms/Button";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -65,12 +60,15 @@ const CheckingOut = (product) => {
     // };
 
     try {
-      firestore.collection("orders").add({
+      firestore.collection("orders").doc().set({
         items,
         total,
         displayName: displayName,
         address: address,
         phone: phone,
+        deliveryDate: deliveryDate,
+        orderCreatedAt: new Date(),
+        userID: currentUser.id,
       });
     } catch (err) {
       console.log(err);
@@ -78,6 +76,7 @@ const CheckingOut = (product) => {
     dispatch(checkingOutCart());
   };
 
+  console.log(currentUser.id);
   return (
     <div>
       <Container fixed>
@@ -88,18 +87,18 @@ const CheckingOut = (product) => {
             height: "120vh",
             padding: "1rem",
             marginTop: "1rem",
-            marginBottom: "1rem",
+            // marginBottom: "1rem",
             borderRadius: "12px",
           }}
         >
           <table border="0" cellPadding="0" cellSpacing="0" className="center">
             <tr>
               <th>Order Details</th>
-              <th>Details</th>
             </tr>
+
             {items.map((item, index) => (
               <tr key={(item, index)}>
-                <td>Pizza:</td>
+                <td>Pizza No. {index + 1}</td>
                 <td>
                   {item.productName}({item.qty})
                 </td>
@@ -158,7 +157,7 @@ const CheckingOut = (product) => {
                 fullWidth
                 name="phone"
                 label="Phone Number"
-                placeholder={currentUser.phone}
+                value={currentUser.phone}
                 required
                 color="secondary"
                 data-cy="user-phone"
@@ -177,6 +176,7 @@ const CheckingOut = (product) => {
                 }}
                 onChange={(e) => setDeliveryDate(e.target.value)}
               />
+              <br /> <br />
               <Typography align="center" variant="h5" color="secondary">
                 Payment Details
               </Typography>
@@ -195,17 +195,7 @@ const CheckingOut = (product) => {
                 fullWidth
               />
               <Typography align="center" style={{ marginTop: "1rem" }}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  style={{
-                    backgroundColor: "#e31837",
-                    color: "white",
-                  }}
-                  type="submit"
-                >
-                  Place an Order
-                </Button>
+                <Button type="submit">Place an Order</Button>
               </Typography>
             </form>
           </Card>
