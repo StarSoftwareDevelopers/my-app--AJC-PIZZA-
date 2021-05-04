@@ -15,6 +15,8 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import MuiPhoneNumber from "material-ui-phone-number";
 import Button from "./../../components/Forms/Button";
 
+import firebase from "firebase/app";
+
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
@@ -34,12 +36,16 @@ const CheckingOut = (product) => {
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
   const [deliveryDate, setDeliveryDate] = useState();
+  const [payment, setPayment] = useState();
 
   useEffect(() => {
     if (cartCount < 1) {
       history.push("/order-status");
     }
   }, [cartCount]);
+
+  const date = firebase.firestore.Timestamp.fromDate(new Date(deliveryDate));
+  console.log(date);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,7 +72,8 @@ const CheckingOut = (product) => {
         displayName: displayName,
         address: address,
         phone: phone,
-        deliveryDate: deliveryDate,
+        payment: payment,
+        deliveryDate: date,
         orderCreatedAt: new Date(),
         userID: currentUser.id,
       });
@@ -169,7 +176,7 @@ const CheckingOut = (product) => {
               <TextField
                 id="date"
                 label="Delivery Date"
-                type="date"
+                type="datetime-local"
                 color="secondary"
                 fullWidth
                 value={deliveryDate}
@@ -186,9 +193,20 @@ const CheckingOut = (product) => {
               <Typography align="left" variant="subtitle1" color="secondary">
                 Choose Payment Option
               </Typography>
-              <input type="radio" value="cod" name="paymentMethod" />{" "}
+              <input
+                type="radio"
+                value="cod"
+                name="paymentMethod"
+                onChange={(e) => setPayment(e.target.value)}
+              />
               COD(Cash-on-Delivery)<br></br>
-              <input type="radio" value="gcash" name="paymentMethod" /> Gcash
+              <input
+                type="radio"
+                value="gcash"
+                name="paymentMethod"
+                onChange={(e) => setPayment(e.target.value)}
+              />{" "}
+              Gcash
               <TextField
                 margin="dense"
                 id="gcash-num"
