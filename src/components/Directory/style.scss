@@ -77,12 +77,12 @@
         color: #fff;
         transition: 0.1s ease-out;
         font-family: "Montserrat", sans-serif;
+        cursor: default;
 
         &:hover {
           background: #ffc500;
           transition: 0.1s ease-out;
           color: #000;
-          cursor: pointer;
         }
       }
     }

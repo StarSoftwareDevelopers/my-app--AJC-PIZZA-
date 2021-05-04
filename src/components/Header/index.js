@@ -55,7 +55,7 @@ const Header = (props) => {
             className="nav-links"
             style={{
               transform: menuOpen ? "translateX(210px)" : "translate(-1000px)",
-              marginRight: "-1500px",
+              marginRight: "-1600px",
             }}
           >
             <li>
@@ -75,17 +75,17 @@ const Header = (props) => {
             <li>
               <Link to="/">Home</Link>
             </li>,
+            // <li>
+            //   <Link to="/order">Order</Link>
+            // </li>,
             <li>
-              <Link to="/order">Order</Link>
+              <Link to="/cart">Cart ({numCartItems})</Link>
             </li>,
             <li>
-              <Link to="/cart">My Cart ({numCartItems})</Link>
+              <Link to="/order-status">Orders</Link>
             </li>,
             <li>
-              <Link to="/order-status">Order Status</Link>
-            </li>,
-            <li>
-              <Link to="/account">My Account</Link>
+              <Link to="/account">Account</Link>
             </li>,
             <li>
               <Link to="/about">About</Link>
@@ -107,6 +107,9 @@ const Header = (props) => {
             </li>,
             <li>
               <Link to="/login">Login</Link>
+            </li>,
+            <li>
+              <Link to="/cart">Cart ({numCartItems})</Link>
             </li>,
             <li>
               <Link to="/about">About</Link>

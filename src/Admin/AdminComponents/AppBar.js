@@ -206,7 +206,7 @@ export default function PersistentDrawerLeft() {
                 <HomeIcon fontSize="large" />
               </ListItemIcon>
               <ListItemText>
-                <Typography variant="h5">Home</Typography>
+                <Typography variant="h5">Dashboard</Typography>
               </ListItemText>
             </ListItem>
           </Link>
@@ -226,14 +226,14 @@ export default function PersistentDrawerLeft() {
               <Typography variant="h5">Orders</Typography>
             </ListItem>
           </Link>
-          <Link to="/Notifications">
+          {/* <Link to="/Notifications">
             <ListItem button key="Notifications">
               <ListItemIcon>
                 <NotificationsIcon fontSize="large" />
               </ListItemIcon>
               <Typography variant="h5">Notifications</Typography>
             </ListItem>
-          </Link>
+          </Link> */}
           <Divider />
           <Link to="/AdminMgt">
             <ListItem button key="Admin">

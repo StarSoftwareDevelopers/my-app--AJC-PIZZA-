@@ -20,7 +20,7 @@ const MyCarting = ({}) => {
   return (
     <div className="carter">
       <Typography variant="h3" align="center">
-        My Cart Items
+        My Cart
       </Typography>
       <div className="carts">
         {cartItems.length > 0 ? (
@@ -36,7 +36,7 @@ const MyCarting = ({}) => {
                   >
                     <tbody>
                       <tr>
-                        <th>Item</th>
+                        <th></th>
                         <th>Name</th>
                         <th>Quantity</th>
                         <th>Price</th>
@@ -61,7 +61,6 @@ const MyCarting = ({}) => {
                           </tr>
                         );
                       })}
-                      {/* </tr> */}
                     </tbody>
                   </table>
                 </td>
@@ -79,26 +78,10 @@ const MyCarting = ({}) => {
                       <tr align="right">
                         <td>
                           <h3>Total: ₱ {total}</h3>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-              {/* Separate */}
-              <tr>
-                <td>
-                  <table
-                    align="right"
-                    border="0"
-                    cellPadding="10"
-                    cellSpacing="0"
-                  >
-                    <tbody>
-                      <tr align="center">
-                        <td>
                           <Link to="/check-out">
-                            <Button>Checkout</Button>
+                            <div style={{ float: "right" }}>
+                              <Button>Check-out</Button>
+                            </div>
                           </Link>
                         </td>
                       </tr>
@@ -117,7 +100,7 @@ const MyCarting = ({}) => {
             <p style={{ color: " #e31837", fontSize: "20px" }}>
               No cart items.
             </p>
-            <Link to="/order">
+            <Link to="/">
               <Button>go shop now</Button>
             </Link>
           </>

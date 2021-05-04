@@ -76,7 +76,6 @@ const CheckingOut = (product) => {
     dispatch(checkingOutCart());
   };
 
-  console.log(currentUser.id);
   return (
     <div>
       <Container fixed>
@@ -92,13 +91,16 @@ const CheckingOut = (product) => {
           }}
         >
           <table border="0" cellPadding="0" cellSpacing="0" className="center">
-            <tr>
-              <th>Order Details</th>
+            <tr align="center">
+              <td>
+                <h3>
+                  <b>Order Details</b>
+                </h3>
+              </td>
             </tr>
 
             {items.map((item, index) => (
-              <tr key={(item, index)}>
-                <td>Pizza No. {index + 1}</td>
+              <tr key={(item, index)} align="center">
                 <td>
                   {item.productName}({item.qty})
                 </td>
@@ -175,6 +177,7 @@ const CheckingOut = (product) => {
                   shrink: true,
                 }}
                 onChange={(e) => setDeliveryDate(e.target.value)}
+                required
               />
               <br /> <br />
               <Typography align="center" variant="h5" color="secondary">

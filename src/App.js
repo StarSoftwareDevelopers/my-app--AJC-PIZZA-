@@ -85,7 +85,7 @@ const App = (props) => {
             </MainLayout>
           )}
         />
-        <Route
+        {/* <Route
           exact
           path="/order"
           render={() => (
@@ -96,7 +96,7 @@ const App = (props) => {
               </div>
             </WithAuth>
           )}
-        />
+        /> */}
         <Route
           exact
           path="/account"
@@ -113,11 +113,11 @@ const App = (props) => {
           exact
           path="/cart"
           render={() => (
-            <WithAuth>
-              <MainLayout>
-                <Cart />
-              </MainLayout>
-            </WithAuth>
+            // <WithAuth>
+            <MainLayout>
+              <Cart />
+            </MainLayout>
+            // </WithAuth>
           )}
         />
         <Route

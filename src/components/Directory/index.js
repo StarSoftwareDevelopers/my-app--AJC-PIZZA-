@@ -16,7 +16,7 @@ const Directory = (props) => {
         >
           <Typography variant="h1">AJC HOMEMADE PIZZA</Typography>
           <p>The Best Pizza in Ayala</p>
-          <Link to="/order">Order Now</Link>
+          <Link>Order Now</Link>
         </div>
       </div>
     </div>

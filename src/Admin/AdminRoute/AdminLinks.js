@@ -42,7 +42,7 @@ const AdminLinks = () => {
             </AdminRoute>
           )}
         />
-        <Route
+        {/* <Route
           exact
           path="/Notifications"
           render={() => (
@@ -50,7 +50,7 @@ const AdminLinks = () => {
               <Notifications />
             </AdminRoute>
           )}
-        />
+        /> */}
         <Route
           exact
           path="/Users"

@@ -31,7 +31,7 @@ const OrderStatus = () => {
           })
         );
         setOrders(arr);
-        console.log(arr);
+        console.log("orders", arr);
       });
 
     return () => {

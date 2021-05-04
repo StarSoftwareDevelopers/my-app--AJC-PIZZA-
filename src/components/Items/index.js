@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Item from "./Item";
 import "./style.scss";
-import { Typography, Card } from "@material-ui/core";
+import { Typography, Card, Container } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useSelector } from "react-redux";
+import Button from "./../Forms/Button";
 
 //From the cart
 import { createStructuredSelector } from "reselect";
@@ -18,10 +20,12 @@ const Items = ({}) => {
 
   return (
     <div className="items">
-      <Typography variant="h3" align="center">
-        Menu Items
+      <Typography variant="h3" align="center" style={{ marginTop: "2.5rem" }}>
+        Order NOW!
       </Typography>
-
+      <Typography variant="subtitle1" align="center">
+        Click 'Add to Cart' to order
+      </Typography>
       {items.length > 0 ? (
         <Card
           style={{
@@ -29,8 +33,8 @@ const Items = ({}) => {
             // position: "fixed",
             padding: "1rem",
             color: "#e31837",
-            marginLeft: "1.5rem",
             width: "20%",
+            margin: "0 auto",
           }}
         >
           <Typography variant="h6">
@@ -42,12 +46,14 @@ const Items = ({}) => {
                 </td>
               </tr>
             ))}
+            <Link to="/cart">
+              <Button>Continue to Cart</Button>
+            </Link>
           </Typography>
         </Card>
       ) : (
         <div></div>
       )}
-
       <Item />
     </div>
   );

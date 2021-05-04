@@ -17,6 +17,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { useDispatch } from "react-redux";
 import { addProduct } from "./../../../Redux/Cart/cartActions";
 
+import Gallery from "./../../GridList";
+
 //MUI-ALERT
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -25,7 +27,7 @@ function Alert(props) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     display: "block",
     float: "left",
   },
@@ -146,7 +148,6 @@ const Pizzas = (product) => {
           </Grid>
         ))}
       </Grid>
-
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Added to Cart!

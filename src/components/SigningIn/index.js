@@ -54,10 +54,6 @@ const SigninIn = (props) => {
     dispatch(googleSignInStart());
   };
 
-  const handleFacebookSignIn = () => {
-    dispatch(facebookSignInStart());
-  };
-
   return (
     <div className="container">
       <div className="wrap">
