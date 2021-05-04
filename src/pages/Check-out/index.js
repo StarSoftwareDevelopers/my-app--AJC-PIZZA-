@@ -45,7 +45,6 @@ const CheckingOut = (product) => {
   }, [cartCount]);
 
   const date = firebase.firestore.Timestamp.fromDate(new Date(deliveryDate));
-  console.log(date);
 
   const handleSubmit = (event) => {
     event.preventDefault();
