@@ -10,7 +10,13 @@ import { firestore } from " ./../../src/firebase/firebase.utils";
 import { createStructuredSelector } from "reselect";
 import { checkingOutCart } from "./../../Redux/Cart/cartActions";
 import "./check-out.scss";
-import { Card, Typography, Container, TextField } from "@material-ui/core";
+import {
+  Card,
+  Typography,
+  Container,
+  TextField,
+  Divider,
+} from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
 import MuiPhoneNumber from "material-ui-phone-number";
 import Button from "./../../components/Forms/Button";
@@ -37,6 +43,7 @@ const CheckingOut = (product) => {
   const [phone, setPhone] = useState(currentUser.phone);
   const [deliveryDate, setDeliveryDate] = useState();
   const [payment, setPayment] = useState();
+  const [gcash, setGcash] = useState("");
 
   useEffect(() => {
     if (cartCount < 1) {
@@ -44,7 +51,16 @@ const CheckingOut = (product) => {
     }
   }, [cartCount]);
 
+  //convert firebase firestore date to Javascript date
   const date = firebase.firestore.Timestamp.fromDate(new Date(deliveryDate));
+  const jsDate = date.toDate();
+  const locale = jsDate.toLocaleString();
+
+  //get local time zone
+  const localTime = new Date();
+
+  //get todays'time and also store the maximum available time
+  // console.log(localTime);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -71,7 +87,8 @@ const CheckingOut = (product) => {
         displayName: displayName,
         address: address,
         phone: phone,
-        payment: payment,
+        paymentMethod: payment,
+        gcashNo: gcash,
         deliveryDate: date,
         orderCreatedAt: new Date(),
         userID: currentUser.id,
@@ -136,6 +153,7 @@ const CheckingOut = (product) => {
             <Typography align="center" variant="h5" color="secondary">
               Billing Details
             </Typography>
+
             <form onSubmit={handleSubmit}>
               <TextField
                 margin="dense"
@@ -183,12 +201,16 @@ const CheckingOut = (product) => {
                   shrink: true,
                 }}
                 onChange={(e) => setDeliveryDate(e.target.value)}
+                inputProps={{
+                  min: `${localTime}`,
+                }}
                 required
               />
               <br /> <br />
               <Typography align="center" variant="h5" color="secondary">
                 Payment Details
               </Typography>
+              <Divider />
               <Typography align="left" variant="subtitle1" color="secondary">
                 Choose Payment Option
               </Typography>
@@ -197,6 +219,7 @@ const CheckingOut = (product) => {
                 value="cod"
                 name="paymentMethod"
                 onChange={(e) => setPayment(e.target.value)}
+                required
               />
               COD(Cash-on-Delivery)<br></br>
               <input
@@ -204,16 +227,32 @@ const CheckingOut = (product) => {
                 value="gcash"
                 name="paymentMethod"
                 onChange={(e) => setPayment(e.target.value)}
-              />{" "}
-              Gcash
-              <TextField
-                margin="dense"
-                id="gcash-num"
-                color="secondary"
-                label="Gcash Number"
-                type="number"
-                fullWidth
               />
+              Gcash
+              {/* Show and hide depending on the radio button that was clicked */}
+              {payment == "cod" && (
+                <div>
+                  <br />
+                  <br />
+                  <Typography variant="h6" align="left" color="secondary">
+                    Please prepare this amount ₱{total}.00 on {locale}
+                  </Typography>
+                  <Divider />
+                </div>
+              )}
+              {payment == "gcash" && (
+                <TextField
+                  margin="dense"
+                  id="gcash-num"
+                  color="secondary"
+                  label="Gcash Number"
+                  type="number"
+                  fullWidth
+                  required
+                  value={gcash}
+                  onChange={(e) => setGcash(e.target.value)}
+                />
+              )}
               <Typography align="center" style={{ marginTop: "1rem" }}>
                 <Button type="submit">Place an Order</Button>
               </Typography>

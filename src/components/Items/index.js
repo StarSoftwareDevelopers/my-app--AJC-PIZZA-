@@ -24,7 +24,7 @@ const Items = ({}) => {
         Order NOW!
       </Typography>
       <Typography variant="subtitle1" align="center">
-        Click 'Add to Cart' to order
+        Click 'Add to Cart' to order your favorite pizza
       </Typography>
       {items.length > 0 ? (
         <Card
