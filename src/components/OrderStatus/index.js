@@ -1,23 +1,54 @@
 import React, { Component, useEffect, useState } from "react";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Card from "@material-ui/core/Card";
-import Divider from "@material-ui/core/Divider";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Typography,
+  Container,
+  Card,
+  Grid,
+  Divider,
+  CardHeader,
+  CardContent,
+} from "@material-ui/core";
+
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import { firestore } from "./../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
-
-//class component to use the useSelector - https://stackoverflow.com/questions/64491841/how-to-use-useselector-in-a-class-based-component-react-redux
-//https://stackoverflow.com/questions/63671237/how-to-get-document-id-of-firestore-in-react
-//mapping an array - https://stackoverflow.com/questions/41027663/how-to-map-an-array-of-objects-in-react
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
+const useStyles = makeStyles((theme) => ({
+  card: {
+    marginTop: "1.5rem",
+    marginBottom: "1.5rem",
+    padding: "1rem",
+    alignItems: "center",
+  },
+  media: {
+    height: "150px",
+    widht: "150px",
+  },
+  root: {
+    display: "flex",
+    float: "left",
+  },
+  Content: {
+    marginTop: "-1.5rem",
+    float: "right",
+  },
+  header: {
+    textAlign: "center",
+    marginTop: "2rem",
+  },
+}));
+
 const OrderStatus = () => {
+  const classes = useStyles();
   const { currentUser } = useSelector(mapState);
   const [orders, setOrders] = useState([]);
-  const [items, setItems] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const unsubscribe = firestore
@@ -27,11 +58,15 @@ const OrderStatus = () => {
         const arr = [];
         snapshot.docs.map((doc) =>
           arr.push({
-            id: doc.data(),
+            id: doc.id,
+            ...doc.data(),
           })
         );
         setOrders(arr);
-        console.log("orders", arr);
+        setIsLoading(true);
+        // console.log("orders", arr);
+        // console.log(arr[0].id);
+        // console.log(JSON.stringify(arr));
       });
 
     return () => {
@@ -39,94 +74,95 @@ const OrderStatus = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const unsubscribe = firestore
-  //     .collection("orders")
-  //     .where("userID", "==", currentUser.id)
-  //     .onSnapshot((snapshot) => {
-  //       const userOrders = snapshot.docs.map((doc) => ({
-  //         id: doc.data(),
-  //       }));
-  //       userOrders.forEach((item) => {
-  //         const orderObj = {
-  //           address: item.id.address,
-  //           deliveryDate: item.id.deliveryDate,
-  //         };
-  //         setOrders(orderObj);
-  //         console.log(orders);
-  //       });
-  //     });
-
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
-
   return (
     <div>
-      {/* {orders.map((item, i) => (
-        <li key={i}>
-          {items}
-          hello
-        </li>
-      ))} */}
-      <Container fixed>
-        <Typography
-          component="div"
-          style={{
-            backgroundColor: "whitesmoke",
-            // height: "100vh",
-            padding: "1rem",
-            marginTop: "1rem",
-            marginBottom: "1rem",
-            borderRadius: "12px",
-          }}
-        >
-          <Typography variant="h3" align="center">
-            Order Status:
+      {isLoading ? (
+        <div>
+          <Typography variant="h3" className={classes.header}>
+            My Orders
           </Typography>
-          {/* <ul>
-            {orders.map((order, index) => {
-              <li key={index}>{order}</li>;
-              console.log("orders", orders);
-            })}
-          </ul> */}
-
-          <Card
-            style={{
-              marginLeft: "10%",
-              marginRight: "10%",
-              padding: "2rem",
-              marginTop: "2rem",
-              // height: "450px",
-            }}
-          >
-            <Typography variant="h4" align="center"></Typography>
-            <Typography variant="h4" align="center">
-              Order ID: <b></b>
-            </Typography>
-            <Typography variant="h4" align="center">
-              Pizza: <b>{"Tuna Pizza "}</b>
-            </Typography>
-            <Typography variant="h4" align="center">
-              Quantity: <b>{"1 "}</b>
-            </Typography>
-
-            <br></br>
-            <Divider variant="middle" />
-            <br></br>
-            <Typography variant="h4" align="center">
-              Total: <b></b>
-            </Typography>
-            <Typography variant="h4" align="center">
-              Mode of Payment: <b> {" COD"}</b>
-            </Typography>
-            <Typography variant="h4" align="center">
-              Expected Delivery Date: <b>{"12-20-2021 "}</b>
-            </Typography>
-          </Card>
-        </Typography>
-      </Container>
+          <Divider />
+          {orders.map((order) => (
+            <Grid key={order.id}>
+              <Card className={classes.card}>
+                <CardHeader title="Order ID " subheader={order.id} />
+                <Typography variant="h5">Order Status:</Typography>
+                <br />
+                <div>
+                  {order.items.map((item) => (
+                    <ul key={item.documentID}>
+                      <Typography variant="h5">
+                        <div className={classes.root}>
+                          <li>
+                            <img
+                              src={item.productImg}
+                              alt={item.productName}
+                              className={classes.media}
+                            />
+                          </li>
+                          <div>
+                            <li>Product Name: {item.productName}</li>
+                            <li>Product Price: {item.productPrice}</li>
+                            <li>Quantity: {item.qty}</li>
+                          </div>
+                        </div>
+                      </Typography>
+                    </ul>
+                  ))}
+                </div>
+                <CardContent className={classes.Content}>
+                  <Typography variant="h6">
+                    {/* {-------------------------------------------------------------------------} */}
+                    Order was created at: {""}
+                    {new Date(
+                      order.orderCreatedAt.seconds * 1000
+                    ).toDateString()}{" "}
+                    at{" "}
+                    {new Date(
+                      order.orderCreatedAt.seconds * 1000
+                    ).toLocaleTimeString()}{" "}
+                    <br />
+                    {/* {-------------------------------------------------------------------------} */}
+                    Total Orders: ₱{order.total}.00
+                    <br />
+                    {order.paymentMethod.trim() === "cod" ? (
+                      <Typography variant="h6">
+                        Payment Method: COD (Cash-on-Delivery)
+                      </Typography>
+                    ) : (
+                      <Typography variant="h6">
+                        Payment Method: Gcash
+                      </Typography>
+                    )}
+                    {/* {-------------------------------------------------------------------------} */}
+                    {order.gcashNo.trim() === "" ? (
+                      <p></p>
+                    ) : (
+                      <Typography variant="h6">
+                        Gcash : {order.gcashNo}
+                      </Typography>
+                    )}
+                    {/* {-------------------------------------------------------------------------} */}
+                    Expected Delivery Date:{" "}
+                    {new Date(order.deliveryDate.seconds * 1000).toDateString()}{" "}
+                    at {""}
+                    {new Date(
+                      order.deliveryDate.seconds * 1000
+                    ).toLocaleTimeString()}
+                    <br />
+                    Your orders will be delivered at: {order.address}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </div>
+      ) : (
+        <p style={{ textAlign: "center" }}>
+          Loading
+          <CircularProgress color="secondary" />
+        </p>
+      )}
     </div>
   );
 };

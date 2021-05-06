@@ -22,6 +22,7 @@ const Signup = (props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -48,6 +49,7 @@ const Signup = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(signUpStart({ displayName, email, password, confirmPassword }));
+    setIsLoading(true);
   };
 
   return (
@@ -113,9 +115,15 @@ const Signup = (props) => {
             />
             <br /> <br />
             <ButtonForm type="submit">
-              <Typography variant="h6" align="center" display="block">
-                Register
-              </Typography>
+              {isLoading ? (
+                <Typography variant="h6" align="center" display="block">
+                  Registering...
+                </Typography>
+              ) : (
+                <Typography variant="h6" align="center" display="block">
+                  Register
+                </Typography>
+              )}
             </ButtonForm>
           </form>
         </div>

@@ -29,6 +29,7 @@ const SigninIn = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     //whenever signinsuccess is true
@@ -48,6 +49,7 @@ const SigninIn = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(emailSignInStart({ email, password }));
+    setIsLoading(true);
   };
 
   const handleGoogleSignIn = () => {
@@ -96,9 +98,18 @@ const SigninIn = (props) => {
 
               <br></br>
               <ButtonForm type="submit" className="btn">
-                <Typography variant="h6" align="center" display="block">
-                  Log In
-                </Typography>
+                {isLoading ? (
+                  <p>
+                    {" "}
+                    <Typography variant="h6" align="center" display="block">
+                      Logging In...
+                    </Typography>
+                  </p>
+                ) : (
+                  <Typography variant="h6" align="center" display="block">
+                    Log In
+                  </Typography>
+                )}
               </ButtonForm>
 
               <br></br>

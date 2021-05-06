@@ -22,6 +22,7 @@ import MuiPhoneNumber from "material-ui-phone-number";
 import Button from "./../../components/Forms/Button";
 
 import firebase from "firebase/app";
+import moment from "moment";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -56,11 +57,9 @@ const CheckingOut = (product) => {
   const jsDate = date.toDate();
   const locale = jsDate.toLocaleString();
 
-  //get local time zone
+  //get local time zone and convert to minimum datetime-local
   const localTime = new Date();
-
-  //get todays'time and also store the maximum available time
-  // console.log(localTime);
+  const minDate = moment(localTime).format("YYYY-MM-DDTHH:MM");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -202,7 +201,7 @@ const CheckingOut = (product) => {
                 }}
                 onChange={(e) => setDeliveryDate(e.target.value)}
                 inputProps={{
-                  min: `${localTime}`,
+                  min: `${minDate}`,
                 }}
                 required
               />

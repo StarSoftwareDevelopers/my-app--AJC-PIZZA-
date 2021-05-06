@@ -84,11 +84,7 @@ const About = () => {
               </Typography>
               <Typography className={classes.content}>
                 <ScheduleIcon className={classes.icon} />
-                Mon-Sat 9:00 AM - 6:00PM
-              </Typography>
-              <Typography className={classes.content}>
-                <ScheduleIcon className={classes.icon} />
-                SUNDAY CLOSED
+                Mon-Sun 9:00 AM - 6:00PM
               </Typography>
             </CardContent>
           </Card>
