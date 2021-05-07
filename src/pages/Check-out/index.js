@@ -24,6 +24,13 @@ import Button from "./../../components/Forms/Button";
 import firebase from "firebase/app";
 import moment from "moment";
 
+import DateFnsUtils from "@date-io/date-fns"; // choose your lib
+import {
+  DateTimePicker,
+  MuiPickersUtilsProvider,
+  KeyboardDateTimePicker,
+} from "@material-ui/pickers";
+
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
@@ -42,7 +49,7 @@ const CheckingOut = (product) => {
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
-  const [deliveryDate, setDeliveryDate] = useState();
+  const [deliveryDate, setDeliveryDate] = useState(new Date());
   const [payment, setPayment] = useState();
   const [gcash, setGcash] = useState("");
 
@@ -205,6 +212,17 @@ const CheckingOut = (product) => {
                 }}
                 required
               />
+              {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DateTimePicker
+                  value={deliveryDate}
+                  disablePast
+                  label="Delivery Date"
+                  fullWidth
+                  showTodayButton
+                  color="secondary"
+                  maxDate={}
+                />
+              </MuiPickersUtilsProvider> */}
               <br /> <br />
               <Typography align="center" variant="h5" color="secondary">
                 Payment Details

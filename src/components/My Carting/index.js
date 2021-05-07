@@ -1,14 +1,14 @@
 import React from "react";
 import "./style.scss";
 import Button from "./../../components/Forms/Button";
-import { Typography } from "@material-ui/core";
+import { Typography, Divider } from "@material-ui/core";
 import Itemized from "./Itemized";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCartItems, cartTotal } from "./../../Redux/Cart/cartHeader";
 import { createStructuredSelector } from "reselect";
 
-import undraw_add_to_cart_vkjp from "./../../assets/undraw_add_to_cart_vkjp.svg";
+import ShopNow from "./../../pages/Go-Shop-Now-Page";
 
 const mapState = createStructuredSelector({
   cartItems: selectCartItems,
@@ -93,16 +93,8 @@ const MyCarting = ({}) => {
           </table>
         ) : (
           <>
-            <p>
-              <img src={undraw_add_to_cart_vkjp} className="svg" />
-            </p>
-
-            <p style={{ color: " #e31837", fontSize: "20px" }}>
-              No cart items.
-            </p>
-            <Link to="/">
-              <Button>go shop now</Button>
-            </Link>
+            <Divider />
+            <ShopNow />
           </>
         )}
       </div>
