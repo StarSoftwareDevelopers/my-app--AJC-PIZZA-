@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderStatus = () => {
+const Completed = () => {
   const classes = useStyles();
   const { currentUser } = useSelector(mapState);
   const [orders, setOrders] = useState([]);
@@ -52,7 +52,7 @@ const OrderStatus = () => {
     const unsubscribe = firestore
       .collection("orders")
       .where("userID", "==", currentUser.id)
-      .where("orderStatus", "==", "Pending")
+      .where("orderStatus", "==", "Delivered")
       .onSnapshot((snapshot) => {
         const arr = [];
         snapshot.docs.map((doc) =>
@@ -187,4 +187,4 @@ const OrderStatus = () => {
   );
 };
 
-export default OrderStatus;
+export default Completed;

@@ -7,7 +7,10 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
-import OrderStatus from "../../components/OrderStatus";
+import OrderStatus from "../../components/OrderStatus/index";
+import Deliveries from "../../components/OrderStatus/Deliveries";
+import Completed from "../../components/OrderStatus/Completed";
+import Cancelled from "../../components/OrderStatus/Cancelled";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,13 +86,14 @@ export default function ScrollableTabsButtonAuto() {
         <OrderStatus />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        {/* Order status page for on Delivery */}
+        <Deliveries />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <Completed />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+        <Cancelled />
       </TabPanel>
     </div>
   );

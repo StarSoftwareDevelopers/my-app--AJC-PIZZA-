@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderStatus = () => {
+const Cancelled = () => {
   const classes = useStyles();
   const { currentUser } = useSelector(mapState);
   const [orders, setOrders] = useState([]);
@@ -52,7 +52,7 @@ const OrderStatus = () => {
     const unsubscribe = firestore
       .collection("orders")
       .where("userID", "==", currentUser.id)
-      .where("orderStatus", "==", "Pending")
+      .where("orderStatus", "==", "Cancelled")
       .onSnapshot((snapshot) => {
         const arr = [];
         snapshot.docs.map((doc) =>
@@ -118,6 +118,9 @@ const OrderStatus = () => {
                           ))}
                         </div>
                         <CardContent className={classes.Content}>
+                          <Typography variant="h5" color="secondary">
+                            Order has been Cancelled
+                          </Typography>
                           <Typography variant="h6">
                             {/* {-------------------------------------------------------------------------} */}
                             Order was created at: {""}
@@ -150,16 +153,7 @@ const OrderStatus = () => {
                               </Typography>
                             )}
                             {/* {-------------------------------------------------------------------------} */}
-                            Expected Delivery Date:{" "}
-                            {new Date(
-                              order.deliveryDate.seconds * 1000
-                            ).toDateString()}{" "}
-                            at {""}
-                            {new Date(
-                              order.deliveryDate.seconds * 1000
-                            ).toLocaleTimeString()}
-                            <br />
-                            Your orders will be delivered at: {order.address}
+                            Order was cancelled at: <br />
                           </Typography>
                         </CardContent>
                       </Card>
@@ -187,4 +181,4 @@ const OrderStatus = () => {
   );
 };
 
-export default OrderStatus;
+export default Cancelled;
