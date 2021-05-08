@@ -52,6 +52,7 @@ const CheckingOut = (product) => {
   const [deliveryDate, setDeliveryDate] = useState(new Date());
   const [payment, setPayment] = useState();
   const [gcash, setGcash] = useState("");
+  const [orderStatus, setOrderStatus] = useState("Pending");
 
   useEffect(() => {
     if (cartCount < 1) {
@@ -98,6 +99,7 @@ const CheckingOut = (product) => {
         deliveryDate: date,
         orderCreatedAt: new Date(),
         userID: currentUser.id,
+        orderStatus,
       });
     } catch (err) {
       console.log(err);
@@ -220,7 +222,7 @@ const CheckingOut = (product) => {
                   fullWidth
                   showTodayButton
                   color="secondary"
-                  maxDate={}
+                  onChange={(e) => setDeliveryDate(e.target.value)}
                 />
               </MuiPickersUtilsProvider> */}
               <br /> <br />

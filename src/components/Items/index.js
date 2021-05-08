@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Item from "./Item";
 import "./style.scss";
-import { Typography, Card, Container } from "@material-ui/core";
+import { Typography, Card, Container, Box, Grid } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useSelector } from "react-redux";
 import Button from "./../Forms/Button";
@@ -26,35 +26,47 @@ const Items = ({}) => {
       <Typography variant="subtitle1" align="center">
         Click 'Add to Cart' to order your favorite pizza
       </Typography>
-      {items.length > 0 ? (
-        <Card
-          style={{
-            marginRight: "0px",
-            // position: "fixed",
-            padding: "1rem",
-            color: "#e31837",
-            width: "20%",
-            margin: "0 auto",
-          }}
-        >
-          <Typography variant="h6">
-            <ShoppingCartIcon /> Cart Items:
-            {items.map((item, index) => (
-              <tr key={(item, index)}>
-                <td>
-                  {item.productName}({item.qty})
-                </td>
-              </tr>
-            ))}
-            <Link to="/cart">
-              <Button>Continue to Cart</Button>
-            </Link>
-          </Typography>
-        </Card>
-      ) : (
-        <div></div>
-      )}
-      <Item />
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+      >
+        <Box width={300}>
+          {items.length > 0 ? (
+            <Card
+              variant="outlined"
+              style={{
+                marginRight: "0px",
+                // position: "fixed",
+                padding: "1rem",
+                color: "#e31837",
+                alignItems: "center",
+                margin: "0 auto",
+              }}
+            >
+              <Typography variant="h6">
+                <ShoppingCartIcon /> Cart Items:
+                {items.map((item, index) => (
+                  <tr key={(item, index)}>
+                    <td>
+                      {item.productName}({item.qty})
+                    </td>
+                  </tr>
+                ))}
+                <Link to="/cart">
+                  <Button>Continue to Cart</Button>
+                </Link>
+              </Typography>
+            </Card>
+          ) : (
+            <div></div>
+          )}
+        </Box>
+
+        <Item />
+      </Grid>
     </div>
   );
 };

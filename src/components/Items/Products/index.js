@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     display: "block",
     float: "left",
+    marginLeft: "2rem",
   },
   media: {
     height: 200,
@@ -99,10 +100,15 @@ const Pizzas = (product) => {
     <div className={classes.root}>
       <Grid
         container
-        direction="row"
-        justify="space-evenly"
-        alignItems="flex-start"
-        spacing={3}
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        // container
+        // direction="row"
+        // justify="space-evenly"
+        // alignItems="flex-start"
+        // spacing={3}
       >
         {data.map((elem) => (
           <Grid

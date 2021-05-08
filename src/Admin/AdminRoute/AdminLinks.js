@@ -5,11 +5,12 @@ import AdminRoute from "./../AdminRoute/index";
 import Home from "./../Pages/Home";
 import Menu from "./../Pages/Menu";
 import Orders from "./../Pages/Orders";
-import Notifications from "./../Pages/Notifications";
 import Users from "./../Pages/User";
 import AdminMgt from "./../Pages/Admin";
 import Staff from "./../Pages/Staff";
 import Feedback from "./../Pages/Feedback";
+import PendingOrders from "./../Pages/PendingOrders";
+import Deliveries from "./../Pages/Deliveries";
 
 const AdminLinks = () => {
   return (
@@ -42,15 +43,24 @@ const AdminLinks = () => {
             </AdminRoute>
           )}
         />
-        {/* <Route
+        <Route
           exact
-          path="/Notifications"
+          path="/PendingOrders"
           render={() => (
             <AdminRoute>
-              <Notifications />
+              <PendingOrders />
             </AdminRoute>
           )}
-        /> */}
+        />
+        <Route
+          exact
+          path="/Deliveries"
+          render={() => (
+            <AdminRoute>
+              <Deliveries />
+            </AdminRoute>
+          )}
+        />
         <Route
           exact
           path="/Users"

@@ -26,10 +26,9 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import HomeIcon from "@material-ui/icons/Home";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import GroupIcon from "@material-ui/icons/Group";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
@@ -203,7 +202,7 @@ export default function PersistentDrawerLeft() {
           <Link to="/admin">
             <ListItem button key="Home">
               <ListItemIcon>
-                <HomeIcon fontSize="large" />
+                <DashboardIcon fontSize="large" />
               </ListItemIcon>
               <ListItemText>
                 <Typography variant="h5">Dashboard</Typography>
@@ -221,19 +220,12 @@ export default function PersistentDrawerLeft() {
           <Link to="/Orders">
             <ListItem button key="Orders">
               <ListItemIcon>
-                <ShoppingCartIcon fontSize="large" />
+                <RemoveShoppingCartIcon fontSize="large" />
               </ListItemIcon>
-              <Typography variant="h5">Orders</Typography>
+              <Typography variant="h5">Cancelled Orders</Typography>
             </ListItem>
           </Link>
-          {/* <Link to="/Notifications">
-            <ListItem button key="Notifications">
-              <ListItemIcon>
-                <NotificationsIcon fontSize="large" />
-              </ListItemIcon>
-              <Typography variant="h5">Notifications</Typography>
-            </ListItem>
-          </Link> */}
+
           <Divider />
           <Link to="/AdminMgt">
             <ListItem button key="Admin">
