@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
 import { Button } from "@material-ui/core";
@@ -80,29 +80,6 @@ class PendingOrdersTable extends Component {
     },
   };
 
-  // componentDidMount() {
-  //   const unsubscribe = firestore
-  //     .collection("orders")
-  //     .where("orderStatus", "==", "Pending")
-  //     .onSnapshot((snapshot) => {
-  //       const orders = [];
-  //       snapshot.docs.map((doc) =>
-  //         orders.push({
-  //           // ...doc.data(),
-  //           "Order ID": doc.id,
-  //           ...doc.data(),
-  //         })
-  //       );
-  //       this.setState({ orders: orders });
-  //       console.log(this.state.orders);
-  //       // console.log(JSON.stringify(arr));
-  //     });
-
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }
-
   componentDidMount() {
     try {
       firestore
@@ -112,37 +89,28 @@ class PendingOrdersTable extends Component {
         .then((snapshot) => {
           const orders = [];
           snapshot.docs.map((doc) => {
-            const orderID = doc.id;
+            const items = [];
+            doc.data().items.forEach((item) => {
+              items.push(`${item.productName}(${item.qty}),`);
+            });
             const data = doc.data();
-
-            // data.items.map((item) => {
-            //   orders.push({
-            //     "Order ID": doc.id,
-            //     Name: data.displayName,
-            //     Address: data.address,
-            //     "Total Amount": data.total,
-            //     Phone: data.phone,
-            //     Items: [item.productName, "(", item.qty, ")"],
-            //   });
-            // });
-
             orders.push({
               "Order ID": doc.id,
+              Items: items,
               Name: data.displayName,
               Address: data.address,
-              "Total Amount": ["₱", data.total, ".00"],
+              "Total Amount": data.total,
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),
               Phone: data.phone,
-              ...data.items,
             });
           });
           this.setState({ orders: orders });
           console.log(this.state.orders);
         });
     } catch (err) {
-      console.log(error);
+      console.log(err);
     }
   }
 
