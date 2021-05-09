@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardContent,
 } from "@material-ui/core";
+import Button from "./../Forms/Button";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import undraw_empty_cart_co35 from "./../../assets/undraw_empty_cart_co35.svg";
@@ -47,6 +48,7 @@ const OrderStatus = () => {
   const { currentUser } = useSelector(mapState);
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [id, setId] = useState();
 
   useEffect(() => {
     const unsubscribe = firestore
@@ -63,6 +65,7 @@ const OrderStatus = () => {
         );
         setOrders(arr);
         setIsLoading(true);
+        // setId(arr[0].id);
         // console.log("orders", arr);
         // console.log(arr[0].id);
         // console.log(JSON.stringify(arr));
@@ -72,6 +75,18 @@ const OrderStatus = () => {
       unsubscribe();
     };
   }, []);
+
+  // function cancelOrders() {
+  //   console.log("clicked");
+  //   try {
+  //     const userRef = firestore
+  //       .collection("orders")
+  //       .doc(id)
+  //       .update({ orderStatus: "Cancelled" });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   return (
     <div>
@@ -91,7 +106,7 @@ const OrderStatus = () => {
                     <Grid key={order.id}>
                       <Card className={classes.card}>
                         <CardHeader title="Order ID " subheader={order.id} />
-                        <Typography variant="h5">
+                        <Typography variant="h5" color="secondary">
                           Order Status: {order.orderStatus}
                         </Typography>
                         <br />
@@ -161,6 +176,9 @@ const OrderStatus = () => {
                             <br />
                             Your orders will be delivered at: {order.address}
                           </Typography>
+                          {/* <Button onClick={(e) => cancelOrders()}>
+                            Cancel Orders
+                          </Button> */}
                         </CardContent>
                       </Card>
                     </Grid>

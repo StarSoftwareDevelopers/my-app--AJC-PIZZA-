@@ -91,7 +91,7 @@ const Cancelled = () => {
                     <Grid key={order.id}>
                       <Card className={classes.card}>
                         <CardHeader title="Order ID " subheader={order.id} />
-                        <Typography variant="h5">
+                        <Typography variant="h5" color="secondary">
                           Order Status: {order.orderStatus}
                         </Typography>
                         <br />

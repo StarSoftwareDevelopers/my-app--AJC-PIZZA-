@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Container, Typography, Button } from "@material-ui/core";
+import ViewDeliveries from "./../AdminComponents/Table/ViewDeliveries";
 
 const Deliveries = () => {
   return (
@@ -28,6 +29,7 @@ const Deliveries = () => {
           </Typography>
         </Typography>
         <br />
+        <ViewDeliveries />
       </Container>
     </div>
   );

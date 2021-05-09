@@ -12,6 +12,7 @@ import {
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import undraw_empty_cart_co35 from "./../../assets/undraw_empty_cart_co35.svg";
+import Button from "./../Forms/Button";
 
 import { firestore } from "./../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
@@ -73,6 +74,10 @@ const Completed = () => {
     };
   }, []);
 
+  function ordersAgain(e) {
+    console.log("clicked", orders);
+  }
+
   return (
     <div>
       <Divider />
@@ -91,7 +96,7 @@ const Completed = () => {
                     <Grid key={order.id}>
                       <Card className={classes.card}>
                         <CardHeader title="Order ID " subheader={order.id} />
-                        <Typography variant="h5">
+                        <Typography variant="h5" color="secondary">
                           Order Status: {order.orderStatus}
                         </Typography>
                         <br />
@@ -161,6 +166,9 @@ const Completed = () => {
                             <br />
                             Your orders will be delivered at: {order.address}
                           </Typography>
+                          <Button onClick={(e) => ordersAgain()}>
+                            Order Again
+                          </Button>
                         </CardContent>
                       </Card>
                     </Grid>

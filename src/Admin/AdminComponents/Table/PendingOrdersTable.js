@@ -17,12 +17,33 @@ class PendingOrdersTable extends Component {
     "Order ID",
     "Name",
     "Items",
-    "Order Date",
     "Delivery Date",
     "Address",
     "Total Amount",
+    "Phone",
     {
-      name: "Delete",
+      name: "Confirm",
+      options: {
+        filter: true,
+        sort: false,
+        empty: true,
+        customBodyRender: (data, dataIndex, rowIndex) => {
+          return (
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                console.log(data);
+              }}
+            >
+              Confirm
+            </Button>
+          );
+        },
+      },
+    },
+    {
+      name: "Cancel",
       options: {
         filter: true,
         sort: false,
@@ -33,10 +54,10 @@ class PendingOrdersTable extends Component {
               variant="outlined"
               color="secondary"
               onClick={() => {
-                console.log("confirmed");
+                console.log(tableMeta.tableData[tableMeta.index]);
               }}
             >
-              Confirmed
+              Cancel
             </Button>
           );
         },
@@ -47,35 +68,82 @@ class PendingOrdersTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
-    //get row data and expand it
-    // expandableRows: true,
-    // renderExpandableRow: (rowData, rowMeta) => {
-    //   console.log(rowData, rowMeta);
-    //   return <div>{rowData}</div>;
+
+    // onRowClick: (rowData, rowState) => {
+    //   console.log(rowData, rowState);
     // },
+    // get row data and expand it
+    // expandableRows: true,
+    renderExpandableRow: (rowData, rowMeta) => {
+      console.log(rowData, rowMeta);
+      return <div>{rowData[2]}</div>;
+    },
   };
 
-  componentDidMount() {
-    const unsubscribe = firestore
-      .collection("orders")
-      .where("orderStatus", "==", "Pending")
-      .onSnapshot((snapshot) => {
-        const arr = [];
-        snapshot.docs.map((doc) =>
-          arr.push({
-            // ...doc.data(),
-            "Order ID": doc.id,
-            ...doc.data(),
-          })
-        );
-        this.setState({ orders: arr });
-        console.log(this.state.orders);
-        // console.log(JSON.stringify(arr));
-      });
+  // componentDidMount() {
+  //   const unsubscribe = firestore
+  //     .collection("orders")
+  //     .where("orderStatus", "==", "Pending")
+  //     .onSnapshot((snapshot) => {
+  //       const orders = [];
+  //       snapshot.docs.map((doc) =>
+  //         orders.push({
+  //           // ...doc.data(),
+  //           "Order ID": doc.id,
+  //           ...doc.data(),
+  //         })
+  //       );
+  //       this.setState({ orders: orders });
+  //       console.log(this.state.orders);
+  //       // console.log(JSON.stringify(arr));
+  //     });
 
-    return () => {
-      unsubscribe();
-    };
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }
+
+  componentDidMount() {
+    try {
+      firestore
+        .collection("orders")
+        .where("orderStatus", "==", "Pending")
+        .get()
+        .then((snapshot) => {
+          const orders = [];
+          snapshot.docs.map((doc) => {
+            const orderID = doc.id;
+            const data = doc.data();
+
+            // data.items.map((item) => {
+            //   orders.push({
+            //     "Order ID": doc.id,
+            //     Name: data.displayName,
+            //     Address: data.address,
+            //     "Total Amount": data.total,
+            //     Phone: data.phone,
+            //     Items: [item.productName, "(", item.qty, ")"],
+            //   });
+            // });
+
+            orders.push({
+              "Order ID": doc.id,
+              Name: data.displayName,
+              Address: data.address,
+              "Total Amount": ["₱", data.total, ".00"],
+              "Delivery Date": new Date(
+                data.deliveryDate.seconds * 1000
+              ).toLocaleString(),
+              Phone: data.phone,
+              ...data.items,
+            });
+          });
+          this.setState({ orders: orders });
+          console.log(this.state.orders);
+        });
+    } catch (err) {
+      console.log(error);
+    }
   }
 
   render() {
