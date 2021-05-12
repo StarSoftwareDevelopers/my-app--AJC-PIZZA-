@@ -1,127 +1,79 @@
-import React from "react";
+//Cancelled Orders
+
+import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
-import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Select, FormControl } from "@material-ui/core";
+import { firestore } from "./../../../firebase/firebase.utils";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+class OrderTable extends Component {
+  constructor() {
+    super();
+    this.state = { orders: [] };
+  }
 
-const OrderTable = () => {
-  // const [ setValue] = React.useState("");
-  const [status] = React.useState(false);
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const [state, setState] = React.useState({
-    age: "",
-    name: "hai",
-  });
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
-
-  const handleClick = () => {
-    window.confirm("Are you sure?");
-  };
-
-  const columns = [
-    "OrderID.",
+  columns = [
+    "Order ID",
+    "Name",
+    "Items",
     "Order Date",
-    "Delivery Date",
-    "Address",
-    "Customer Name",
-    "Order Amount",
-    "Payment Status",
-    "Payment Amount",
-    "Order Status",
+    "Cancelled Date",
+    "Total Amount",
   ];
-
-  const data = [
-    [
-      "1",
-      "2/24/2020",
-      "2/25/2020",
-      "5th House,Orythn, Terassen ",
-      "Aelin Galathynius",
-      "₱130.00",
-      "Pending",
-      "₱130.00",
-      <FormControl>
-        <Select
-          labelId="select-demo"
-          id="status-select"
-          value={status}
-          onChange={handleChange}
-        >
-          <option aria-label="None" value="" disabled />
-          <MenuItem value={1} onClick={handleClickOpen}>
-            Confirmed
-          </MenuItem>
-          <MenuItem value={2}>Preparing</MenuItem>
-          <MenuItem value={3}>On the Way</MenuItem>
-          <MenuItem value={4}>On the Way (Delayed)</MenuItem>
-          <MenuItem value={5}>Delivered</MenuItem>
-        </Select>
-      </FormControl>,
-    ],
-  ];
-
-  const options = {
-    filterType: "checkbox",
+  options = {
+    filter: true,
+    selectableRows: "none",
+    responsive: "simple",
+    renderExpandableRow: (rowData, rowMeta) => {
+      console.log(rowData, rowMeta);
+      return <div>{rowData[2]}</div>;
+    },
   };
 
-  return (
-    <div>
-      <Container maxWidth="lg">
+  componentDidMount() {
+    try {
+      firestore
+        .collection("orders")
+        .where("orderStatus", "==", "Cancelled")
+        .get()
+        .then((snapshot) => {
+          const orders = [];
+          snapshot.docs.map((doc) => {
+            const items = [];
+            doc.data().items.forEach((item) => {
+              items.push(`${item.productName}(${item.qty}),`);
+            });
+            const data = doc.data();
+            orders.push({
+              "Order ID": doc.id,
+              Items: items,
+              Name: data.displayName,
+              "Total Amount": data.total,
+              "Order Date": new Date(
+                data.orderCreatedAt.seconds * 1000
+              ).toLocaleString(),
+              "Cancelled Date": new Date(
+                data.orderCancelledAt.seconds * 1000
+              ).toLocaleString(),
+            });
+          });
+          this.setState({ orders: orders });
+          // console.log(this.state.orders);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  render() {
+    return (
+      <div>
         <MUIDataTable
-          title={"Orders"}
-          data={data}
-          columns={columns}
-          options={options}
+          title={"Cancelled Orders"}
+          columns={this.columns}
+          data={this.state.orders}
+          options={this.options}
         />
-      </Container>
-
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Order Status"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Set the order status to "Confirmed"?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            No
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-};
-
+      </div>
+    );
+  }
+}
 export default OrderTable;

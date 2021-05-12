@@ -1,5 +1,5 @@
-import OrderTable from "./../AdminComponents/Table/OrdersTable";
 import Container from "@material-ui/core/Container";
+import OrderTable from "./../AdminComponents/Table/OrdersTable";
 
 const Orders = () => {
   return (

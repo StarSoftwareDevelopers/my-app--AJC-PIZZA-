@@ -2,13 +2,14 @@ import React, { Component, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
-  Container,
+  Snackbar,
   Card,
   Grid,
   Divider,
   CardHeader,
   CardContent,
 } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 import Button from "./../Forms/Button";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -16,6 +17,11 @@ import undraw_empty_cart_co35 from "./../../assets/undraw_empty_cart_co35.svg";
 
 import { firestore } from "./../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
+
+//MUI-ALERT
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -48,7 +54,18 @@ const OrderStatus = () => {
   const { currentUser } = useSelector(mapState);
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [id, setId] = useState();
+  const [open, setOpen] = React.useState(false); //for MUI ALERT
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   useEffect(() => {
     const unsubscribe = firestore
@@ -75,18 +92,6 @@ const OrderStatus = () => {
       unsubscribe();
     };
   }, []);
-
-  // function cancelOrders() {
-  //   console.log("clicked");
-  //   try {
-  //     const userRef = firestore
-  //       .collection("orders")
-  //       .doc(id)
-  //       .update({ orderStatus: "Cancelled" });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
 
   return (
     <div>
@@ -176,9 +181,27 @@ const OrderStatus = () => {
                             <br />
                             Your orders will be delivered at: {order.address}
                           </Typography>
-                          {/* <Button onClick={(e) => cancelOrders()}>
-                            Cancel Orders
-                          </Button> */}
+                          <Button
+                            onClick={(e) => {
+                              try {
+                                firestore
+                                  .collection("orders")
+                                  .doc(order.id)
+                                  .set(
+                                    {
+                                      orderStatus: "Cancelled",
+                                      orderCancelledAt: new Date(),
+                                    },
+                                    { merge: true }
+                                  );
+                              } catch (err) {
+                                console.log(err);
+                              }
+                              handleClick();
+                            }}
+                          >
+                            Cancel Order
+                          </Button>
                         </CardContent>
                       </Card>
                     </Grid>
@@ -201,6 +224,11 @@ const OrderStatus = () => {
           </Typography>
         </div>
       )}
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Order has been Cancelled!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

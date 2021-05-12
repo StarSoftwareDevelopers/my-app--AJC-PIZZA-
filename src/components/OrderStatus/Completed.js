@@ -64,19 +64,12 @@ const Completed = () => {
         );
         setOrders(arr);
         setIsLoading(true);
-        // console.log("orders", arr);
-        // console.log(arr[0].id);
-        // console.log(JSON.stringify(arr));
       });
 
     return () => {
       unsubscribe();
     };
   }, []);
-
-  function ordersAgain(e) {
-    console.log("clicked", orders);
-  }
 
   return (
     <div>
@@ -166,9 +159,9 @@ const Completed = () => {
                             <br />
                             Your orders will be delivered at: {order.address}
                           </Typography>
-                          <Button onClick={(e) => ordersAgain()}>
+                          {/* <Button onClick={(e) => ordersAgain()}>
                             Order Again
-                          </Button>
+                          </Button> */}
                         </CardContent>
                       </Card>
                     </Grid>

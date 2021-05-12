@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
-import { Button } from "@material-ui/core";
+import { Button, FormControlLabel, Switch } from "@material-ui/core";
 
 // https://stackoverflow.com/questions/60509294/react-muidatatable-trigger-going-to-a-different-page-after-a-row-is-clicked
 
@@ -17,9 +17,11 @@ class PendingOrdersTable extends Component {
     "Order ID",
     "Name",
     "Items",
+    "Order Date",
     "Delivery Date",
     "Address",
     "Total Amount",
+
     "Phone",
     {
       name: "Confirm",
@@ -27,17 +29,36 @@ class PendingOrdersTable extends Component {
         filter: true,
         sort: false,
         empty: true,
-        customBodyRender: (data, dataIndex, rowIndex) => {
+        customBodyRender: (
+          value,
+          tableMeta,
+          updateValue,
+          dataIndex,
+          rowIndex
+        ) => {
           return (
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                console.log(data);
-              }}
-            >
-              Confirm
-            </Button>
+            // <FormControlLabel
+            //   label={value ? "Yes" : "No"}
+            //   value={value ? "Yes" : "No"}
+            //   control={
+            //     <Switch
+            //       color="primary"
+            //       checked={value}
+            //       value={value ? "Yes" : "No"}
+            //     />
+            //   }
+            //   onChange={(event) => {
+            //     updateValue(event.target.value === "Yes" ? false : true);
+            //     console.log(updateValue);
+            //   }}
+            // />
+            <FormControlLabel
+              value={value}
+              control={<Button value={value}>confirm</Button>}
+              onClick={(e) =>
+                console.log(tableMeta.tableData[tableMeta.rowIndex])
+              }
+            />
           );
         },
       },
@@ -53,8 +74,9 @@ class PendingOrdersTable extends Component {
             <Button
               variant="outlined"
               color="secondary"
-              onClick={() => {
-                console.log(tableMeta.tableData[tableMeta.index]);
+              value={value}
+              onClick={(e) => {
+                console.log(value, tableMeta);
               }}
             >
               Cancel
@@ -98,16 +120,20 @@ class PendingOrdersTable extends Component {
               "Order ID": doc.id,
               Items: items,
               Name: data.displayName,
+              "Order Date": new Date(
+                data.orderCreatedAt.seconds * 1000
+              ).toLocaleString(),
               Address: data.address,
               "Total Amount": data.total,
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),
+
               Phone: data.phone,
             });
           });
           this.setState({ orders: orders });
-          console.log(this.state.orders);
+          // console.log(this.state.orders);
         });
     } catch (err) {
       console.log(err);

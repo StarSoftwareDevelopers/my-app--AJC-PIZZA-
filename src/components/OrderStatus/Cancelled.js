@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
@@ -63,9 +63,6 @@ const Cancelled = () => {
         );
         setOrders(arr);
         setIsLoading(true);
-        // console.log("orders", arr);
-        // console.log(arr[0].id);
-        // console.log(JSON.stringify(arr));
       });
 
     return () => {
@@ -119,7 +116,10 @@ const Cancelled = () => {
                         </div>
                         <CardContent className={classes.Content}>
                           <Typography variant="h5" color="secondary">
-                            Order has been Cancelled
+                            Order was cancelled at:{" "}
+                            {new Date(
+                              order.orderCancelledAt.seconds * 1000
+                            ).toLocaleString()}
                           </Typography>
                           <Typography variant="h6">
                             {/* {-------------------------------------------------------------------------} */}
@@ -153,7 +153,7 @@ const Cancelled = () => {
                               </Typography>
                             )}
                             {/* {-------------------------------------------------------------------------} */}
-                            Order was cancelled at: <br />
+                            <br />
                           </Typography>
                         </CardContent>
                       </Card>

@@ -1,5 +1,10 @@
+import Tabs from "./../Tabs";
 const deliveriesTable = () => {
-  return <div>Deliveries Table</div>;
+  return (
+    <div>
+      <Tabs />
+    </div>
+  );
 };
 
 export default deliveriesTable;
