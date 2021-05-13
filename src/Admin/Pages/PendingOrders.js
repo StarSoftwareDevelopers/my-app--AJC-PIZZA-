@@ -22,8 +22,20 @@ const PendingOrders = () => {
           Pending Orders
           <Typography style={{ float: "right" }}>
             <Link to="/Deliveries">
-              <Button variant="outlined" color="secondary">
+              <Button
+                variant="outlined"
+                style={{
+                  borderColor: "#397D02",
+                  color: "#397D02",
+                  marginRight: "1rem",
+                }}
+              >
                 View Deliveries
+              </Button>
+            </Link>
+            <Link to="/Orders">
+              <Button variant="outlined" color="secondary">
+                View Cancelled Orders
               </Button>
             </Link>
           </Typography>

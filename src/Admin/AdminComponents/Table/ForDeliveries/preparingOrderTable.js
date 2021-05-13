@@ -1,21 +1,15 @@
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
-import { firestore } from "./../../../firebase/firebase.utils";
+import { firestore } from "./../../../../firebase/firebase.utils";
 import { Button, FormControlLabel, Snackbar } from "@material-ui/core";
-
-import MuiAlert from "@material-ui/lab/Alert";
 
 // https://stackoverflow.com/questions/54616114/show-snackbar-material-ui-when-appear-erron-in-mutation
 
-class PendingOrdersTable extends Component {
+class PreparingOrdersTable extends Component {
   constructor() {
     super();
-    this.state = { orders: [], open: false };
+    this.state = { orders: [] };
   }
-
-  handleOpen = () => this.setState({ open: true });
-
-  handleClose = () => this.setState({ open: false });
 
   columns = [
     "Order ID",
@@ -28,7 +22,7 @@ class PendingOrdersTable extends Component {
 
     "Phone",
     {
-      name: "Confirm",
+      name: "On Delivery",
       options: {
         filter: true,
         sort: false,
@@ -43,21 +37,20 @@ class PendingOrdersTable extends Component {
                   variant="outlined"
                   style={{ borderColor: "#397D02", color: "#397D02" }}
                 >
-                  confirm
+                  on delivery
                 </Button>
               }
               onClick={(e) => {
                 try {
                   firestore.collection("orders").doc(tableMeta.rowData[0]).set(
                     {
-                      orderStatus: "Confirmed",
+                      orderStatus: "On the way",
                     },
                     { merge: true }
                   );
                 } catch (err) {
                   console.log(err);
                 }
-                // this.handleOpen();
               }}
             />
           );
@@ -65,32 +58,25 @@ class PendingOrdersTable extends Component {
       },
     },
     {
-      name: "Cancel",
+      name: "On Delivery(Delayed)",
       options: {
         filter: true,
         sort: false,
         empty: true,
-        customBodyRender: (
-          value,
-          tableMeta,
-          updateValue,
-          dataIndex,
-          rowIndex
-        ) => {
+        customBodyRender: (value, tableMeta) => {
           return (
             <FormControlLabel
               value={value}
               control={
                 <Button value={value} variant="outlined" color="secondary">
-                  Cancel
+                  On Delivery (Delayed)
                 </Button>
               }
               onClick={(e) => {
                 try {
                   firestore.collection("orders").doc(tableMeta.rowData[0]).set(
                     {
-                      orderCancelledAt: new Date(),
-                      orderStatus: "Cancelled",
+                      orderStatus: "On the way(Delayed)",
                     },
                     { merge: true }
                   );
@@ -108,23 +94,13 @@ class PendingOrdersTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
-
-    // onRowClick: (rowData, rowState) => {
-    //   console.log(rowData, rowState);
-    // },
-    // get row data and expand it
-    // expandableRows: true,
-    // renderExpandableRow: (rowData, rowMeta) => {
-    //   console.log(rowData, rowMeta);
-    //   return <div>{rowData[2]}</div>;
-    // },
   };
 
   componentDidMount() {
     try {
       firestore
         .collection("orders")
-        .where("orderStatus", "==", "Pending")
+        .where("orderStatus", "==", "Preparing")
         .onSnapshot((snapshot) => {
           const orders = [];
           snapshot.docs.forEach((doc) => {
@@ -157,31 +133,18 @@ class PendingOrdersTable extends Component {
   }
 
   render() {
-    const { open } = this.state;
     return this.state.orders ? (
       <div>
         <MUIDataTable
-          title={"Pending Orders"}
+          title={"Preparing"}
           columns={this.columns}
           data={this.state.orders}
           options={this.options}
         />
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          open={open}
-          onClose={this.handleClose}
-          autoHideDuration={2000}
-          // other Snackbar props
-        >
-          Order Confirmed
-        </Snackbar>
       </div>
     ) : (
       <p>Loading...</p>
     );
   }
 }
-export default PendingOrdersTable;
+export default PreparingOrdersTable;

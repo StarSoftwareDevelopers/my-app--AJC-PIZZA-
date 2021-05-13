@@ -1,11 +1,15 @@
+//Tabs for the deliveries
 import React from "react";
 import PropTypes from "prop-types";
+import { AppBar, Tabs, Tab, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+
+//orderStatus tables
+import ConfirmedOrdersTable from "./Table/ForDeliveries/confirmedOrdersTable";
+import PreparingOrdersTable from "./Table/ForDeliveries/preparingOrderTable";
+import OnTheWayTable from "./Table/ForDeliveries/onthewayTable";
+import DelayedTable from "./Table/ForDeliveries/delayed";
+import DeliveredTable from "./Table/ForDeliveries/deliveredTable";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -70,23 +74,29 @@ export default function ScrollableTabsButtonAuto() {
           variant="fullWidth"
           centered
         >
-          <Tab label="Preparing" {...a11yProps(0)} />
-          <Tab label="On the way" {...a11yProps(1)} />
-          <Tab label="On the way (Delayed)" {...a11yProps(2)} />
-          <Tab label="delivered" {...a11yProps(3)} />
+          <Tab label="Confirmed" {...a11yProps(0)} />
+          <Tab label="Preparing" {...a11yProps(1)} />
+          <Tab label="On Delivery" {...a11yProps(2)} />
+          <Tab label="On Delivery(Delayed)" {...a11yProps(3)} />
+          <Tab label="delivered" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {/* Order Status page for pending */}1
+        {/* Order Status for Confirmed Orders */}
+        <ConfirmedOrdersTable />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {/* Order status page for on Delivery */}2
+        {/* Order status page for Preparing */}
+        <PreparingOrdersTable />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        3
+        <OnTheWayTable />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        4
+        <DelayedTable />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <DeliveredTable />
       </TabPanel>
     </div>
   );

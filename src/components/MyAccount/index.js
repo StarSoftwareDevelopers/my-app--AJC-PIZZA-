@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { firestore } from "./../../firebase/firebase.utils";
 import { Link, useHistory } from "react-router-dom";
@@ -34,6 +34,7 @@ const MyAccount = () => {
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
+  const [users, setUsers] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

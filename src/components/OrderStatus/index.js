@@ -82,10 +82,6 @@ const OrderStatus = () => {
         );
         setOrders(arr);
         setIsLoading(true);
-        // setId(arr[0].id);
-        // console.log("orders", arr);
-        // console.log(arr[0].id);
-        // console.log(JSON.stringify(arr));
       });
 
     return () => {

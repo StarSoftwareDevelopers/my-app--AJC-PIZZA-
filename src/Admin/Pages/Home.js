@@ -7,7 +7,7 @@ import {
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Dashboard from "./../AdminComponents/Dashboard";
-import OrderTable from "./../AdminComponents/Table/OrdersTable";
+import CurrentDateOrders from "./../AdminComponents/Table/currentDateOrders";
 
 let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);
@@ -43,7 +43,7 @@ const Home = () => {
           >
             Today's Orders
           </Typography>
-          <OrderTable />
+          {/* <CurrentDateOrders /> */}
           <Typography
             variant="h5"
             style={{

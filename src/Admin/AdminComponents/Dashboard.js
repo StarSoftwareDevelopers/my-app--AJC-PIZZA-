@@ -1,12 +1,15 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import {
+  Grid,
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+
 import PeopleIcon from "@material-ui/icons/People";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
@@ -39,6 +42,7 @@ const useStyles = makeStyles({
 export default function Dashboard() {
   const classes = useStyles();
   const [size, setSize] = useState(null);
+  const [pendingSize, setPendingSize] = useState(0);
 
   //useEffect for counting the total users registered
   useEffect(() => {
@@ -47,6 +51,17 @@ export default function Dashboard() {
       .get()
       .then((snap) => {
         setSize(snap.size);
+      });
+  }, []);
+
+  //for number of pending orders
+  useEffect(() => {
+    firestore
+      .collection("orders")
+      .where("orderStatus", "==", "Pending")
+      .get()
+      .then((snap) => {
+        setPendingSize(snap.size);
       });
   }, []);
 
@@ -95,7 +110,7 @@ export default function Dashboard() {
                 <ShoppingCartIcon style={{ color: red[500] }} /> Pending Orders
               </Typography>
               <Typography variant="h4" component="h2">
-                4
+                {pendingSize}
               </Typography>
             </CardContent>
             <CardActions>
@@ -117,7 +132,8 @@ export default function Dashboard() {
                 color="textSecondary"
                 gutterBottom
               >
-                <LocalShippingIcon style={{ color: orange[500] }} /> Deliveries
+                <LocalShippingIcon style={{ color: orange[500] }} /> For
+                Deliveries
               </Typography>
               <Typography variant="h4" component="h2">
                 2
