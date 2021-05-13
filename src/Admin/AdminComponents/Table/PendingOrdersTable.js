@@ -25,7 +25,7 @@ class PendingOrdersTable extends Component {
     "Delivery Date",
     "Address",
     "Total Amount",
-
+    "Payment method",
     "Phone",
     {
       name: "Confirm",
@@ -142,6 +142,15 @@ class PendingOrdersTable extends Component {
               ).toLocaleString(),
               Address: data.address,
               "Total Amount": data.total,
+              ...(data.paymentMethod == "gcash"
+                ? {
+                    "Payment method": `${data.paymentMethod.toUpperCase()}(${
+                      data.gcashNo
+                    })`,
+                  }
+                : {
+                    "Payment method": data.paymentMethod.toUpperCase(),
+                  }),
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),

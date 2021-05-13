@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import Button from "./../Forms/Button";
+import Pagination from "@material-ui/lab/Pagination";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import undraw_empty_cart_co35 from "./../../assets/undraw_empty_cart_co35.svg";
@@ -47,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "-1.5rem",
     float: "right",
   },
+  paginator: {
+    justifyContent: "center",
+    padding: "10px",
+    margin: "0 auto",
+  },
 }));
 
 const OrderStatus = () => {
@@ -54,7 +60,17 @@ const OrderStatus = () => {
   const { currentUser } = useSelector(mapState);
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [open, setOpen] = React.useState(false); //for MUI ALERT
+  //for the pagination
+  const itemsPerPage = 3;
+  const [page, setPage] = useState(1);
+
+  const noOfPages = orders.length / itemsPerPage;
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+  //for MUI ALERT
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(true);
@@ -103,105 +119,119 @@ const OrderStatus = () => {
             <div>
               {isLoading ? (
                 <div>
-                  {orders.map((order) => (
-                    <Grid key={order.id}>
-                      <Card className={classes.card}>
-                        <CardHeader title="Order ID " subheader={order.id} />
-                        <Typography variant="h5" color="secondary">
-                          Order Status: {order.orderStatus}
-                        </Typography>
-                        <br />
-                        <div>
-                          {order.items.map((item) => (
-                            <ul key={item.documentID}>
-                              <Typography variant="h5">
-                                <div className={classes.root}>
-                                  <li>
-                                    <img
-                                      src={item.productImg}
-                                      alt={item.productName}
-                                      className={classes.media}
-                                    />
-                                  </li>
-                                  <div>
-                                    <li>{item.productName}</li>
-                                    <li>₱{item.productPrice}.00</li>
-                                    <li>Quantity: {item.qty}</li>
-                                  </div>
-                                </div>
-                              </Typography>
-                            </ul>
-                          ))}
-                        </div>
-                        <CardContent className={classes.Content}>
-                          <Typography variant="h6">
-                            {/* {-------------------------------------------------------------------------} */}
-                            Order was created at: {""}
-                            {new Date(
-                              order.orderCreatedAt.seconds * 1000
-                            ).toDateString()}{" "}
-                            at{" "}
-                            {new Date(
-                              order.orderCreatedAt.seconds * 1000
-                            ).toLocaleTimeString()}{" "}
-                            <br />
-                            {/* {-------------------------------------------------------------------------} */}
-                            Total Orders: ₱{order.total}.00
-                            <br />
-                            {order.paymentMethod === "cod" ? (
-                              <Typography variant="h6">
-                                Payment Method: COD (Cash-on-Delivery)
-                              </Typography>
-                            ) : (
-                              <Typography variant="h6">
-                                Payment Method: Gcash
-                              </Typography>
-                            )}
-                            {/* {-------------------------------------------------------------------------} */}
-                            {order.gcashNo === "" ? (
-                              <p></p>
-                            ) : (
-                              <Typography variant="h6">
-                                Gcash : {order.gcashNo}
-                              </Typography>
-                            )}
-                            {/* {-------------------------------------------------------------------------} */}
-                            Expected Delivery Date:{" "}
-                            {new Date(
-                              order.deliveryDate.seconds * 1000
-                            ).toDateString()}{" "}
-                            at {""}
-                            {new Date(
-                              order.deliveryDate.seconds * 1000
-                            ).toLocaleTimeString()}
-                            <br />
-                            Your orders will be delivered at: {order.address}
+                  {orders
+                    .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+                    .map((order) => (
+                      <Grid key={order.id}>
+                        <Card className={classes.card}>
+                          <CardHeader title="Order ID " subheader={order.id} />
+                          <Typography variant="h5" color="secondary">
+                            Order Status: {order.orderStatus}
                           </Typography>
-                          <Button
-                            onClick={(e) => {
-                              try {
-                                firestore
-                                  .collection("orders")
-                                  .doc(order.id)
-                                  .set(
-                                    {
-                                      orderStatus: "Cancelled",
-                                      orderCancelledAt: new Date(),
-                                    },
-                                    { merge: true }
-                                  );
-                              } catch (err) {
-                                console.log(err);
-                              }
-                              handleClick();
-                            }}
-                          >
-                            Cancel Order
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  ))}
+                          <br />
+                          <div>
+                            {order.items.map((item) => (
+                              <ul key={item.documentID}>
+                                <Typography variant="h5">
+                                  <div className={classes.root}>
+                                    <li>
+                                      <img
+                                        src={item.productImg}
+                                        alt={item.productName}
+                                        className={classes.media}
+                                      />
+                                    </li>
+                                    <div>
+                                      <li>{item.productName}</li>
+                                      <li>₱{item.productPrice}.00</li>
+                                      <li>Quantity: {item.qty}</li>
+                                    </div>
+                                  </div>
+                                </Typography>
+                              </ul>
+                            ))}
+                          </div>
+                          <CardContent className={classes.Content}>
+                            <Typography variant="h6">
+                              {/* {-------------------------------------------------------------------------} */}
+                              Order was created at: {""}
+                              {new Date(
+                                order.orderCreatedAt.seconds * 1000
+                              ).toDateString()}{" "}
+                              at{" "}
+                              {new Date(
+                                order.orderCreatedAt.seconds * 1000
+                              ).toLocaleTimeString()}{" "}
+                              <br />
+                              {/* {-------------------------------------------------------------------------} */}
+                              Total Orders: ₱{order.total}.00
+                              <br />
+                              {order.paymentMethod === "cod" ? (
+                                <Typography variant="h6">
+                                  Payment Method: COD (Cash-on-Delivery)
+                                </Typography>
+                              ) : (
+                                <Typography variant="h6">
+                                  Payment Method: Gcash
+                                </Typography>
+                              )}
+                              {/* {-------------------------------------------------------------------------} */}
+                              {order.gcashNo === "" ? (
+                                <p></p>
+                              ) : (
+                                <Typography variant="h6">
+                                  Gcash : {order.gcashNo}
+                                </Typography>
+                              )}
+                              {/* {-------------------------------------------------------------------------} */}
+                              Expected Delivery Date:{" "}
+                              {new Date(
+                                order.deliveryDate.seconds * 1000
+                              ).toDateString()}{" "}
+                              at {""}
+                              {new Date(
+                                order.deliveryDate.seconds * 1000
+                              ).toLocaleTimeString()}
+                              <br />
+                              Your orders will be delivered at: {order.address}
+                            </Typography>
+                            <Button
+                              onClick={(e) => {
+                                try {
+                                  firestore
+                                    .collection("orders")
+                                    .doc(order.id)
+                                    .set(
+                                      {
+                                        orderStatus: "Cancelled",
+                                        orderCancelledAt: new Date(),
+                                      },
+                                      { merge: true }
+                                    );
+                                } catch (err) {
+                                  console.log(err);
+                                }
+                                handleClick();
+                              }}
+                            >
+                              Cancel Order
+                            </Button>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    ))}
+                  <Pagination
+                    count={noOfPages}
+                    page={page}
+                    onChange={handleChange}
+                    defaultPage={1}
+                    color="secondary"
+                    shape="rounded"
+                    size="large"
+                    showFirstButton
+                    showLastButton
+                    classes={{ ul: classes.paginator }}
+                  />
                 </div>
               ) : (
                 <p style={{ textAlign: "center" }}>

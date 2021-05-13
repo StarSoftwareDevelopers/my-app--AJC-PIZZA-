@@ -36,6 +36,26 @@ const MyAccount = () => {
   const [phone, setPhone] = useState(currentUser.phone);
   const [users, setUsers] = useState([]);
 
+  // useEffect(() => {
+  //   const unsubscribe = firestore
+  //     .collection("users")
+  //     .doc(currentUser.id)
+  //     .onSnapshot((snapshot) => {
+  //       const arr = [];
+  //       arr.push({
+  //         ...snapshot.data(),
+  //       });
+
+  //       setUsers(arr);
+  //     });
+
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
+
+  // console.log(users);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

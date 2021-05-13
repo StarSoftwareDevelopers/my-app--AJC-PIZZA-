@@ -19,7 +19,7 @@ class DeliveredTable extends Component {
     "Delivery Date",
     "Address",
     "Total Amount",
-
+    "Payment method",
     "Phone",
   ];
   options = {
@@ -50,6 +50,15 @@ class DeliveredTable extends Component {
               ).toLocaleString(),
               Address: data.address,
               "Total Amount": data.total,
+              ...(data.paymentMethod == "gcash"
+                ? {
+                    "Payment method": `${data.paymentMethod.toUpperCase()}(${
+                      data.gcashNo
+                    })`,
+                  }
+                : {
+                    "Payment method": data.paymentMethod.toUpperCase(),
+                  }),
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),

@@ -176,6 +176,18 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
+          {/* {Back to Store} */}
+          <Link to="/">
+            <ListItem button key="Store">
+              <ListItemIcon>
+                <StoreIcon fontSize="large" />
+              </ListItemIcon>
+              <ListItemText>
+                <Typography variant="h5">Back to Store</Typography>
+              </ListItemText>
+            </ListItem>
+          </Link>
+          {/* {Back to Store} */}
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -184,18 +196,6 @@ export default function PersistentDrawerLeft() {
             )}
           </IconButton>
         </div>
-        {/* {Back to Store} */}
-        <Link to="/">
-          <ListItem button key="Store">
-            <ListItemIcon>
-              <StoreIcon fontSize="large" />
-            </ListItemIcon>
-            <ListItemText>
-              <Typography variant="h5">Back to Store</Typography>
-            </ListItemText>
-          </ListItem>
-        </Link>
-        {/* {Back to Store} */}
 
         <Divider />
         <List>

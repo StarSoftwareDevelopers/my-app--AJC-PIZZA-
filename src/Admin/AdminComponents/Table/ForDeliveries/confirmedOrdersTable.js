@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../../firebase/firebase.utils";
 import { Button, FormControlLabel, Snackbar } from "@material-ui/core";
-
-// https://stackoverflow.com/questions/54616114/show-snackbar-material-ui-when-appear-erron-in-mutation
+import MuiAlert from "@material-ui/lab/Alert";
 
 class ConfirmedOrdersTable extends Component {
   constructor() {
     super();
-    this.state = { orders: [] };
+    this.state = { orders: [], open: false };
   }
+
+  handleOpen = () => this.setState({ open: true });
+  handleClose = () => this.setState({ open: false });
+  handleClick = () => this.setState({ orders: [1], open: true });
 
   columns = [
     "Order ID",
@@ -19,7 +22,7 @@ class ConfirmedOrdersTable extends Component {
     "Delivery Date",
     "Address",
     "Total Amount",
-
+    "Payment method",
     "Phone",
     {
       name: "Preparing",
@@ -51,6 +54,7 @@ class ConfirmedOrdersTable extends Component {
                 } catch (err) {
                   console.log(err);
                 }
+                // this.handleOpen();
               }}
             />
           );
@@ -86,6 +90,15 @@ class ConfirmedOrdersTable extends Component {
               ).toLocaleString(),
               Address: data.address,
               "Total Amount": data.total,
+              ...(data.paymentMethod == "gcash"
+                ? {
+                    "Payment method": `${data.paymentMethod.toUpperCase()}(${
+                      data.gcashNo
+                    })`,
+                  }
+                : {
+                    "Payment method": data.paymentMethod.toUpperCase(),
+                  }),
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),
@@ -109,6 +122,36 @@ class ConfirmedOrdersTable extends Component {
           data={this.state.orders}
           options={this.options}
         />
+        <div>
+          {/* <Button variant="outlined" onClick={this.handleClick}>
+            Open snackbar
+          </Button> */}
+          {/* {this.state.orders.length > 0 ? (
+            <div>
+              <Snackbar
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                open={open}
+                onClose={this.handleClose}
+                autoHideDuration={2000}
+                // other Snackbar props
+              >
+                <MuiAlert
+                  onClose={this.handleClose}
+                  severity="success"
+                  elevation={6}
+                  variant="filled"
+                >
+                  Successfully Set the order status to preparing!
+                </MuiAlert>
+              </Snackbar>
+            </div>
+          ) : (
+            <p>Loading...</p>
+          )} */}
+        </div>
       </div>
     ) : (
       <p>Loading...</p>

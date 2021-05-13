@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardContent,
 } from "@material-ui/core";
+import Pagination from "@material-ui/lab/Pagination";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import undraw_empty_cart_co35 from "./../../assets/undraw_empty_cart_co35.svg";
@@ -40,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "-1.5rem",
     float: "right",
   },
+  paginator: {
+    justifyContent: "center",
+    padding: "10px",
+    margin: "0 auto",
+  },
 }));
 
 const Deliveries = () => {
@@ -47,6 +53,16 @@ const Deliveries = () => {
   const { currentUser } = useSelector(mapState);
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  //for pagination
+  const itemsPerPage = 3;
+  const [page, setPage] = useState(1);
+
+  const noOfPages = orders.length / itemsPerPage;
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     const unsubscribe = firestore
@@ -92,7 +108,10 @@ const Deliveries = () => {
             <div>
               {isLoading ? (
                 <div>
-                  {orders.map((order) => (
+                  {ordersslice(
+                    (page - 1) * itemsPerPage,
+                    page * itemsPerPage
+                  ).map((order) => (
                     <Grid key={order.id}>
                       <Card className={classes.card}>
                         <CardHeader title="Order ID " subheader={order.id} />
@@ -170,6 +189,18 @@ const Deliveries = () => {
                       </Card>
                     </Grid>
                   ))}
+                  <Pagination
+                    count={noOfPages}
+                    page={page}
+                    onChange={handleChange}
+                    defaultPage={1}
+                    color="secondary"
+                    shape="rounded"
+                    size="large"
+                    showFirstButton
+                    showLastButton
+                    classes={{ ul: classes.paginator }}
+                  />
                 </div>
               ) : (
                 <p style={{ textAlign: "center" }}>
