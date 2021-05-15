@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Dashboard from "./../AdminComponents/Dashboard";
 import CurrentDateOrders from "./../AdminComponents/Table/currentDateOrders";
+import UpcomingOrdersTable from "./../AdminComponents/Table/UpcomingOrders";
 
 let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);
@@ -53,6 +54,7 @@ const Home = () => {
             }}
           >
             Upcoming Orders
+            <UpcomingOrdersTable />
           </Typography>
         </ThemeProvider>
       </Container>
