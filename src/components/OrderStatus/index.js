@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
   },
   Content: {
     marginTop: "-1.5rem",
-    float: "right",
   },
   paginator: {
     justifyContent: "center",

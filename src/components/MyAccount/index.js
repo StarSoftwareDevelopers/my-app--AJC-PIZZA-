@@ -22,7 +22,6 @@ import MuiPhoneNumber from "material-ui-phone-number";
 
 import "./styles.scss";
 import ButtonForm from "./../Forms/Button";
-import Map from "./../Google Maps";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -31,31 +30,30 @@ const mapState = ({ user }) => ({
 const MyAccount = () => {
   const history = useHistory();
   const { currentUser } = useSelector(mapState);
+  const [users, setUsers] = useState([]);
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
-  const [users, setUsers] = useState([]);
 
-  // useEffect(() => {
-  //   const unsubscribe = firestore
-  //     .collection("users")
-  //     .doc(currentUser.id)
-  //     .onSnapshot((snapshot) => {
-  //       const arr = [];
-  //       arr.push({
-  //         ...snapshot.data(),
-  //       });
+  useEffect(() => {
+    const unsubscribe = firestore
+      .collection("users")
+      .doc(currentUser.id)
+      .onSnapshot((snapshot) => {
+        const arr = [];
+        arr.push({
+          ...snapshot.data(),
+        });
 
-  //       setUsers(arr);
-  //     });
+        setUsers(arr);
+      });
 
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   // console.log(users);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -81,110 +79,116 @@ const MyAccount = () => {
 
       <Container>
         <div className="container">
-          <Typography
-            variant="h4"
-            align="center"
-            style={{
-              marginBottom: "1.5rem",
-            }}
-          >
-            {currentUser.displayName}'s Account
-            <Tooltip title={<h4 style={{ color: "#fff" }}>Edit</h4>}>
-              <IconButton aria-label="delete">
-                <EditIcon color="primary" />
-              </IconButton>
-            </Tooltip>
-          </Typography>
+          {users.map((user) => (
+            <li>
+              <Typography
+                variant="h4"
+                align="center"
+                style={{
+                  marginBottom: "1.5rem",
+                }}
+              >
+                {user.displayName}'s Account
+                <Tooltip title={<h4 style={{ color: "#fff" }}>Edit</h4>}>
+                  <IconButton aria-label="delete">
+                    <EditIcon color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </Typography>
 
-          <div className="profileData">
-            <form onSubmit={handleSubmit}>
-              <TextField
-                id="input"
-                margin="dense"
-                type="text"
-                label="Full Name"
-                placeholder={currentUser.displayName}
-                value={displayName}
-                color="secondary"
-                fullWidth
-                required
-                onChange={(e) => setdisplayName(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <AccountCircle style={{ color: " #e31837" }} />
-                    </InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: { fontSize: "17px" },
-                }}
-              />
-              <TextField
-                disabled
-                margin="dense"
-                type="email"
-                label="Email"
-                color="secondary"
-                defaultValue={currentUser.email}
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <EmailIcon style={{ color: " #e31837" }} />
-                    </InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: { fontSize: "17px" },
-                }}
-              />
-              <TextField
-                margin="dense"
-                type="text"
-                label="Address"
-                placeholder={currentUser.address}
-                value={address}
-                fullWidth
-                onChange={(e) => setAddress(e.target.value)}
-                required
-                color="secondary"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PersonPinCircleIcon style={{ color: " #e31837" }} />
-                    </InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: { fontSize: "17px" },
-                }}
-              />
-              <MuiPhoneNumber
-                fullWidth
-                name="phone"
-                label="Phone Number"
-                value={currentUser.phone}
-                required
-                color="secondary"
-                data-cy="user-phone"
-                defaultCountry={"ph"}
-                onChange={(e) => setPhone(e)}
-              />
-              <ButtonForm type="submit">Update</ButtonForm>
-            </form>
-            <Link to="/recovery">
-              <Typography variant="body1">Reset Password?</Typography>
-            </Link>
-            <br></br>
-            <Link to="#">
-              <Typography variant="body1">Deactivate Account?</Typography>
-            </Link>
-          </div>
+              {/*---------------------------------------------------------------------------------  */}
+              <li>
+                <div className="profileData">
+                  <form onSubmit={handleSubmit}>
+                    <TextField
+                      id="input"
+                      margin="dense"
+                      type="text"
+                      label="Full Name"
+                      placeholder={user.displayName}
+                      value={displayName}
+                      color="secondary"
+                      fullWidth
+                      required
+                      onChange={(e) => setdisplayName(e.target.value)}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AccountCircle style={{ color: " #e31837" }} />
+                          </InputAdornment>
+                        ),
+                      }}
+                      InputLabelProps={{
+                        style: { fontSize: "17px" },
+                      }}
+                    />
+                    <TextField
+                      disabled
+                      margin="dense"
+                      type="email"
+                      label="Email"
+                      color="secondary"
+                      defaultValue={user.email}
+                      fullWidth
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <EmailIcon style={{ color: " #e31837" }} />
+                          </InputAdornment>
+                        ),
+                      }}
+                      InputLabelProps={{
+                        style: { fontSize: "17px" },
+                      }}
+                    />
+                    <TextField
+                      margin="dense"
+                      type="text"
+                      label="Address"
+                      placeholder={user.address}
+                      value={address}
+                      fullWidth
+                      onChange={(e) => setAddress(e.target.value)}
+                      required
+                      color="secondary"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PersonPinCircleIcon
+                              style={{ color: " #e31837" }}
+                            />
+                          </InputAdornment>
+                        ),
+                      }}
+                      InputLabelProps={{
+                        style: { fontSize: "17px" },
+                      }}
+                    />
+                    <MuiPhoneNumber
+                      fullWidth
+                      name="phone"
+                      label="Phone Number"
+                      value={user.phone}
+                      required
+                      color="secondary"
+                      data-cy="user-phone"
+                      defaultCountry={"ph"}
+                      onChange={(e) => setPhone(e)}
+                    />
+                    <ButtonForm type="submit">Update</ButtonForm>
+                  </form>
+                </div>
+              </li>
+            </li>
+          ))}
+          <Link to="/recovery">
+            <Typography variant="body1">Reset Password?</Typography>
+          </Link>
+          <br></br>
+          <Link to="#">
+            <Typography variant="body1">Deactivate Account?</Typography>
+          </Link>
         </div>
-        {/* <Card>
-          <Map />
-        </Card> */}
       </Container>
       <br></br>
     </div>

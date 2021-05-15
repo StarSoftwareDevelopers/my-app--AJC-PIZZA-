@@ -43,7 +43,7 @@ const Home = () => {
           >
             Today's Orders
           </Typography>
-          {/* <CurrentDateOrders /> */}
+          <CurrentDateOrders />
           <Typography
             variant="h5"
             style={{

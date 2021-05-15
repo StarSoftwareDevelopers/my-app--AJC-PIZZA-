@@ -11,7 +11,14 @@ class CurrentDateTable extends Component {
     this.state = { orders: [] };
   }
 
-  columns = ["Order ID", "Name", "Items", "Delivery Date", "Total Amount"];
+  columns = [
+    "Order ID",
+    "Name",
+    "Items",
+    "Delivery Date",
+    "Total Amount",
+    "Order Status",
+  ];
   options = {
     filter: true,
     selectableRows: "none",
@@ -22,17 +29,25 @@ class CurrentDateTable extends Component {
     },
   };
 
-  //   `${(new Date().seconds * 1000).toLocaleString()}`
-  //date range - https://stackoverflow.com/questions/47000854/firestore-query-by-date-range
-
   componentDidMount() {
+    var start = new Date();
+    start.setUTCHours(0, 0, 0, 0);
+    var startOfDay = start.toLocaleDateString();
+    console.log(startOfDay);
+
+    var end = new Date();
+    end.setHours(23, 59, 59, 999);
+    var endOfDay = end.toUTCString();
+    console.log(endOfDay);
+
     try {
       firestore
         .collection("orders")
         .where("orderStatus", "==", "Confirmed")
-        .where(`${deliveryDate.toDateString()}`, "=", new Date().toDateString())
-        .get()
-        .then((snapshot) => {
+        // .where("deliveryDate", ">=", new Date())
+        // .where("deliveryDate", ">=", startOfDay)
+        // .where("deliveryDate", "<=", endOfDay)
+        .onSnapshot((snapshot) => {
           const orders = [];
           snapshot.docs.map((doc) => {
             const items = [];
@@ -49,6 +64,7 @@ class CurrentDateTable extends Component {
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),
+              "Order Status": data.orderStatus,
             });
           });
           console.log(orders);
@@ -63,6 +79,7 @@ class CurrentDateTable extends Component {
   render() {
     return (
       <div>
+        {<p>Still not working</p>}
         <MUIDataTable
           title={"Today's Orders"}
           columns={this.columns}
