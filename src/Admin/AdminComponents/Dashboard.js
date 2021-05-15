@@ -43,25 +43,37 @@ export default function Dashboard() {
   const classes = useStyles();
   const [size, setSize] = useState(null);
   const [pendingSize, setPendingSize] = useState(0);
+  const [deliverySize, setDeliverySize] = useState(0);
 
   //useEffect for counting the total users registered
   useEffect(() => {
-    firestore
-      .collection("users")
-      .get()
-      .then((snap) => {
-        setSize(snap.size);
-      });
+    firestore.collection("users").onSnapshot((snap) => {
+      setSize(snap.size);
+    });
   }, []);
 
-  //for number of pending orders
+  // for number of pending orders
   useEffect(() => {
     firestore
       .collection("orders")
       .where("orderStatus", "==", "Pending")
-      .get()
-      .then((snap) => {
+      .onSnapshot((snap) => {
         setPendingSize(snap.size);
+      });
+  }, []);
+
+  // for number of for deliveries
+  useEffect(() => {
+    firestore
+      .collection("orders")
+      .where("orderStatus", "in", [
+        "Confirmed",
+        "Preparing",
+        "On the way",
+        "On the way(Delayed)",
+      ])
+      .onSnapshot((snap) => {
+        setDeliverySize(snap.size);
       });
   }, []);
 
@@ -136,7 +148,7 @@ export default function Dashboard() {
                 Deliveries
               </Typography>
               <Typography variant="h4" component="h2">
-                2
+                {deliverySize}
               </Typography>
             </CardContent>
             <CardActions>

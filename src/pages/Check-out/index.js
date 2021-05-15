@@ -26,6 +26,8 @@ import moment from "moment";
 
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import {
+  KeyboardDatePicker,
+  KeyboardTimePicker,
   DateTimePicker,
   MuiPickersUtilsProvider,
   KeyboardDateTimePicker,
@@ -71,22 +73,6 @@ const CheckingOut = (product) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // const order = {
-    //   // totalOrders: total,
-    //   orderItems: items.map((item) => {
-    //     const { documentID, productImg, productName, productPrice, qty } = item;
-
-    //     return {
-    //       documentID,
-    //       productImg,
-    //       productName,
-    //       productPrice,
-    //       qty,
-    //     };
-    //   }),
-    // };
-
     try {
       firestore.collection("orders").doc().set({
         items,
@@ -215,14 +201,15 @@ const CheckingOut = (product) => {
                 required
               />
               {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <DateTimePicker
+                <KeyboardDatePicker
                   value={deliveryDate}
                   disablePast
                   label="Delivery Date"
                   fullWidth
                   showTodayButton
                   color="secondary"
-                  onChange={(e) => setDeliveryDate(e.target.value)}
+                  onInputChange={e => setDeliveryDate(e.target.value)}
+                  // onChange={(e) => setDeliveryDate(e.target.value)}
                 />
               </MuiPickersUtilsProvider> */}
               <br /> <br />

@@ -3,7 +3,8 @@
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
-import moment from "moment";
+import { FormControlLabel, Button, Select, MenuItem } from "@material-ui/core";
+import firebase from "firebase/app";
 
 class CurrentDateTable extends Component {
   constructor() {
@@ -18,6 +19,56 @@ class CurrentDateTable extends Component {
     "Delivery Date",
     "Total Amount",
     "Order Status",
+    // {
+    //   name: "Order Status",
+    //   options: {
+    //     filter: true,
+    //     sort: false,
+    //     empty: true,
+    //     customBodyRender: (value, tableMeta) => {
+    //       return (
+    //         // <FormControlLabel
+    //         //   value={value}
+    //         //   control={
+    //         //     <Button
+    //         //       value={value}
+    //         //       variant="outlined"
+    //         //       style={{ borderColor: "#397D02", color: "#397D02" }}
+    //         //     >
+    //         //       confirm
+    //         //     </Button>
+    //         //   }
+    //         //   onClick={(e) => {
+    //         //     try {
+    //         //       firestore.collection("orders").doc(tableMeta.rowData[0]).set(
+    //         //         {
+    //         //           orderStatus: "Confirmed",
+    //         //         },
+    //         //         { merge: true }
+    //         //       );
+    //         //     } catch (err) {
+    //         //       console.log(err);
+    //         //     }
+    //         //     // this.handleOpen();
+    //         //   }}
+    //         // />,
+    //         <FormControlLabel
+    //           value={value}
+    //           control={
+    //             <Select>
+    //               <MenuItem value="">
+    //                 <em>{tableMeta.rowData[5]}</em>
+    //               </MenuItem>
+    //               <MenuItem value={10}>Ten</MenuItem>
+    //               <MenuItem value={20}>Twenty</MenuItem>
+    //               <MenuItem value={30}>Thirty</MenuItem>
+    //             </Select>
+    //           }
+    //         />
+    //       );
+    //     },
+    //   },
+    // },
   ];
   options = {
     filter: true,
@@ -30,23 +81,31 @@ class CurrentDateTable extends Component {
   };
 
   componentDidMount() {
+    // Javascript of setting the 0 hrs for start day
     var start = new Date();
     start.setUTCHours(0, 0, 0, 0);
     var startOfDay = start.toLocaleDateString();
-    console.log(startOfDay);
-
+    // Javascript of setting the end hours for end day
     var end = new Date();
     end.setHours(23, 59, 59, 999);
     var endOfDay = end.toUTCString();
-    console.log(endOfDay);
+
+    //converting the JS start day to firebase timestamp
+    var startDay = firebase.firestore.Timestamp.fromDate(new Date(startOfDay));
+    //converting the JS end day to firebase timestamp
+    var endDay = firebase.firestore.Timestamp.fromDate(new Date(endOfDay));
 
     try {
       firestore
         .collection("orders")
-        .where("orderStatus", "==", "Confirmed")
-        // .where("deliveryDate", ">=", new Date())
-        // .where("deliveryDate", ">=", startOfDay)
-        // .where("deliveryDate", "<=", endOfDay)
+        .where("orderStatus", "in", [
+          "Confirmed",
+          "Preparing",
+          "On the way",
+          "On the way(Delayed)",
+        ])
+        .where("deliveryDate", ">=", startDay)
+        .where("deliveryDate", "<=", endDay)
         .onSnapshot((snapshot) => {
           const orders = [];
           snapshot.docs.map((doc) => {
@@ -60,16 +119,13 @@ class CurrentDateTable extends Component {
               Items: items,
               Name: data.displayName,
               "Total Amount": data.total,
-
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),
               "Order Status": data.orderStatus,
             });
           });
-          console.log(orders);
           this.setState({ orders: orders });
-          console.log(this.state.orders);
         });
     } catch (err) {
       console.log(err);
@@ -79,7 +135,7 @@ class CurrentDateTable extends Component {
   render() {
     return (
       <div>
-        {<p>Still not working</p>}
+        {/* still not working properly. Data does not update real-time */}
         <MUIDataTable
           title={"Today's Orders"}
           columns={this.columns}
