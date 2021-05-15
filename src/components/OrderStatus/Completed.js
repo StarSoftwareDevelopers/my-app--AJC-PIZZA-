@@ -57,7 +57,8 @@ const Completed = () => {
   const itemsPerPage = 3;
   const [page, setPage] = useState(1);
 
-  const noOfPages = orders.length / itemsPerPage;
+  const rawPages = orders.length / itemsPerPage;
+  const noOfPages = Math.floor(rawPages);
 
   const handleChange = (event, value) => {
     setPage(value);

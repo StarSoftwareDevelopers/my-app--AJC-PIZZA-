@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
@@ -10,6 +10,7 @@ import {
   CardContent,
 } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 import undraw_empty_cart_co35 from "./../../assets/undraw_empty_cart_co35.svg";
 
@@ -56,7 +57,8 @@ const Cancelled = () => {
   const itemsPerPage = 3;
   const [page, setPage] = useState(1);
 
-  const noOfPages = orders.length / itemsPerPage;
+  const rawPages = orders.length / itemsPerPage;
+  const noOfPages = Math.floor(rawPages);
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -131,12 +133,6 @@ const Cancelled = () => {
                             ))}
                           </div>
                           <CardContent className={classes.Content}>
-                            <Typography variant="h5" color="secondary">
-                              Order was cancelled at:{" "}
-                              {new Date(
-                                order.orderCancelledAt.seconds * 1000
-                              ).toLocaleString()}
-                            </Typography>
                             <Typography variant="h6">
                               {/* {-------------------------------------------------------------------------} */}
                               Order was created at: {""}
@@ -169,7 +165,16 @@ const Cancelled = () => {
                                 </Typography>
                               )}
                               {/* {-------------------------------------------------------------------------} */}
+                              Expected Delivery Date:{" "}
+                              {new Date(
+                                order.deliveryDate.seconds * 1000
+                              ).toDateString()}{" "}
+                              at {""}
+                              {new Date(
+                                order.deliveryDate.seconds * 1000
+                              ).toLocaleTimeString()}
                               <br />
+                              Your orders will be delivered at: {order.address}
                             </Typography>
                           </CardContent>
                         </Card>
