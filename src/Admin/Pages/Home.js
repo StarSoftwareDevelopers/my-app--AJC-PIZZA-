@@ -4,6 +4,7 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@material-ui/core/styles";
+import { Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Dashboard from "./../AdminComponents/Dashboard";
@@ -34,16 +35,7 @@ const Home = () => {
             Overview
           </Typography>
           <Dashboard />
-          <Typography
-            variant="h5"
-            style={{
-              textAlign: "left",
-              marginTop: "2rem",
-              marginBottom: "1rem",
-            }}
-          >
-            Today's Orders
-          </Typography>
+          <Divider style={{ marginTop: "1.5rem", marginBottom: ".5rem" }} />
           <CurrentDateOrders />
           <Typography
             variant="h5"
@@ -53,7 +45,7 @@ const Home = () => {
               marginBottom: "1rem",
             }}
           >
-            Upcoming Orders
+            <Divider style={{ marginTop: "1.5rem", marginBottom: ".5rem" }} />
             <UpcomingOrdersTable />
           </Typography>
         </ThemeProvider>

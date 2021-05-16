@@ -20,6 +20,7 @@ class UpcomingOrdersTable extends Component {
     "Items",
     "Delivery Date",
     "Total Amount",
+    "Payment method",
     "Order Status",
     // {
     //   name: "Order Status",
@@ -117,6 +118,15 @@ class UpcomingOrdersTable extends Component {
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),
+              ...(data.paymentMethod == "gcash"
+                ? {
+                    "Payment method": `${data.paymentMethod.toUpperCase()}(${
+                      data.gcashNo
+                    })`,
+                  }
+                : {
+                    "Payment method": data.paymentMethod.toUpperCase(),
+                  }),
               "Order Status": data.orderStatus,
             });
           });
@@ -132,7 +142,7 @@ class UpcomingOrdersTable extends Component {
       <div>
         {/* still not working properly. Data does not update real-time */}
         <MUIDataTable
-          title={"Upcoming Orders Orders"}
+          title={"Upcoming Orders "}
           columns={this.columns}
           data={this.state.orders}
           options={this.options}

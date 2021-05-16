@@ -18,6 +18,7 @@ class CurrentDateTable extends Component {
     "Items",
     "Delivery Date",
     "Total Amount",
+    "Payment method",
     "Order Status",
     // {
     //   name: "Order Status",
@@ -122,6 +123,15 @@ class CurrentDateTable extends Component {
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),
+              ...(data.paymentMethod == "gcash"
+                ? {
+                    "Payment method": `${data.paymentMethod.toUpperCase()}(${
+                      data.gcashNo
+                    })`,
+                  }
+                : {
+                    "Payment method": data.paymentMethod.toUpperCase(),
+                  }),
               "Order Status": data.orderStatus,
             });
           });

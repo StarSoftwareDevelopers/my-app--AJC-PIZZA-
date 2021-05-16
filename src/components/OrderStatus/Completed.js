@@ -1,15 +1,13 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
-  Container,
   Card,
   Grid,
   Divider,
   CardHeader,
   CardContent,
 } from "@material-ui/core";
-
 import Pagination from "@material-ui/lab/Pagination";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -110,6 +108,7 @@ const Completed = () => {
                           <Typography variant="h5" color="secondary">
                             Order Status: {order.orderStatus}
                           </Typography>
+
                           <br />
                           <div>
                             {order.items.map((item) => (

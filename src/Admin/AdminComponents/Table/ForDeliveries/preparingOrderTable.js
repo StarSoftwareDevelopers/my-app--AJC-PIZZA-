@@ -17,6 +17,7 @@ class PreparingOrdersTable extends Component {
     "Items",
     "Order Date",
     "Delivery Date",
+    "Delivery Time",
     "Address",
     "Total Amount",
     "Payment method",
@@ -115,7 +116,8 @@ class PreparingOrdersTable extends Component {
               Name: data.displayName,
               "Order Date": new Date(
                 data.orderCreatedAt.seconds * 1000
-              ).toLocaleString(),
+              ).toDateString(),
+
               Address: data.address,
               "Total Amount": data.total,
               ...(data.paymentMethod == "gcash"
@@ -129,7 +131,11 @@ class PreparingOrdersTable extends Component {
                   }),
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
-              ).toLocaleString(),
+              ).toDateString(),
+              "Delivery Time": new Date(
+                data.deliveryDate.seconds * 1000
+              ).toLocaleTimeString(),
+
               Phone: data.phone,
             });
           });
