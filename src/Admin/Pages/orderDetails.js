@@ -57,7 +57,7 @@ const orderDetails = () => {
 
     doc.html(document.querySelector("#pdf"), {
       callback: function (pdf) {
-        pdf.save("mypdf.pdf");
+        pdf.save(`${rowData}.pdf`);
       },
     });
   };
@@ -116,7 +116,7 @@ const orderDetails = () => {
             {orders &&
               orders.map((order) => (
                 <div key={order.id}>
-                  <Typography variant="h4" align="center" color="secondary">
+                  <Typography variant="h3" align="center" color="secondary">
                     AJC HOMEMADE PIZZA
                   </Typography>
                   <br></br>
