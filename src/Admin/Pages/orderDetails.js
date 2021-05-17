@@ -21,11 +21,9 @@ import {
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import GetAppIcon from "@material-ui/icons/GetApp";
-import { unstable_batchedUpdates } from "react-dom";
 import { useHistory } from "react-router-dom";
 
 // https://www.youtube.com/watch?v=gW-ph8o_QKY
-// https://www.newline.co/@andreeamaco/how-to-use-react-onclick-events-in-class-and-functional-components--fb63a01e
 
 const useStyles = makeStyles({
   Paper: {
@@ -60,9 +58,7 @@ const orderDetails = () => {
           id: snapshot.id,
           ...snapshot.data(),
         });
-        // const id = arr[0] ? arr[0].userID : "";
         setOrders(arr);
-        // setID(arr[0].userID);
       });
 
     return () => {

@@ -1,5 +1,4 @@
 //Cancelled Orders
-
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
