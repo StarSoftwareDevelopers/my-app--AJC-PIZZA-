@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { firestore } from "./../../firebase/firebase.utils";
 import {
   Button,
-  Container,
   Typography,
-  Card,
-  CardHeader,
-  CardContent,
   makeStyles,
   Grid,
   Paper,
@@ -20,6 +16,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
 import GetAppIcon from "@material-ui/icons/GetApp";
 import { useHistory } from "react-router-dom";
 import jsPDF from "jspdf";
@@ -28,7 +25,7 @@ const useStyles = makeStyles({
   Paper: {
     padding: "1.5rem",
     width: "595px",
-    height: "100%",
+    // height: "100%",
     margin: "0 auto",
   },
   table: {
@@ -111,7 +108,7 @@ const orderDetails = () => {
             id="pdf"
             className={classes.Paper}
             elevation={3}
-            style={{ overflowX: "auto" }}
+            // style={{ overflowX: "auto" }}
           >
             {orders &&
               orders.map((order) => (
@@ -189,6 +186,25 @@ const orderDetails = () => {
                   </TableContainer>
                 </div>
               ))}
+
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: "1rem",
+                marginBottom: "1rem",
+              }}
+            >
+              <Typography color="secondary" variant="subtitle1">
+                AJC HOMEMADE PIZZA
+              </Typography>
+              <Typography variant="subtitle1">
+                Zone 7-Calle San Miguel, Ayala, Zamboanga City
+                <br />
+                Call us at (+63) 995-853-3250
+                <br />
+                Visit us at ajc-pizza.web.app
+              </Typography>
+            </div>
           </Paper>
         </Grid>
       </Grid>
