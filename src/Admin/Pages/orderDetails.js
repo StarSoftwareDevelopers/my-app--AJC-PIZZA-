@@ -22,12 +22,14 @@ import {
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import { useHistory } from "react-router-dom";
-
-// https://www.youtube.com/watch?v=gW-ph8o_QKY
+import jsPDF from "jspdf";
 
 const useStyles = makeStyles({
   Paper: {
-    padding: "1rem",
+    padding: "1.5rem",
+    width: "595px",
+    height: "100%",
+    margin: "0 auto",
   },
   table: {
     minWidth: 650,
@@ -43,8 +45,21 @@ const orderDetails = () => {
   const rowData = location.state;
   const [orders, setOrders] = useState([]);
   let history = useHistory();
+
+  //go back to the previous path
   const goToPreviousPath = () => {
     history.goBack();
+  };
+
+  //generate PDF
+  const generatePdf = () => {
+    var doc = new jsPDF("p", "pt", "a4", "l", "letter");
+
+    doc.html(document.querySelector("#pdf"), {
+      callback: function (pdf) {
+        pdf.save("mypdf.pdf");
+      },
+    });
   };
 
   // to get the order details
@@ -84,6 +99,7 @@ const orderDetails = () => {
             color="secondary"
             startIcon={<GetAppIcon />}
             style={{ float: "right" }}
+            onClick={generatePdf}
           >
             Export to PDF
           </Button>
@@ -92,6 +108,7 @@ const orderDetails = () => {
           </Typography>
 
           <Paper
+            id="pdf"
             className={classes.Paper}
             elevation={3}
             style={{ overflowX: "auto" }}
@@ -99,6 +116,10 @@ const orderDetails = () => {
             {orders &&
               orders.map((order) => (
                 <div key={order.id}>
+                  <Typography variant="h4" align="center" color="secondary">
+                    AJC HOMEMADE PIZZA
+                  </Typography>
+                  <br></br>
                   <Typography variant="h6">Order ID: {order.id}</Typography>
                   <Typography variant="h6">
                     Delivery Date:{" "}
@@ -110,9 +131,7 @@ const orderDetails = () => {
                     Ship To: {order.displayName}
                   </Typography>
                   <Typography variant="h6">Ship At: {order.address}</Typography>
-                  <Typography variant="h6">
-                    Ship By: AHC HOMEMADE PIZZA
-                  </Typography>
+
                   {/* ------------------------------------------------------------------- */}
                   <Divider />
                   {/* -------------------------------------------------------------------- */}
@@ -150,10 +169,10 @@ const orderDetails = () => {
                             <TableCell>{item.productName}</TableCell>
                             <TableCell align="right">{item.qty}</TableCell>
                             <TableCell align="right">
-                              ₱{item.productPrice}.00
+                              Php {item.productPrice}.00
                             </TableCell>
                             <TableCell align="right">
-                              ₱{`${item.productPrice}` * `${item.qty}`}.00
+                              Php {`${item.productPrice}` * `${item.qty}`}.00
                             </TableCell>
                           </TableRow>
                         ))}
@@ -161,7 +180,9 @@ const orderDetails = () => {
                         <TableRow>
                           <TableCell rowSpan={3} />
                           <TableCell colSpan={2}>Total</TableCell>
-                          <TableCell align="right">₱{order.total}.00</TableCell>
+                          <TableCell align="right">
+                            Php {order.total}.00
+                          </TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
