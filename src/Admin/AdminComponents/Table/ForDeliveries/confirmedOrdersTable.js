@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../../firebase/firebase.utils";
 import { Button, FormControlLabel, Snackbar } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
 
 class ConfirmedOrdersTable extends Component {
@@ -12,7 +13,11 @@ class ConfirmedOrdersTable extends Component {
 
   handleOpen = () => this.setState({ open: true });
   handleClose = () => this.setState({ open: false });
-  handleClick = () => this.setState({ orders: [1], open: true });
+
+  handleRowClick = (rowData, rowMeta) => {
+    event.stopPropagation();
+    this.props.history.push("/details", `${rowData[0]}`);
+  };
 
   columns = [
     "Order ID",
@@ -31,6 +36,7 @@ class ConfirmedOrdersTable extends Component {
         filter: true,
         sort: false,
         empty: true,
+        isRowSelectable: false,
         customBodyRender: (value, tableMeta) => {
           return (
             <FormControlLabel
@@ -45,6 +51,7 @@ class ConfirmedOrdersTable extends Component {
                 </Button>
               }
               onClick={(e) => {
+                e.stopPropagation();
                 try {
                   firestore.collection("orders").doc(tableMeta.rowData[0]).set(
                     {
@@ -67,6 +74,7 @@ class ConfirmedOrdersTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
+    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -164,4 +172,4 @@ class ConfirmedOrdersTable extends Component {
     );
   }
 }
-export default ConfirmedOrdersTable;
+export default withRouter(ConfirmedOrdersTable);

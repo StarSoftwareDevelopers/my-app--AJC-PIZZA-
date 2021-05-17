@@ -3,22 +3,23 @@
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
+import { withRouter } from "react-router-dom";
 
 class OrderTable extends Component {
   constructor() {
     super();
     this.state = { orders: [] };
   }
+  handleRowClick = (rowData, rowMeta) => {
+    this.props.history.push("/details", `${rowData[0]}`);
+  };
 
   columns = ["Order ID", "Name", "Items", "Cancelled Date", "Total Amount"];
   options = {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
-    renderExpandableRow: (rowData, rowMeta) => {
-      console.log(rowData, rowMeta);
-      return <div>{rowData[2]}</div>;
-    },
+    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -66,4 +67,4 @@ class OrderTable extends Component {
     );
   }
 }
-export default OrderTable;
+export default withRouter(OrderTable);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../../firebase/firebase.utils";
 import { Button, FormControlLabel, Snackbar } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 
 // https://stackoverflow.com/questions/54616114/show-snackbar-material-ui-when-appear-erron-in-mutation
 
@@ -10,6 +11,10 @@ class PreparingOrdersTable extends Component {
     super();
     this.state = { orders: [] };
   }
+
+  handleRowClick = (rowData, rowMeta) => {
+    this.props.history.push("/details", `${rowData[0]}`);
+  };
 
   columns = [
     "Order ID",
@@ -42,6 +47,7 @@ class PreparingOrdersTable extends Component {
                 </Button>
               }
               onClick={(e) => {
+                e.stopPropagation();
                 try {
                   firestore.collection("orders").doc(tableMeta.rowData[0]).set(
                     {
@@ -74,6 +80,7 @@ class PreparingOrdersTable extends Component {
                 </Button>
               }
               onClick={(e) => {
+                e.stopPropagation();
                 try {
                   firestore.collection("orders").doc(tableMeta.rowData[0]).set(
                     {
@@ -95,6 +102,7 @@ class PreparingOrdersTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
+    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -162,4 +170,4 @@ class PreparingOrdersTable extends Component {
     );
   }
 }
-export default PreparingOrdersTable;
+export default withRouter(PreparingOrdersTable);

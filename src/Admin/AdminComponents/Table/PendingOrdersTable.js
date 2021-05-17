@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
 import { Button, FormControlLabel, Snackbar } from "@material-ui/core";
-
+import { useHistory, withRouter, Link, Route } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
 
 // https://stackoverflow.com/questions/54616114/show-snackbar-material-ui-when-appear-erron-in-mutation
+// https://github.com/gregnb/mui-datatables/issues/456
 
 class PendingOrdersTable extends Component {
   constructor() {
@@ -16,6 +17,10 @@ class PendingOrdersTable extends Component {
   handleOpen = () => this.setState({ open: true });
 
   handleClose = () => this.setState({ open: false });
+
+  handleRowClick = (rowData, rowMeta) => {
+    this.props.history.push("/details", `${rowData[0]}`);
+  };
 
   columns = [
     "Order ID",
@@ -48,6 +53,7 @@ class PendingOrdersTable extends Component {
                 </Button>
               }
               onClick={(e) => {
+                e.stopPropagation();
                 try {
                   firestore.collection("orders").doc(tableMeta.rowData[0]).set(
                     {
@@ -109,16 +115,7 @@ class PendingOrdersTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
-
-    // onRowClick: (rowData, rowState) => {
-    //   console.log(rowData, rowState);
-    // },
-    // get row data and expand it
-    // expandableRows: true,
-    // renderExpandableRow: (rowData, rowMeta) => {
-    //   console.log(rowData, rowMeta);
-    //   return <div>{rowData[2]}</div>;
-    // },
+    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -197,4 +194,4 @@ class PendingOrdersTable extends Component {
     );
   }
 }
-export default PendingOrdersTable;
+export default withRouter(PendingOrdersTable);

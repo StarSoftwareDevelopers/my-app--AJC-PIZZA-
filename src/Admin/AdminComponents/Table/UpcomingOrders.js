@@ -5,14 +5,17 @@ import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
 import { FormControlLabel, Button, Select, MenuItem } from "@material-ui/core";
 import firebase from "firebase/app";
-
-// https://www.gitmemory.com/issue/gregnb/mui-datatables/1038/547926206
+import { withRouter } from "react-router-dom";
 
 class UpcomingOrdersTable extends Component {
   constructor() {
     super();
     this.state = { orders: [] };
   }
+
+  handleRowClick = (rowData, rowMeta) => {
+    this.props.history.push("/details", `${rowData[0]}`);
+  };
 
   columns = [
     "Order ID",
@@ -77,10 +80,7 @@ class UpcomingOrdersTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
-    renderExpandableRow: (rowData, rowMeta) => {
-      console.log(rowData, rowMeta);
-      return <div>{rowData[2]}</div>;
-    },
+    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -151,4 +151,4 @@ class UpcomingOrdersTable extends Component {
     );
   }
 }
-export default UpcomingOrdersTable;
+export default withRouter(UpcomingOrdersTable);

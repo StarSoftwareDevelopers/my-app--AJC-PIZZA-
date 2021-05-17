@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../../firebase/firebase.utils";
 import { Button, FormControlLabel, Snackbar } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 
 class DelayedTable extends Component {
   constructor() {
     super();
     this.state = { orders: [] };
   }
+
+  handleRowClick = (rowData, rowMeta) => {
+    this.props.history.push("/details", `${rowData[0]}`);
+  };
 
   columns = [
     "Order ID",
@@ -40,6 +45,7 @@ class DelayedTable extends Component {
                 </Button>
               }
               onClick={(e) => {
+                e.stopPropagation();
                 try {
                   firestore.collection("orders").doc(tableMeta.rowData[0]).set(
                     {
@@ -61,6 +67,7 @@ class DelayedTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
+    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -128,4 +135,4 @@ class DelayedTable extends Component {
     );
   }
 }
-export default DelayedTable;
+export default withRouter(DelayedTable);

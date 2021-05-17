@@ -61,14 +61,14 @@ const useStyles = makeStyles((theme) => ({
   },
   customBadge: {
     position: "absolute",
-    top: '-3px',
-    left: "3.5rem"
+    top: "-3px",
+    left: "3.5rem",
   },
-   customBadge2: {
-    position: "absolute",
-    top: '-3px',
-    left: "5.5rem"
-  },
+  // customBadge2: {
+  //   position: "absolute",
+  //   top: "-3px",
+  //   left: "5rem",
+  // },
 }));
 
 export default function ScrollableTabsButtonAuto() {
@@ -76,16 +76,13 @@ export default function ScrollableTabsButtonAuto() {
   const { currentUser } = useSelector(mapState);
   const [value, setValue] = useState(0);
   const [pendingSize, setPendingSize] = useState(0);
-  const [onDeliverySize, setOnDeliverySize]=useState(0)
+  const [onDeliverySize, setOnDeliverySize] = useState(0);
   const [invisible, setInvisible] = React.useState(false);
 
   const handleBadgeVisibility = () => {
-    {setPendingSize == 0 ? (
-       setInvisible(!invisible)
-    ): (
-       setInvisible(invisible)
-    )}
-   
+    {
+      setPendingSize == 0 ? setInvisible(!invisible) : setInvisible(invisible);
+    }
   };
 
   const handleChange = (event, newValue) => {
@@ -96,15 +93,14 @@ export default function ScrollableTabsButtonAuto() {
   useEffect(() => {
     firestore
       .collection("orders")
-      .where("userID","==", currentUser.id)
+      .where("userID", "==", currentUser.id)
       .where("orderStatus", "==", "Pending")
       .onSnapshot((snap) => {
         setPendingSize(snap.size);
       });
   }, []);
 
-
-// useEffect to get number of on the way
+  // useEffect to get number of on the way
   useEffect(() => {
     firestore
       .collection("orders")
@@ -116,11 +112,9 @@ export default function ScrollableTabsButtonAuto() {
         "On the way(Delayed)",
       ])
       .onSnapshot((snap) => {
-        setOnDeliverySize(snap.size)
-      })
-  },[])
-
-
+        setOnDeliverySize(snap.size);
+      });
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -139,10 +133,9 @@ export default function ScrollableTabsButtonAuto() {
               <Badge
                 classes={{ badge: classes.customBadge }}
                 badgeContent={pendingSize}
-
                 color="secondary"
-               checked={!invisible} 
-               onChange={handleBadgeVisibility} 
+                checked={!invisible}
+                onChange={handleBadgeVisibility}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
@@ -153,20 +146,18 @@ export default function ScrollableTabsButtonAuto() {
             }
             {...a11yProps(0)}
           />
-          
+
           <Tab
             label={
               <Badge
                 classes={{ badge: classes.customBadge2 }}
-    
                 badgeContent={onDeliverySize}
                 color="secondary"
-               checked={!invisible} 
-               onChange={handleBadgeVisibility} 
+                checked={!invisible}
+                onChange={handleBadgeVisibility}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
-       
                 }}
               >
                 <Typography>On Delivery</Typography>

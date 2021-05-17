@@ -5,12 +5,16 @@ import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
 import { FormControlLabel, Button, Select, MenuItem } from "@material-ui/core";
 import firebase from "firebase/app";
+import { withRouter } from "react-router-dom";
 
 class CurrentDateTable extends Component {
   constructor() {
     super();
     this.state = { orders: [] };
   }
+  handleRowClick = (rowData, rowMeta) => {
+    this.props.history.push("/details", `${rowData[0]}`);
+  };
 
   columns = [
     "Order ID",
@@ -75,10 +79,7 @@ class CurrentDateTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
-    renderExpandableRow: (rowData, rowMeta) => {
-      console.log(rowData, rowMeta);
-      return <div>{rowData[2]}</div>;
-    },
+    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -156,4 +157,4 @@ class CurrentDateTable extends Component {
     );
   }
 }
-export default CurrentDateTable;
+export default withRouter(CurrentDateTable);

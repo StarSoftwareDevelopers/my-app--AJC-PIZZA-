@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../../firebase/firebase.utils";
 import { Button, FormControlLabel, Snackbar } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 
 // https://stackoverflow.com/questions/54616114/show-snackbar-material-ui-when-appear-erron-in-mutation
 
@@ -10,6 +11,10 @@ class DeliveredTable extends Component {
     super();
     this.state = { orders: [] };
   }
+
+  handleRowClick = (rowData, rowMeta) => {
+    this.props.history.push("/details", `${rowData[0]}`);
+  };
 
   columns = [
     "Order ID",
@@ -27,6 +32,7 @@ class DeliveredTable extends Component {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
+    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -94,4 +100,4 @@ class DeliveredTable extends Component {
     );
   }
 }
-export default DeliveredTable;
+export default withRouter(DeliveredTable);

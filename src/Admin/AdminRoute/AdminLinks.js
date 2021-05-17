@@ -11,6 +11,7 @@ import Staff from "./../Pages/Staff";
 import Feedback from "./../Pages/Feedback";
 import PendingOrders from "./../Pages/PendingOrders";
 import Deliveries from "./../Pages/Deliveries";
+import OrderDetails from "./../Pages/orderDetails";
 
 const AdminLinks = () => {
   return (
@@ -22,6 +23,15 @@ const AdminLinks = () => {
           render={() => (
             <AdminRoute>
               <Home />
+            </AdminRoute>
+          )}
+        />
+        <Route
+          exact
+          path="/details"
+          render={() => (
+            <AdminRoute>
+              <OrderDetails />
             </AdminRoute>
           )}
         />
