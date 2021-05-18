@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
-import { FormControlLabel, Button, Select, MenuItem } from "@material-ui/core";
 import firebase from "firebase/app";
 import { withRouter } from "react-router-dom";
 

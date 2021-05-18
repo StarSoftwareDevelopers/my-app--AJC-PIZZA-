@@ -36,12 +36,16 @@ const useStyles = makeStyles({
   },
 });
 
-const orderDetails = () => {
+const OrderDetails = () => {
   const classes = useStyles();
   const location = useLocation();
   const rowData = location.state;
   const [orders, setOrders] = useState([]);
   let history = useHistory();
+
+  const [value, setValue] = useState();
+
+  const handleChange = (e) => setValue(e.target.value);
 
   //go back to the previous path
   const goToPreviousPath = () => {
@@ -100,6 +104,7 @@ const orderDetails = () => {
           >
             Export to PDF
           </Button>
+
           <Typography variant="h4" align="center">
             Order Details
           </Typography>
@@ -176,7 +181,7 @@ const orderDetails = () => {
 
                         <TableRow>
                           <TableCell rowSpan={3} />
-                          <TableCell colSpan={2}>Total</TableCell>
+                          <TableCell colSpan={2}>Total Amount</TableCell>
                           <TableCell align="right">
                             Php {order.total}.00
                           </TableCell>
@@ -212,4 +217,4 @@ const orderDetails = () => {
   );
 };
 
-export default orderDetails;
+export default OrderDetails;

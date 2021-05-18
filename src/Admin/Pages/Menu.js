@@ -23,7 +23,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./../Admin.scss";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
@@ -34,11 +34,22 @@ const mapState = ({ productsData }) => ({
 const Menu = () => {
   const { products } = useSelector(mapState);
   const dispatch = useDispatch();
+  const history = useHistory();
   const [productName, setProductName] = useState("");
   const [productDesc, setProductDesc] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productImg, setProductImg] = useState("");
 
+  //for the first Dialog
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // --------------------------------------------------------------------
   useEffect(() => {
     dispatch(getProducts(products));
   }, []);
@@ -63,14 +74,8 @@ const Menu = () => {
     resetForm();
   };
 
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+  const handleEdit = (data) => {
+    history.push("/EditMenu", data);
   };
 
   return (
@@ -206,10 +211,15 @@ const Menu = () => {
                             <td>{productDesc}</td>
                             <td>{productPrice}</td>
                             <td>
-                              <EditIcon
-                                fontSize="large"
-                                style={{ color: "#4CAF50" }}
-                              />
+                              <IconButton
+                                aria-label="delete"
+                                onClick={() => handleEdit(documentID)}
+                              >
+                                <EditIcon
+                                  fontSize="large"
+                                  style={{ color: "#4CAF50" }}
+                                />
+                              </IconButton>
                             </td>
                             <td>
                               <IconButton

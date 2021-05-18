@@ -12,6 +12,7 @@ import Feedback from "./../Pages/Feedback";
 import PendingOrders from "./../Pages/PendingOrders";
 import Deliveries from "./../Pages/Deliveries";
 import OrderDetails from "./../Pages/orderDetails";
+import MenuEdit from "./../Pages/MenuEdit";
 
 const AdminLinks = () => {
   return (
@@ -41,6 +42,15 @@ const AdminLinks = () => {
           render={() => (
             <AdminRoute>
               <Menu />
+            </AdminRoute>
+          )}
+        />
+        <Route
+          exact
+          path="/EditMenu"
+          render={() => (
+            <AdminRoute>
+              <MenuEdit />
             </AdminRoute>
           )}
         />
