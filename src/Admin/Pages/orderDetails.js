@@ -14,6 +14,10 @@ import {
   TableRow,
   Table,
   Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
@@ -35,6 +39,15 @@ const useStyles = makeStyles({
     fontSize: "medium",
   },
 });
+
+const STATUS_MAP = {
+  Pending: 10,
+  "On the way": 20,
+  Delivered: 40,
+  10: "Pending",
+  20: "On the way",
+  40: "Delivered",
+};
 
 const OrderDetails = () => {
   const classes = useStyles();
@@ -63,6 +76,13 @@ const OrderDetails = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("cliked", value);
+  };
+
+  const [status, setStatus] = useState("");
+
   // to get the order details
   useEffect(() => {
     const unsubscribe = firestore
@@ -75,12 +95,15 @@ const OrderDetails = () => {
           ...snapshot.data(),
         });
         setOrders(arr);
+        setStatus(arr[0].orderStatus);
       });
 
     return () => {
       unsubscribe();
     };
   }, []);
+
+  // console.log(status);
 
   return (
     <div>
@@ -104,6 +127,27 @@ const OrderDetails = () => {
           >
             Export to PDF
           </Button>
+          {/* <form onSubmit={handleSubmit}>
+            <FormControl>
+              <InputLabel htmlFor="order-status">Order Status</InputLabel>
+              <Select onChange={handleChange} value={value}>
+                <MenuItem value={10} disabled={value > 10}>
+                  Confirmed
+                </MenuItem>
+                <MenuItem value={20} disabled={value > 20}>
+                  On the way
+                </MenuItem>
+                <MenuItem value={30} disabled={value > 30}>
+                  On the way (Delayed)
+                </MenuItem>
+                <MenuItem value={40} disabled={value > 40}>
+                  Delivered
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <Button type="submit">Submit</Button>
+          </form>
+          {value} */}
 
           <Typography variant="h4" align="center">
             Order Details
