@@ -11,7 +11,8 @@ import { firestore } from "../../firebase/firebase.utils";
 
 const Orders = ({ status }) => {
   const [value, setValue] = useState(0);
-  const [stat, setStat] = useState("");
+  // const [stat, setStat] = useState("");
+  let stat = "";
   const location = useLocation();
   const rowData = location.state;
 
@@ -21,23 +22,21 @@ const Orders = ({ status }) => {
     e.preventDefault();
 
     if (value == 10) {
-      setStat("Confirmed");
+      stat = "Confirmed";
     }
     if (value == 20) {
-      setStat("On the way");
+      stat = "On the way";
     }
     if (value == 30) {
-      setStat("On the way(Delayed)");
+      stat = "On the way(Delayed)";
     }
     if (value == 40) {
-      setStat("Delivered");
+      stat = "Delivered";
     }
-
-    console.log(stat);
 
     if (stat !== "") {
       try {
-        const userRef = await firestore.collection("orders").doc(rowData);
+        const userRef = firestore.collection("orders").doc(rowData);
         const res = userRef.set(
           {
             orderStatus: stat,

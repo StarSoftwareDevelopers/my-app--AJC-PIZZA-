@@ -89,7 +89,6 @@ const Cancelled = () => {
   };
   //----------------------------------------------
 
-  const [id, setId] = useState();
   useEffect(() => {
     const unsubscribe = firestore
       .collection("orders")
@@ -104,7 +103,6 @@ const Cancelled = () => {
           })
         );
         setOrders(arr);
-        setId(arr[0].id);
         setIsLoading(true);
       });
 
