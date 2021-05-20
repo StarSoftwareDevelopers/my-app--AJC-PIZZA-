@@ -145,7 +145,7 @@ const Completed = () => {
                                 variant="subtitle1"
                                 color="textPrimary"
                               >
-                                Expected Delivery Date:{" "}
+                                Delivery Date:{" "}
                                 {new Date(
                                   order.deliveryDate.seconds * 1000
                                 ).toDateString()}{" "}
@@ -154,7 +154,7 @@ const Completed = () => {
                                   order.deliveryDate.seconds * 1000
                                 ).toLocaleTimeString()}
                                 <br />
-                                Ship to: {order.address}
+                                Addressed at: {order.address}
                                 <br />
                                 Total Amount: {order.total}
                               </Typography>
