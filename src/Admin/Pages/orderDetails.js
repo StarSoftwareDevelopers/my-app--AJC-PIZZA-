@@ -14,16 +14,13 @@ import {
   TableRow,
   Table,
   Divider,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import GetAppIcon from "@material-ui/icons/GetApp";
 import { useHistory } from "react-router-dom";
 import jsPDF from "jspdf";
+import Orders from "./select";
 
 const useStyles = makeStyles({
   Paper: {
@@ -40,13 +37,11 @@ const useStyles = makeStyles({
   },
 });
 
-const STATUS_MAP = {
-  Pending: 10,
+const statusMap = {
+  Confirmed: 10,
   "On the way": 20,
+  "On the way (Delayed)": 30,
   Delivered: 40,
-  10: "Pending",
-  20: "On the way",
-  40: "Delivered",
 };
 
 const OrderDetails = () => {
@@ -55,10 +50,6 @@ const OrderDetails = () => {
   const rowData = location.state;
   const [orders, setOrders] = useState([]);
   let history = useHistory();
-
-  const [value, setValue] = useState();
-
-  const handleChange = (e) => setValue(e.target.value);
 
   //go back to the previous path
   const goToPreviousPath = () => {
@@ -74,11 +65,6 @@ const OrderDetails = () => {
         pdf.save(`${rowData}.pdf`);
       },
     });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("cliked", value);
   };
 
   const [status, setStatus] = useState("");
@@ -103,8 +89,6 @@ const OrderDetails = () => {
     };
   }, []);
 
-  // console.log(status);
-
   return (
     <div>
       <Grid Container justify="center">
@@ -117,7 +101,6 @@ const OrderDetails = () => {
           >
             Back
           </Button>
-
           <Button
             variant="outlined"
             color="secondary"
@@ -127,38 +110,19 @@ const OrderDetails = () => {
           >
             Export to PDF
           </Button>
-          {/* <form onSubmit={handleSubmit}>
-            <FormControl>
-              <InputLabel htmlFor="order-status">Order Status</InputLabel>
-              <Select onChange={handleChange} value={value}>
-                <MenuItem value={10} disabled={value > 10}>
-                  Confirmed
-                </MenuItem>
-                <MenuItem value={20} disabled={value > 20}>
-                  On the way
-                </MenuItem>
-                <MenuItem value={30} disabled={value > 30}>
-                  On the way (Delayed)
-                </MenuItem>
-                <MenuItem value={40} disabled={value > 40}>
-                  Delivered
-                </MenuItem>
-              </Select>
-            </FormControl>
-            <Button type="submit">Submit</Button>
-          </form>
-          {value} */}
 
-          <Typography variant="h4" align="center">
-            Order Details
+          {/* -------------------------------------------------------------- */}
+
+          <Typography variant="h4" align="center" gutterBottom>
+            Order Status : {status}
+            <Orders status={statusMap[status]} />
           </Typography>
 
-          <Paper
-            id="pdf"
-            className={classes.Paper}
-            elevation={3}
-            // style={{ overflowX: "auto" }}
-          >
+          {/* ----------------------------------------------------------------- */}
+          <Typography variant="h6" align="center">
+            Order Details
+          </Typography>
+          <Paper id="pdf" className={classes.Paper} elevation={3}>
             {orders &&
               orders.map((order) => (
                 <div key={order.id}>
