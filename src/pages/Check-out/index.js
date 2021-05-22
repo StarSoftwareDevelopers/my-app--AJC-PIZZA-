@@ -16,6 +16,11 @@ import {
   Container,
   TextField,
   Divider,
+  Grid,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
 } from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
 import MuiPhoneNumber from "material-ui-phone-number";
@@ -23,15 +28,7 @@ import Button from "./../../components/Forms/Button";
 
 import firebase from "firebase/app";
 import moment from "moment";
-
-import DateFnsUtils from "@date-io/date-fns"; // choose your lib
-import {
-  KeyboardDatePicker,
-  KeyboardTimePicker,
-  DateTimePicker,
-  MuiPickersUtilsProvider,
-  KeyboardDateTimePicker,
-} from "@material-ui/pickers";
+import { Barangays } from "./barangay";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -59,6 +56,12 @@ const CheckingOut = (product) => {
   const [orderStatus, setOrderStatus] = useState("Pending");
   const [pickAddress, setPickAddress] = useState("");
 
+  const [houseNo, setHouseNo] = useState("");
+  const [street, setStreet] = useState("");
+  const [barangay, setBarangay] = useState("");
+  const [value, setValue] = useState("");
+  const handleChange = (e) => setValue(e.target.value);
+
   useEffect(() => {
     if (cartCount < 1) {
       history.push("/order-status");
@@ -77,20 +80,23 @@ const CheckingOut = (product) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      firestore.collection("orders").doc().set({
-        items,
-        total,
-        displayName: displayName,
-        address: address,
-        phone: phone,
-        paymentMethod: payment,
-        gcashNo: gcash,
-        deliveryDate: date,
-        orderCreatedAt: new Date(),
-        userID: currentUser.id,
-        orderStatus,
-        instruction: instruction,
-      });
+      firestore
+        .collection("orders")
+        .doc()
+        .set({
+          items,
+          total,
+          displayName: displayName,
+          address: houseNo + " ," + street + " ," + barangay + "" + value,
+          phone: phone,
+          paymentMethod: payment,
+          gcashNo: gcash,
+          deliveryDate: date,
+          orderCreatedAt: new Date(),
+          userID: currentUser.id,
+          orderStatus,
+          instruction: instruction,
+        });
     } catch (err) {
       console.log(err);
     }
@@ -157,7 +163,6 @@ const CheckingOut = (product) => {
                 margin="dense"
                 type="text"
                 label="Full Name"
-                placeholder={currentUser.displayName}
                 value={displayName}
                 fullWidth
                 variant="outlined"
@@ -165,18 +170,47 @@ const CheckingOut = (product) => {
                 required
                 onChange={(e) => setdisplayName(e.target.value)}
               />
-              <TextField
-                margin="dense"
-                type="text"
-                label="Address"
-                placeholder={currentUser.address}
-                value={address}
-                color="secondary"
-                fullWidth
-                variant="outlined"
-                required
-                onChange={(e) => setAddress(e.target.value)}
-              />
+              <Grid container spacing={24}>
+                <Grid item>
+                  <TextField
+                    margin="dense"
+                    type="text"
+                    label="House No."
+                    value={houseNo}
+                    variant="outlined"
+                    color="secondary"
+                    required
+                    onChange={(e) => setHouseNo(e.target.value)}
+                    style={{ paddingRight: "20px", width: "100px" }}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="dense"
+                    type="text"
+                    label="Street Address"
+                    value={street}
+                    variant="outlined"
+                    color="secondary"
+                    required
+                    onChange={(e) => setStreet(e.target.value)}
+                    style={{ paddingRight: "20px", width: "518px" }}
+                  />
+                </Grid>
+                <Grid item>
+                  <FormControl>
+                    <InputLabel htmlFor="order-status">Barangay</InputLabel>
+                    <Select onChange={handleChange}>
+                      {Barangays.map((barangay) => (
+                        <MenuItem key={barangay.value} value={barangay.value}>
+                          {barangay.text}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                {value}
+              </Grid>
               <MuiPhoneNumber
                 fullWidth
                 name="phone"

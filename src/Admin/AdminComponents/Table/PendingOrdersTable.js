@@ -1,24 +1,18 @@
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
-import {
-  Button,
-  FormControlLabel,
-  Snackbar,
-  TextField,
-} from "@material-ui/core";
-import { useHistory, withRouter, Link, Route } from "react-router-dom";
-import MuiAlert from "@material-ui/lab/Alert";
+import { Button, FormControlLabel } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 
 class PendingOrdersTable extends Component {
   constructor() {
     super();
-    this.state = { orders: [], open: false };
+
+    this.state = {
+      orders: [],
+      open: false,
+    };
   }
-
-  handleOpen = () => this.setState({ open: true });
-
-  handleClose = () => this.setState({ open: false });
 
   handleRowClick = (rowData, rowMeta) => {
     this.props.history.push("/details", `${rowData[0]}`);
@@ -79,13 +73,7 @@ class PendingOrdersTable extends Component {
         filter: true,
         sort: false,
         empty: true,
-        customBodyRender: (
-          value,
-          tableMeta,
-          updateValue,
-          dataIndex,
-          rowIndex
-        ) => {
+        customBodyRender: (value, tableMeta) => {
           return (
             <FormControlLabel
               value={value}
@@ -95,6 +83,7 @@ class PendingOrdersTable extends Component {
                 </Button>
               }
               onClick={(e) => {
+                e.stopPropagation();
                 try {
                   firestore.collection("orders").doc(tableMeta.rowData[0]).set(
                     {
@@ -178,18 +167,6 @@ class PendingOrdersTable extends Component {
           data={this.state.orders}
           options={this.options}
         />
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          open={open}
-          onClose={this.handleClose}
-          autoHideDuration={2000}
-          // other Snackbar props
-        >
-          Order Confirmed
-        </Snackbar>
       </div>
     ) : (
       <p>Loading...</p>

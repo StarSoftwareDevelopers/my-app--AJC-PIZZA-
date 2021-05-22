@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { firestore } from "./../../firebase/firebase.utils";
 import { Link, useHistory } from "react-router-dom";
-
+import { Barangays } from "../../pages/Check-out/barangay";
 import {
   Typography,
   TextField,
   InputAdornment,
-  Card,
   Container,
+  Grid,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
@@ -34,6 +38,12 @@ const MyAccount = () => {
   const [displayName, setdisplayName] = useState(currentUser.displayName);
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
+
+  const [houseNo, setHouseNo] = useState("");
+  const [street, setStreet] = useState("");
+  const [barangay, setBarangay] = useState("");
+  const [value, setValue] = useState("");
+  const handleChange = (e) => setValue(e.target.value);
 
   useEffect(() => {
     const unsubscribe = firestore
@@ -61,7 +71,7 @@ const MyAccount = () => {
       const res = userRef.set(
         {
           displayName,
-          address,
+          address: street + " ," + barangay + "" + value,
           phone,
         },
         { merge: true }
@@ -141,16 +151,19 @@ const MyAccount = () => {
                         style: { fontSize: "17px" },
                       }}
                     />
+                    <Typography varian="subtitle1">
+                      Your address: {user.address}
+                    </Typography>
                     <TextField
                       margin="dense"
                       type="text"
-                      label="Address"
-                      placeholder={user.address}
-                      value={address}
-                      fullWidth
-                      onChange={(e) => setAddress(e.target.value)}
-                      required
+                      label="Street Address"
+                      value={street}
+                      variant="standard"
                       color="secondary"
+                      required
+                      fullWidth
+                      onChange={(e) => setStreet(e.target.value)}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -164,6 +177,17 @@ const MyAccount = () => {
                         style: { fontSize: "17px" },
                       }}
                     />
+                    <FormControl>
+                      <InputLabel htmlFor="order-status">Barangay</InputLabel>
+                      <Select onChange={handleChange}>
+                        {Barangays.map((barangay) => (
+                          <MenuItem key={barangay.value} value={barangay.value}>
+                            {barangay.text}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                    {value}
                     <MuiPhoneNumber
                       fullWidth
                       name="phone"
