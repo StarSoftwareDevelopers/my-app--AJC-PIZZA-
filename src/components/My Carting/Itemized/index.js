@@ -48,7 +48,8 @@ const Itemized = (product) => {
               {<ArrowForwardIosIcon size="small" color="secondary" />}
             </IconButton>
           </td>
-          <td>₱ {productPrice}</td>
+          <td>₱ {productPrice}.00</td>
+          <td>₱{qty * productPrice}.00</td>
           <td>
             <IconButton onClick={() => removeItem(documentID)}>
               <HighlightOffIcon fontSize="large" color="secondary" />

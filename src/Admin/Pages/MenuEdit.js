@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { firestore } from "../../firebase/firebase.utils";
-import { Button } from "@material-ui/core";
+import { Button, Container, TextField, FormControl } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const MenuEdit = () => {
   const location = useLocation();
   const history = useHistory();
   const data = location.state;
+
   const [editProduct, setEditProduct] = useState([]);
+  const [productName, setProductName] = useState();
+  const [productPrice, setProductPrice] = useState();
+  const [productDesc, setProductDesc] = useState();
+  const [productImg, setProductImg] = useState();
 
   //go back to the previous path
   const goToPreviousPath = () => {
@@ -25,7 +30,6 @@ const MenuEdit = () => {
           ...snapshot.data(),
         });
         setEditProduct(arr);
-        console.log("edit", editProduct);
       });
 
     return () => {
@@ -33,7 +37,27 @@ const MenuEdit = () => {
     };
   }, []);
 
-  //editing the products just use the similar const handleSubmit from the account page.
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // const timeStamp = new Date();
+      const productsRef = firestore.collection("products").doc(data);
+      const res = productsRef.set(
+        {
+          productName,
+          productDesc,
+          productPrice,
+          productImg,
+          // timeStamp,
+        },
+        { merge: true }
+      );
+      alert("Successfully updated");
+    } catch (err) {
+      console.log(err);
+    }
+    history.push("/EditMenu");
+  };
 
   return (
     <div>
@@ -46,14 +70,93 @@ const MenuEdit = () => {
         Back
       </Button>
       edit form
-      {editProduct.map((prod, index) => (
-        <div>
-          <p>{prod.productName}</p>
-          <p>{prod.productPrice}</p>
-          <p>{prod.productDesc}</p>
-          <img src={prod.productImg} alt={prod.productName} />
-        </div>
-      ))}
+      <Container>
+        {editProduct.map((prod) => (
+          <div>
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <TextField
+                  id="input"
+                  type="text"
+                  label="Product Name"
+                  placeholder={prod.productName}
+                  value={productName}
+                  required
+                  color="secondary"
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={(e) => setProductName(e.target.value)}
+                />
+
+                <TextField
+                  id="input"
+                  margin="dense"
+                  type="text"
+                  label="Product Price"
+                  value={productPrice}
+                  placeholder={prod.productPrice}
+                  color="secondary"
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={(e) => setProductPrice(e.target.value)}
+                />
+
+                <TextField
+                  id="input"
+                  margin="dense"
+                  type="text"
+                  label="Product Description"
+                  placeholder={prod.productDesc}
+                  value={productDesc}
+                  color="secondary"
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={(e) => setProductDesc(e.target.value)}
+                />
+
+                <img
+                  src={prod.productImg}
+                  alt={prod.productName}
+                  style={{ height: "150px" }}
+                />
+
+                <TextField
+                  id="input"
+                  margin="dense"
+                  type="text"
+                  placeholder="Enter Link"
+                  label="Product Image"
+                  value={productImg}
+                  color="secondary"
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={(e) => setProductImg(e.target.value)}
+                />
+
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  style={{
+                    borderColor: "#397D02",
+                    color: "#397D02",
+                    marginRight: "1rem",
+                  }}
+                >
+                  Update
+                </Button>
+              </FormControl>
+            </form>
+          </div>
+        ))}
+      </Container>
     </div>
   );
 };

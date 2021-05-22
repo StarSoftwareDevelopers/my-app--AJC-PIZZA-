@@ -40,6 +40,7 @@ const MyCarting = ({}) => {
                         <th>Name</th>
                         <th>Quantity</th>
                         <th>Price</th>
+                        <th>Sum</th>
                         <th>Delete</th>
                       </tr>
                     </tbody>
@@ -77,7 +78,7 @@ const MyCarting = ({}) => {
                     <tbody>
                       <tr align="right">
                         <td>
-                          <h3>Total: ₱ {total}</h3>
+                          <h3>Total: ₱ {total}.00</h3>
                           <Link to="/check-out">
                             <div style={{ float: "right" }}>
                               <Button>Check-out</Button>

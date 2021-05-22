@@ -141,7 +141,15 @@ const OrderDetails = () => {
                     Ship To: {order.displayName}
                   </Typography>
                   <Typography variant="h6">Ship At: {order.address}</Typography>
-
+                  <Typography variant="h6">
+                    {order.instruction === "" ? (
+                      <p></p>
+                    ) : (
+                      <Typography variant="h6">
+                        Delivery Instructions: {order.instruction}
+                      </Typography>
+                    )}
+                  </Typography>
                   {/* ------------------------------------------------------------------- */}
                   <Divider />
                   {/* -------------------------------------------------------------------- */}

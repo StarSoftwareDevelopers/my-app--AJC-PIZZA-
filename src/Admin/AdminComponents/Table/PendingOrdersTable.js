@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { firestore } from "./../../../firebase/firebase.utils";
-import { Button, FormControlLabel, Snackbar } from "@material-ui/core";
+import {
+  Button,
+  FormControlLabel,
+  Snackbar,
+  TextField,
+} from "@material-ui/core";
 import { useHistory, withRouter, Link, Route } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
-
-// https://stackoverflow.com/questions/54616114/show-snackbar-material-ui-when-appear-erron-in-mutation
-// https://github.com/gregnb/mui-datatables/issues/456
 
 class PendingOrdersTable extends Component {
   constructor() {

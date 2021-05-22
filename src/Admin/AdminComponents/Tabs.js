@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ConfirmedOrdersTable from "./Table/ForDeliveries/confirmedOrdersTable";
 import PreparingOrdersTable from "./Table/ForDeliveries/preparingOrderTable";
 import OnTheWayTable from "./Table/ForDeliveries/onthewayTable";
-import DelayedTable from "./Table/ForDeliveries/delayed";
+
 import DeliveredTable from "./Table/ForDeliveries/deliveredTable";
 
 function TabPanel(props) {
@@ -77,8 +77,7 @@ export default function ScrollableTabsButtonAuto() {
           <Tab label="Confirmed" {...a11yProps(0)} />
           <Tab label="Preparing" {...a11yProps(1)} />
           <Tab label="On Delivery" {...a11yProps(2)} />
-          <Tab label="On Delivery(Delayed)" {...a11yProps(3)} />
-          <Tab label="delivered" {...a11yProps(4)} />
+          <Tab label="delivered" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -92,10 +91,8 @@ export default function ScrollableTabsButtonAuto() {
       <TabPanel value={value} index={2}>
         <OnTheWayTable />
       </TabPanel>
+
       <TabPanel value={value} index={3}>
-        <DelayedTable />
-      </TabPanel>
-      <TabPanel value={value} index={4}>
         <DeliveredTable />
       </TabPanel>
     </div>

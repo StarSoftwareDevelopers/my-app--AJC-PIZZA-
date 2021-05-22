@@ -178,6 +178,14 @@ const OrderStatus = () => {
                                 Ship to: {order.address}
                                 <br />
                                 Total Amount: {order.total}
+                                <br />
+                                {order.instruction === "" ? (
+                                  <p></p>
+                                ) : (
+                                  <Typography>
+                                    Delivery Instructions:({order.instruction})
+                                  </Typography>
+                                )}
                               </Typography>
                               <Box justifyContent="flex-end" display="flex">
                                 <Box p={1}>

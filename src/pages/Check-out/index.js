@@ -54,7 +54,10 @@ const CheckingOut = (product) => {
   const [deliveryDate, setDeliveryDate] = useState(new Date());
   const [payment, setPayment] = useState();
   const [gcash, setGcash] = useState("");
+  const [pickUp, setPickUp] = useState();
+  const [instruction, setInstructions] = useState("");
   const [orderStatus, setOrderStatus] = useState("Pending");
+  const [pickAddress, setPickAddress] = useState("");
 
   useEffect(() => {
     if (cartCount < 1) {
@@ -86,6 +89,7 @@ const CheckingOut = (product) => {
         orderCreatedAt: new Date(),
         userID: currentUser.id,
         orderStatus,
+        instruction: instruction,
       });
     } catch (err) {
       console.log(err);
@@ -141,7 +145,7 @@ const CheckingOut = (product) => {
               marginRight: "10%",
               padding: "2rem",
               marginTop: "2rem",
-              height: "520px",
+              // height: "520px",
             }}
           >
             <Typography align="center" variant="h5" color="secondary">
@@ -234,7 +238,14 @@ const CheckingOut = (product) => {
                 name="paymentMethod"
                 onChange={(e) => setPayment(e.target.value)}
               />
-              Gcash
+              Gcash<br></br>
+              <input
+                type="radio"
+                value="pick-up"
+                name="paymentMethod"
+                onChange={(e) => setPayment(e.target.value)}
+              />
+              Pick-up
               {/* Show and hide depending on the radio button that was clicked */}
               {payment == "cod" && (
                 <div>
@@ -259,6 +270,31 @@ const CheckingOut = (product) => {
                   onChange={(e) => setGcash(e.target.value)}
                 />
               )}
+              {payment == "pick-up" && (
+                <div>
+                  <br />
+                  <br />
+                  <Typography variant="h6" align="left" color="secondary">
+                    Please meet up at this place at ENTER PLACE on {locale}
+                  </Typography>
+                  <Divider />
+                </div>
+              )}
+              <br /> <br />
+              <Typography align="center" variant="h5" color="secondary">
+                Delivery Instructions
+              </Typography>
+              <Divider />
+              <TextField
+                type="text"
+                label="Delivery Instructions"
+                fullWidth
+                multiline
+                margin="dense"
+                rowsMax={Infinity}
+                color="secondary"
+                onChange={(e) => setInstructions(e.target.value)}
+              />
               <Typography align="center" style={{ marginTop: "1rem" }}>
                 <Button type="submit">Place an Order</Button>
               </Typography>

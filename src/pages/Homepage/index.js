@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import Directory from "./../../components/Directory";
 import Gallery from "./../../components/GridList";
 import Divider from "@material-ui/core/Divider";
 import ContactInfoHome from "./../../components/ContactInfor";
 import Browsing from "./../Browse";
+import { firestore } from "../../firebase/firebase.utils";
 
 const Homepage = (props) => {
   return (
     <section className="homepage">
       <Directory />
+
       <Browsing />
       <Gallery />
       <br></br>
