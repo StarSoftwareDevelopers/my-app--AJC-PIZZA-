@@ -157,6 +157,13 @@ const Completed = () => {
                                 Addressed at: {order.address}
                                 <br />
                                 Total Amount: {order.total}
+                                {order.instruction === "" ? (
+                                  <p></p>
+                                ) : (
+                                  <Typography>
+                                    Delivery Instructions:({order.instruction})
+                                  </Typography>
+                                )}
                               </Typography>
                             </Typography>
                           </CardContent>

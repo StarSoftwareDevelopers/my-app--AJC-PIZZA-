@@ -160,6 +160,13 @@ const Deliveries = () => {
                                 Ship to: {order.address}
                                 <br />
                                 Total Amount: {order.total}
+                                {order.instruction === "" ? (
+                                  <p></p>
+                                ) : (
+                                  <Typography>
+                                    Delivery Instructions:({order.instruction})
+                                  </Typography>
+                                )}
                               </Typography>
                             </Typography>
                           </CardContent>
