@@ -25,7 +25,12 @@ class UserTable extends Component {
           users.push({
             "Display Name": data.displayName,
             Email: data.email,
-            Address: data.address,
+            // Address: data.street + "," + data.Barangay,
+            ...(data.street && data.Barangay
+              ? {
+                  Address: data.street + "," + data.Barangay,
+                }
+              : {}),
             "Phone Number": data.phone,
           });
         });

@@ -9,16 +9,20 @@ class OrderTable extends Component {
     super();
     this.state = { orders: [] };
   }
-  handleRowClick = (rowData, rowMeta) => {
-    this.props.history.push("/details", `${rowData[0]}`);
-  };
 
-  columns = ["Order ID", "Name", "Items", "Cancelled Date", "Total Amount"];
+  columns = [
+    "Order ID",
+    "Name",
+    "Items",
+    "Address",
+    "Cancelled Date",
+    "Payment method",
+    "Total Amount",
+  ];
   options = {
     filter: true,
     selectableRows: "none",
     responsive: "simple",
-    onRowClick: this.handleRowClick,
   };
 
   componentDidMount() {
@@ -39,10 +43,20 @@ class OrderTable extends Component {
               "Order ID": doc.id,
               Items: items,
               Name: data.displayName,
+              Address: data.address,
               "Total Amount": data.total,
               "Cancelled Date": new Date(
                 data.orderCancelledAt.seconds * 1000
               ).toLocaleString(),
+              ...(data.paymentMethod == "gcash"
+                ? {
+                    "Payment method": `${data.paymentMethod.toUpperCase()}(${
+                      data.gcashNo
+                    })`,
+                  }
+                : {
+                    "Payment method": data.paymentMethod.toUpperCase(),
+                  }),
             });
           });
           this.setState({ orders: orders });

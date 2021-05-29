@@ -99,7 +99,7 @@ class ConfirmedOrdersTable extends Component {
               ).toDateString(),
 
               Address: data.address,
-              "Total Amount": data.total,
+              "Total Amount": ` ₱${data.total}.00`,
               ...(data.paymentMethod == "gcash"
                 ? {
                     "Payment method": `${data.paymentMethod.toUpperCase()}(${

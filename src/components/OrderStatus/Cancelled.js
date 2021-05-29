@@ -75,10 +75,11 @@ const Cancelled = () => {
   const itemsPerPage = 3;
   const [page, setPage] = useState(1);
   const rawPages = orders.length / itemsPerPage;
-  const noOfPages = Math.floor(rawPages);
+  const noOfPages = Math.ceil(rawPages);
   const handleChange = (event, value) => {
     setPage(value);
   };
+
   // --------------------------------------------
 
   //for the expansion of card content
@@ -261,6 +262,14 @@ const Cancelled = () => {
                                           <Typography>
                                             Gcash({order.gcashNo})
                                           </Typography>
+                                        )}
+                                        {/* ------------------------------------------------------ */}
+                                        {order.paymentMethod === "pick-up" ? (
+                                          <Typography>
+                                            Pick Up at {order.meetUpAddress}
+                                          </Typography>
+                                        ) : (
+                                          <Typography></Typography>
                                         )}
                                       </TableCell>
                                     </TableRow>

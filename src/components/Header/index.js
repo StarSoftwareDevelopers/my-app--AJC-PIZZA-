@@ -50,7 +50,7 @@ const Header = (props) => {
           <Link to="/">AJC PIZZA</Link>
         </div>
 
-        {admin && (
+        {/* {admin && (
           <ul
             className="nav-links"
             style={{
@@ -62,7 +62,7 @@ const Header = (props) => {
               <Link to="/admin">My Admin</Link>
             </li>
           </ul>
-        )}
+        )} */}
 
         <ul
           className="nav-links"
@@ -71,13 +71,18 @@ const Header = (props) => {
             marginRight: "-500px",
           }}
         >
+          {" "}
+          {admin && (
+            <li>
+              <Link to="/admin">My Admin</Link>
+            </li>
+          )}
+          {/* ----------------------------------------- */}
           {currentUser && [
             <li>
               <Link to="/">Home</Link>
             </li>,
-            // <li>
-            //   <Link to="/order">Order</Link>
-            // </li>,
+
             <li>
               <Link to="/cart">Cart ({numCartItems})</Link>
             </li>,
@@ -94,7 +99,6 @@ const Header = (props) => {
               <span onClick={handleClickOpen}>Log Out</span>
             </li>,
           ]}
-
           {!currentUser && [
             /*<ul
             className="nav-links"

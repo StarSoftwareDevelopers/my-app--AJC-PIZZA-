@@ -21,59 +21,10 @@ class CurrentDateTable extends Component {
     "Name",
     "Items",
     "Delivery Date",
+    "Address",
     "Total Amount",
     "Payment method",
     "Order Status",
-    // {
-    //   name: "Order Status",
-    //   options: {
-    //     filter: true,
-    //     sort: false,
-    //     empty: true,
-    //     customBodyRender: (value, tableMeta) => {
-    //       return (
-    //         // <FormControlLabel
-    //         //   value={value}
-    //         //   control={
-    //         //     <Button
-    //         //       value={value}
-    //         //       variant="outlined"
-    //         //       style={{ borderColor: "#397D02", color: "#397D02" }}
-    //         //     >
-    //         //       confirm
-    //         //     </Button>
-    //         //   }
-    //         //   onClick={(e) => {
-    //         //     try {
-    //         //       firestore.collection("orders").doc(tableMeta.rowData[0]).set(
-    //         //         {
-    //         //           orderStatus: "Confirmed",
-    //         //         },
-    //         //         { merge: true }
-    //         //       );
-    //         //     } catch (err) {
-    //         //       console.log(err);
-    //         //     }
-    //         //     // this.handleOpen();
-    //         //   }}
-    //         // />,
-    //         <FormControlLabel
-    //           value={value}
-    //           control={
-    //             <Select>
-    //               <MenuItem value="">
-    //                 <em>{tableMeta.rowData[5]}</em>
-    //               </MenuItem>
-    //               <MenuItem value={10}>Ten</MenuItem>
-    //               <MenuItem value={20}>Twenty</MenuItem>
-    //               <MenuItem value={30}>Thirty</MenuItem>
-    //             </Select>
-    //           }
-    //         />
-    //       );
-    //     },
-    //   },
-    // },
   ];
   options = {
     filter: true,
@@ -120,7 +71,8 @@ class CurrentDateTable extends Component {
               "Order ID": doc.id,
               Items: items,
               Name: data.displayName,
-              "Total Amount": data.total,
+              "Total Amount": ` ₱${data.total}.00`,
+              Address: data.address,
               "Delivery Date": new Date(
                 data.deliveryDate.seconds * 1000
               ).toLocaleString(),

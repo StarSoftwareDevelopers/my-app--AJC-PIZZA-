@@ -22,6 +22,8 @@ import { useHistory } from "react-router-dom";
 import jsPDF from "jspdf";
 import Orders from "./select";
 
+import moment from "moment";
+
 const useStyles = makeStyles({
   Paper: {
     padding: "1.5rem",
@@ -39,8 +41,8 @@ const useStyles = makeStyles({
 
 const statusMap = {
   Confirmed: 10,
-  "On the way": 20,
-  "On the way (Delayed)": 30,
+  Preparing: 20,
+  "On the way": 30,
   Delivered: 40,
 };
 
@@ -113,10 +115,17 @@ const OrderDetails = () => {
 
           {/* -------------------------------------------------------------- */}
 
-          <Typography variant="h4" align="center" gutterBottom>
-            Order Status : {status}
-            <Orders status={statusMap[status]} />
-          </Typography>
+          {status == "Delivered" ? (
+            <p></p>
+          ) : (
+            <p>
+              {" "}
+              <Typography variant="h4" align="center" gutterBottom>
+                Order Status : {status}
+                <Orders status={statusMap[status]} />
+              </Typography>
+            </p>
+          )}
 
           {/* ----------------------------------------------------------------- */}
           <Typography variant="h6" align="center">
@@ -141,6 +150,9 @@ const OrderDetails = () => {
                     Ship To: {order.displayName}
                   </Typography>
                   <Typography variant="h6">Ship At: {order.address}</Typography>
+                  <Typography variant="h6">
+                    Payment Method: {order.paymentMethod.toUpperCase()}
+                  </Typography>
                   <Typography variant="h6">
                     {order.instruction === "" ? (
                       <p></p>

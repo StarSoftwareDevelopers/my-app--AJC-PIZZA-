@@ -39,10 +39,9 @@ const MyAccount = () => {
   const [address, setAddress] = useState(currentUser.address);
   const [phone, setPhone] = useState(currentUser.phone);
 
-  const [houseNo, setHouseNo] = useState("");
-  const [street, setStreet] = useState("");
-  const [barangay, setBarangay] = useState("");
-  const [value, setValue] = useState("");
+  const [street, setStreet] = useState(currentUser.street);
+
+  const [value, setValue] = useState(currentUser.barangay);
   const handleChange = (e) => setValue(e.target.value);
 
   useEffect(() => {
@@ -71,7 +70,9 @@ const MyAccount = () => {
       const res = userRef.set(
         {
           displayName,
-          address: street + " ," + barangay + "" + value,
+          // address: street + " ," + barangay + "" + value,
+          street,
+          Barangay: value,
           phone,
         },
         { merge: true }
@@ -151,15 +152,22 @@ const MyAccount = () => {
                         style: { fontSize: "17px" },
                       }}
                     />
-                    <Typography varian="subtitle1">
-                      Your address: {user.address}
-                    </Typography>
+
+                    {user.street && user.Barangay ? (
+                      <Typography varian="subtitle1">
+                        Your address: {user.street + "," + user.Barangay}
+                      </Typography>
+                    ) : (
+                      <p></p>
+                    )}
+
                     <TextField
                       margin="dense"
                       type="text"
-                      label="Street Address"
+                      label="Street Address, Building, etc..."
                       value={street}
                       variant="standard"
+                      placeholder={user.street}
                       color="secondary"
                       required
                       fullWidth
@@ -179,7 +187,11 @@ const MyAccount = () => {
                     />
                     <FormControl>
                       <InputLabel htmlFor="order-status">Barangay</InputLabel>
-                      <Select onChange={handleChange}>
+                      <Select
+                        onChange={handleChange}
+                        fullWidth
+                        defaultValue={currentUser.Barangay}
+                      >
                         {Barangays.map((barangay) => (
                           <MenuItem key={barangay.value} value={barangay.value}>
                             {barangay.text}
@@ -187,7 +199,7 @@ const MyAccount = () => {
                         ))}
                       </Select>
                     </FormControl>
-                    {value}
+
                     <MuiPhoneNumber
                       fullWidth
                       name="phone"

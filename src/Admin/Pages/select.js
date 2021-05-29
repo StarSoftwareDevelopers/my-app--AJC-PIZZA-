@@ -25,10 +25,10 @@ const Orders = ({ status }) => {
       stat = "Confirmed";
     }
     if (value == 20) {
-      stat = "On the way";
+      stat = "Preparing";
     }
     if (value == 30) {
-      stat = "On the way(Delayed)";
+      stat = "On the way";
     }
     if (value == 40) {
       stat = "Delivered";
@@ -59,12 +59,12 @@ const Orders = ({ status }) => {
               Confirmed
             </MenuItem>
             <MenuItem value={20} disabled={value > 20}>
-              On the way
+              Preparing
             </MenuItem>
             <MenuItem value={30} disabled={value > 30}>
-              On the way (Delayed)
+              On the way
             </MenuItem>
-            <MenuItem value={40} disabled={value > 40}>
+            <MenuItem value={40} disabled={value > 30}>
               Delivered
             </MenuItem>
           </Select>

@@ -12,3 +12,28 @@
     text-align: left;
   }
 }
+
+.datePicker {
+  grid-column: 5/10;
+  grid-row: 2/4;
+  padding-bottom: 50px;
+
+  input {
+    font-size: 15px;
+    text-align: center;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #414a4c;
+    font-family: Roboto;
+
+    border-bottom: 1px solid #afafaf;
+    display: inline;
+    &:focus {
+      color: #2c2527;
+      outline: none;
+      border-bottom: 2px solid #f50057;
+    }
+  }
+}

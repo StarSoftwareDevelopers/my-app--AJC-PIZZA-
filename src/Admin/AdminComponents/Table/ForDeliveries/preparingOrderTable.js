@@ -64,39 +64,6 @@ class PreparingOrdersTable extends Component {
         },
       },
     },
-    {
-      name: "On Delivery(Delayed)",
-      options: {
-        filter: true,
-        sort: false,
-        empty: true,
-        customBodyRender: (value, tableMeta) => {
-          return (
-            <FormControlLabel
-              value={value}
-              control={
-                <Button value={value} variant="outlined" color="secondary">
-                  On Delivery (Delayed)
-                </Button>
-              }
-              onClick={(e) => {
-                e.stopPropagation();
-                try {
-                  firestore.collection("orders").doc(tableMeta.rowData[0]).set(
-                    {
-                      orderStatus: "On the way(Delayed)",
-                    },
-                    { merge: true }
-                  );
-                } catch (err) {
-                  console.log(err);
-                }
-              }}
-            />
-          );
-        },
-      },
-    },
   ];
   options = {
     filter: true,
@@ -127,7 +94,7 @@ class PreparingOrdersTable extends Component {
               ).toDateString(),
 
               Address: data.address,
-              "Total Amount": data.total,
+              "Total Amount": ` ₱${data.total}.00`,
               ...(data.paymentMethod == "gcash"
                 ? {
                     "Payment method": `${data.paymentMethod.toUpperCase()}(${

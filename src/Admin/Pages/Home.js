@@ -7,12 +7,19 @@ import {
 } from "@material-ui/core/styles";
 import {
   Divider,
-  FormGroup,
-  Grid,
   Switch,
   Typography,
   Container,
+  Dialog,
+  DialogContent,
+  Button,
+  DialogTitle,
+  TextField,
+  FormControl,
+  IconButton,
+  DialogContentText,
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { firestore } from "../../firebase/firebase.utils";
 import Dashboard from "./../AdminComponents/Dashboard";
 import CurrentDateOrders from "./../AdminComponents/Table/currentDateOrders";
@@ -56,57 +63,69 @@ let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);
 
 const Home = () => {
-  const [meetAddress, setMeetAddress] = useState("");
-
   const [stat, setStat] = useState();
+  const [meetAddress, setMeetAddress] = useState();
+  const [address, setAddress] = useState("");
 
-  useEffect(() => {
-    firestore
-      .collection("business")
-      .doc("business-store")
-      .get()
-      .then((doc) => {
-        if (!doc.exists) {
-          console.log("No such document!");
-        } else {
-          setStat(doc.data());
-        }
-      });
-  }, []);
-
-  const [state, setState] = useState({
-    checkedC: true,
-  });
-
-  const handleChange = async (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-    const value = event.target.checked;
-    const status = value.toString();
-    let setStatus = "";
-
-    if (status === "true") {
-      setStatus = "open";
-    } else if (status.toString() === "false") {
-      setStatus = "close";
-    }
-
-    console.log(setStatus);
-
-    try {
-      const res = await firestore
-        .collection("business")
-        .doc("business-store")
-        .set({
-          status: setStatus,
-        })
-        .then(() => {
-          console.log("successfu;ll");
-        });
-    } catch (err) {
-      console.log(err);
-    }
+  //for the dialog----------------------------------------------------------
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
   };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  //for the dialog----------------------------------------------------------
 
+  //--------------------------------------------------------------------------
+  //get the data for the switch
+  // useEffect(() => {
+  //   firestore
+  //     .collection("business")
+  //     .doc("business-store")
+  //     .get()
+  //     .then((doc) => {
+  //       if (!doc.exists) {
+  //         console.log("No such document!");
+  //       } else {
+  //         setStat(doc.data());
+  //       }
+  //     });
+  // }, []);
+
+  // const [state, setState] = useState({
+  //   checkedC: true,
+  // });
+
+  // const handleChange = async (event) => {
+  //   setState({ ...state, [event.target.name]: event.target.checked });
+  //   const value = event.target.checked;
+  //   const status = value.toString();
+  //   let setStatus = "";
+
+  //   if (status === "true") {
+  //     setStatus = "open";
+  //   } else if (status.toString() === "false") {
+  //     setStatus = "close";
+  //   }
+
+  //   try {
+  //     const res = await firestore
+  //       .collection("business")
+  //       .doc("business-store")
+  //       .set({
+  //         status: setStatus,
+  //       })
+  //       .then(() => {
+  //         alert("Succesfully set!");
+  //       });
+  //   } catch (err) {
+  //     // console.log(err);
+  //   }
+  // };
+  //---------------------------------------------------------------------------------
+
+  //-------------------------submission for the dialog--------------------------------
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
@@ -114,15 +133,28 @@ const Home = () => {
         .collection("business")
         .doc("pickUp-Address")
         .set({
-          meetAddress: meetAddress,
+          meetAddress,
         })
         .then(() => {
-          console.log("successfull");
+          // alert("Succesfully set!");
         });
     } catch (err) {
       console.log(err);
     }
   };
+
+  //-------------------------submission for the dialog--------------------------------
+
+  //-------------------------USEEFFECT FOR THE DIALOG/MEET UP ADDRESS----------------
+  useEffect(() => {
+    firestore
+      .collection("business")
+      .doc("pickUp-Address")
+      .onSnapshot((doc) => {
+        setAddress(doc.data());
+      });
+  }, []);
+  //-------------------------USEEFFECT FOR THE DIALOG/MEET UP ADDRESS----------------
 
   return (
     <div>
@@ -143,15 +175,44 @@ const Home = () => {
           >
             Overview
           </Typography>
-          <form onSubmit={handleSubmit}>
-            <input
-              value={meetAddress}
-              onChange={(e) => setMeetAddress(e.target.value)}
-            />
-            <button type="submit">submit</button>
-          </form>
 
-          <FormGroup>
+          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            set up meet up address
+          </Button>
+
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">
+              Meet Up Address
+              <IconButton onClick={handleClose}>
+                <CloseIcon edge="end" color="secondary" />
+              </IconButton>
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>{address.meetAddress}</DialogContentText>
+              <form onSubmit={handleSubmit}>
+                <FormControl>
+                  <TextField
+                    variant="outlined"
+                    label="Enter meet up address"
+                    color="secondary"
+                    value={meetAddress}
+                    rowsMax={Infinity}
+                    fullWidth
+                    onChange={(e) => setMeetAddress(e.target.value)}
+                  />
+                  <Button type="submit" color="secondary">
+                    Submit
+                  </Button>
+                </FormControl>
+              </form>
+            </DialogContent>
+          </Dialog>
+          <br />
+          {/* <FormGroup>
             <Typography component="div" variant="h6">
               <Grid component="label" container alignItems="center" spacing={1}>
                 <Grid item>Close</Grid>
@@ -165,7 +226,7 @@ const Home = () => {
                 <Grid item>Open</Grid>
               </Grid>
             </Typography>
-          </FormGroup>
+          </FormGroup> */}
           <br />
           <Dashboard />
           <Divider style={{ marginTop: "1.5rem", marginBottom: ".5rem" }} />

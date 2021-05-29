@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { firestore } from "../../firebase/firebase.utils";
-import { Button, Container, TextField, FormControl } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  TextField,
+  FormControl,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const MenuEdit = () => {
@@ -56,11 +63,10 @@ const MenuEdit = () => {
     } catch (err) {
       console.log(err);
     }
-    history.push("/EditMenu");
   };
 
   return (
-    <div>
+    <Container>
       <Button
         variant="outlined"
         color="secondary"
@@ -69,95 +75,104 @@ const MenuEdit = () => {
       >
         Back
       </Button>
-      edit form
-      <Container>
-        {editProduct.map((prod) => (
-          <div>
-            <form onSubmit={handleSubmit}>
-              <FormControl>
-                <TextField
-                  id="input"
-                  type="text"
-                  label="Product Name"
-                  placeholder={prod.productName}
-                  value={productName}
-                  required
-                  color="secondary"
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => setProductName(e.target.value)}
-                />
+      <br></br>
+      <br></br>
+      <Paper padding="5rem" elevation={3}>
+        <br />
+        <Typography variant="h4" align="center" color="secondary">
+          Edit Product
+        </Typography>
+        <Container align="center" margin="0 auto">
+          {editProduct.map((prod) => (
+            <div>
+              <form onSubmit={handleSubmit}>
+                <FormControl>
+                  <TextField
+                    id="input"
+                    type="text"
+                    label="Product Name"
+                    placeholder={prod.productName}
+                    value={productName}
+                    required
+                    color="secondary"
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => setProductName(e.target.value)}
+                  />
 
-                <TextField
-                  id="input"
-                  margin="dense"
-                  type="text"
-                  label="Product Price"
-                  value={productPrice}
-                  placeholder={prod.productPrice}
-                  color="secondary"
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => setProductPrice(e.target.value)}
-                />
+                  <TextField
+                    id="input"
+                    margin="dense"
+                    type="text"
+                    label="Product Price"
+                    value={productPrice}
+                    placeholder={prod.productPrice}
+                    color="secondary"
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => setProductPrice(e.target.value)}
+                  />
 
-                <TextField
-                  id="input"
-                  margin="dense"
-                  type="text"
-                  label="Product Description"
-                  placeholder={prod.productDesc}
-                  value={productDesc}
-                  color="secondary"
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => setProductDesc(e.target.value)}
-                />
+                  <TextField
+                    id="input"
+                    margin="dense"
+                    type="text"
+                    label="Product Description"
+                    placeholder={prod.productDesc}
+                    value={productDesc}
+                    color="secondary"
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => setProductDesc(e.target.value)}
+                  />
 
-                <img
-                  src={prod.productImg}
-                  alt={prod.productName}
-                  style={{ height: "150px" }}
-                />
+                  <img
+                    src={prod.productImg}
+                    alt={prod.productName}
+                    style={{ height: "150px" }}
+                  />
 
-                <TextField
-                  id="input"
-                  margin="dense"
-                  type="text"
-                  placeholder="Enter Link"
-                  label="Product Image"
-                  value={productImg}
-                  color="secondary"
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => setProductImg(e.target.value)}
-                />
+                  <TextField
+                    id="input"
+                    margin="dense"
+                    type="text"
+                    placeholder="Enter Link"
+                    label="Product Image"
+                    value={productImg}
+                    color="secondary"
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => setProductImg(e.target.value)}
+                  />
 
-                <Button
-                  type="submit"
-                  variant="outlined"
-                  style={{
-                    borderColor: "#397D02",
-                    color: "#397D02",
-                    marginRight: "1rem",
-                  }}
-                >
-                  Update
-                </Button>
-              </FormControl>
-            </form>
-          </div>
-        ))}
-      </Container>
-    </div>
+                  <Button
+                    type="submit"
+                    variant="outlined"
+                    style={{
+                      borderColor: "#397D02",
+                      color: "#397D02",
+                      marginRight: "1rem",
+                    }}
+                  >
+                    Update
+                  </Button>
+                  <br></br>
+                  <br></br>
+                </FormControl>
+              </form>
+            </div>
+          ))}
+        </Container>
+      </Paper>
+    </Container>
   );
 };
 

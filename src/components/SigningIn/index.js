@@ -7,16 +7,20 @@ import {
 } from "./../../Redux/User/user.actions";
 
 import "./style.scss";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
+
 import ButtonForm from "./../Forms/Button";
 
-import IconButton from "@material-ui/core/IconButton";
-
-import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
+import {
+  Typography,
+  Divider,
+  IconButton,
+  TextField,
+  Tooltip,
+} from "@material-ui/core";
 
 import { FaFacebook, FaGoogle, FaMailBulk } from "react-icons/fa";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,

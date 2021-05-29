@@ -84,7 +84,7 @@ const OrderStatus = () => {
   const [page, setPage] = useState(1);
 
   const rawPages = orders.length / itemsPerPage;
-  const noOfPages = Math.floor(rawPages);
+  const noOfPages = Math.ceil(rawPages);
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -136,6 +136,7 @@ const OrderStatus = () => {
   return (
     <div>
       <Divider />
+
       {isLoading ? (
         <div>
           {orders == 0 ? (
@@ -177,7 +178,7 @@ const OrderStatus = () => {
                                 <br />
                                 Ship to: {order.address}
                                 <br />
-                                Total Amount: {order.total}
+                                Total Amount: ₱{order.total}.00
                                 <br />
                                 {order.instruction === "" ? (
                                   <p></p>
@@ -322,6 +323,14 @@ const OrderStatus = () => {
                                           <Typography>
                                             Gcash({order.gcashNo})
                                           </Typography>
+                                        )}
+                                        {/* ---------------------------------------------------------- */}
+                                        {order.paymentMethod === "pick-up" ? (
+                                          <Typography>
+                                            Pick Up at {order.meetUpAddress}
+                                          </Typography>
+                                        ) : (
+                                          <Typography></Typography>
                                         )}
                                       </TableCell>
                                     </TableRow>
