@@ -180,11 +180,18 @@ const OrderStatus = () => {
                                 <br />
                                 Total Amount: ₱{order.total}.00
                                 <br />
+                                {order.remarks === "" ? (
+                                  <p></p>
+                                ) : (
+                                  <Typography>
+                                    Remarks: {order.remarks}
+                                  </Typography>
+                                )}
                                 {order.instruction === "" ? (
                                   <p></p>
                                 ) : (
                                   <Typography>
-                                    Delivery Instructions:({order.instruction})
+                                    Delivery Instructions: {order.instruction}
                                   </Typography>
                                 )}
                               </Typography>
@@ -297,7 +304,17 @@ const OrderStatus = () => {
 
                                     <TableRow>
                                       <TableCell rowSpan={2} />
-                                      <TableCell colSpan={3}>
+                                      <TableCell colSpan={3} align="right">
+                                        Delivery Fee
+                                      </TableCell>
+                                      <TableCell align="right">
+                                        Free Delivery
+                                      </TableCell>
+                                    </TableRow>
+
+                                    <TableRow>
+                                      {/* <TableCell rowSpan={2} /> */}
+                                      <TableCell colSpan={3} align="right">
                                         Total Amount
                                       </TableCell>
                                       <TableCell align="right">
@@ -305,7 +322,7 @@ const OrderStatus = () => {
                                       </TableCell>
                                     </TableRow>
                                     <TableRow>
-                                      <TableCell colSpan={3}>
+                                      <TableCell colSpan={4} align="right">
                                         Payment Method
                                       </TableCell>
                                       <TableCell align="right">

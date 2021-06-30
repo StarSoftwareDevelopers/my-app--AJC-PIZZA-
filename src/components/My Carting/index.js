@@ -1,7 +1,15 @@
 import React from "react";
 import "./style.scss";
 import Button from "./../../components/Forms/Button";
-import { Typography, Divider } from "@material-ui/core";
+import {
+  Typography,
+  Divider,
+  TableContainer,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@material-ui/core";
 import Itemized from "./Itemized";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -15,8 +23,13 @@ const mapState = createStructuredSelector({
   total: cartTotal,
 });
 
+const mapUserState = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
 const MyCarting = ({}) => {
   const { cartItems, total } = useSelector(mapState);
+  const { currentUser } = useSelector(mapUserState);
   return (
     <div className="carter">
       <Typography variant="h3" align="center">
@@ -24,74 +37,95 @@ const MyCarting = ({}) => {
       </Typography>
       <div className="carts">
         {cartItems.length > 0 ? (
-          <table border="0" cellPadding="0" cellSpacing="0">
-            <tbody>
-              <tr>
-                <td>
-                  <table
+          <TableContainer border="0" cellPadding="0" cellSpacing="0">
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <Table
                     className="cartHead"
                     border="0"
                     cellPadding="10"
                     cellSpacing="0"
                   >
-                    <tbody>
-                      <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Sum</th>
-                        <th>Delete</th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell>
+                          {" "}
+                          <Typography variant="h5">Name</Typography>
+                        </TableCell>
+                        <TableCell>
+                          {" "}
+                          <Typography variant="h5">Qty</Typography>
+                        </TableCell>
+                        <TableCell>
+                          {" "}
+                          <Typography variant="h5">Price</Typography>
+                        </TableCell>
+                        <TableCell>
+                          {" "}
+                          <Typography variant="h5">Sum</Typography>
+                        </TableCell>
+                        <TableCell>
+                          {" "}
+                          <Typography variant="h5">Delete</Typography>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableCell>
+              </TableRow>
               {/* Separate */}
-              <tr>
-                <td>
-                  <table border="0" cellPadding="0" cellSpacing="0">
-                    <tbody>
+              <TableRow>
+                <TableCell>
+                  <Table border="0" cellPadding="0" cellSpacing="0">
+                    <TableBody>
                       {/* <tr> */}
                       {cartItems.map((item, index) => {
                         return (
-                          <tr key={index}>
-                            <td>
+                          <TableRow key={index}>
+                            <TableCell>
                               <Itemized {...item} />
-                            </td>
-                          </tr>
+                            </TableCell>
+                          </TableRow>
                         );
                       })}
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
+                    </TableBody>
+                  </Table>
+                </TableCell>
+              </TableRow>
               {/* {Separate} */}
-              <tr>
-                <td>
-                  <table
+              <TableRow>
+                <TableCell>
+                  <Table
                     align="right"
                     border="0"
                     cellPadding="10"
                     cellSpacing="0"
                   >
-                    <tbody>
-                      <tr align="right">
-                        <td>
-                          <h3>Total: ₱ {total}.00</h3>
+                    <TableBody>
+                      <TableRow align="right">
+                        <TableCell align="right">
+                          <h3></h3>
+                          <Typography variant="h4">
+                            Delivery Fee : Free Delivery{" "}
+                          </Typography>
+                          <Typography variant="h4">
+                            Total: ₱ {total}.00
+                          </Typography>
                           <Link to="/check-out">
                             <div style={{ float: "right" }}>
                               <Button>Check-out</Button>
                             </div>
                           </Link>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </TableContainer>
         ) : (
           <>
             <Divider />

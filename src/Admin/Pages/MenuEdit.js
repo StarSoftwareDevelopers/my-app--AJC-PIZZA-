@@ -21,6 +21,8 @@ const MenuEdit = () => {
   const [productPrice, setProductPrice] = useState();
   const [productDesc, setProductDesc] = useState();
   const [productImg, setProductImg] = useState();
+  const [slices, setSlices] = useState();
+  const [pizzaSize, setPizzaSize] = useState();
 
   //go back to the previous path
   const goToPreviousPath = () => {
@@ -130,6 +132,32 @@ const MenuEdit = () => {
                       shrink: true,
                     }}
                     onChange={(e) => setProductDesc(e.target.value)}
+                  />
+                  <TextField
+                    id="input"
+                    margin="dense"
+                    type="number"
+                    label="Slices of Pizza"
+                    placeholder={prod.slices}
+                    value={slices}
+                    color="secondary"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => setSlices(e.target.value)}
+                  />
+                  <TextField
+                    id="input"
+                    margin="dense"
+                    type="number"
+                    label="Size of Pizza"
+                    placeholder={prod.pizzaSize}
+                    value={pizzaSize}
+                    color="secondary"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={(e) => setPizzaSize(e.target.value)}
                   />
 
                   <img

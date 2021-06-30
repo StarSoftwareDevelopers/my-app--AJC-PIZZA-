@@ -26,6 +26,7 @@ import {
 import { Link, useHistory } from "react-router-dom";
 import "./../Admin.scss";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import { firesotre, firestore } from "../../firebase/firebase.utils";
 
 const mapState = ({ productsData }) => ({
   products: productsData.products,
@@ -39,6 +40,9 @@ const Menu = () => {
   const [productDesc, setProductDesc] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productImg, setProductImg] = useState("");
+  const [slices, setSlices] = useState(0);
+  const [pizzaSize, setPizzaSize] = useState(0);
+  const isActive = "true";
 
   //for the first Dialog
   const [open, setOpen] = useState(false);
@@ -69,6 +73,9 @@ const Menu = () => {
         productDesc,
         productPrice,
         productImg,
+        slices,
+        pizzaSize,
+        isActive,
       })
     );
     resetForm();
@@ -76,6 +83,38 @@ const Menu = () => {
 
   const handleEdit = (data) => {
     history.push("/EditMenu", data);
+  };
+
+  const toInactive = (documentID) => {
+    try {
+      const ref = firestore.collection("products").doc(documentID);
+      const res = ref.set(
+        {
+          isActive: "false",
+        },
+        { merge: true }
+      );
+      alert("Succesfull set to Inactive");
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const toActive = (documentID) => {
+    try {
+      const ref = firestore.collection("products").doc(documentID);
+      const res = ref.set(
+        {
+          isActive: "true",
+        },
+        { merge: true }
+      );
+      alert("Succesfull set to Active");
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -140,6 +179,36 @@ const Menu = () => {
                 value={productDesc}
                 onChange={(e) => setProductDesc(e.target.value)}
               />
+              {/* ---------------------------------------------- */}
+              <TextField
+                margin="dense"
+                id="desc"
+                label="Number of slices"
+                type="number"
+                required
+                color="secondary"
+                value={slices}
+                onChange={(e) => setSlices(e.target.value)}
+                style={{ marginRight: "1.5rem" }}
+              />
+
+              <TextField
+                margin="dense"
+                id="desc"
+                label="Size of Pizza"
+                type="number"
+                required
+                color="secondary"
+                value={pizzaSize}
+                onChange={(e) => setPizzaSize(e.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">inches</InputAdornment>
+                  ),
+                }}
+              />
+
+              {/* ------------------------------------------------- */}
               <TextField
                 margin="dense"
                 id="price"
@@ -201,6 +270,9 @@ const Menu = () => {
                           productImg,
                           productPrice,
                           documentID,
+                          slices,
+                          pizzaSize,
+                          isActive,
                         } = product;
                         return (
                           <tr key={index}>
@@ -208,17 +280,47 @@ const Menu = () => {
                               <img className="img" src={productImg} />
                             </td>
                             <td>{productName}</td>
-                            <td>{productDesc}</td>
-                            <td>{productPrice}</td>
+                            <td>
+                              {productDesc}
+                              {<br />}
+                              Slice: {slices}, Size: {pizzaSize} inches
+                            </td>
+                            <td>₱{productPrice}.00</td>
+                            <td>
+                              {isActive === "true" ? (
+                                <Button
+                                  color="secondary"
+                                  variant="outlined"
+                                  onClick={() => toInactive(documentID)}
+                                  style={{
+                                    borderColor: "#397D02",
+                                    color: "#397D02",
+                                  }}
+                                >
+                                  Active
+                                </Button>
+                              ) : (
+                                <p></p>
+                              )}
+                              {/* ---------------------------------- */}
+                              {isActive === "false" ? (
+                                <Button
+                                  color="secondary"
+                                  variant="outlined"
+                                  onClick={() => toActive(documentID)}
+                                >
+                                  Inactive
+                                </Button>
+                              ) : (
+                                <p></p>
+                              )}
+                            </td>
                             <td>
                               <IconButton
                                 aria-label="delete"
                                 onClick={() => handleEdit(documentID)}
                               >
-                                <EditIcon
-                                  fontSize="large"
-                                  style={{ color: "#4CAF50" }}
-                                />
+                                <EditIcon fontSize="large" color="primary" />
                               </IconButton>
                             </td>
                             <td>

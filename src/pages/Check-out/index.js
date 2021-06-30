@@ -59,6 +59,7 @@ const CheckingOut = (product) => {
   const [gcash, setGcash] = useState("");
   const [pickUp, setPickUp] = useState();
   const [instruction, setInstructions] = useState("");
+  const [remarks, setRemarks] = useState("");
   const [orderStatus, setOrderStatus] = useState("Pending");
   const [pickAddress, setPickAddress] = useState("");
 
@@ -131,6 +132,7 @@ const CheckingOut = (product) => {
           orderStatus,
           instruction: instruction,
           meetUpAddress: meetUp.meetAddress,
+          remarks,
         });
     } catch (err) {
       console.log(err);
@@ -179,6 +181,10 @@ const CheckingOut = (product) => {
               </tr>
             ))}
             <br></br>
+            <tr>
+              <td>Delivery Fee: </td>
+              <td>Free Delivery</td>
+            </tr>
             <tr>
               <td>
                 {" "}
@@ -287,53 +293,6 @@ const CheckingOut = (product) => {
                   style={{ display: "inline-block", marginLeft: ".5rem" }}
                 />
               </div>
-              {/* ---------------------------------------------------- */}
-              {/* <input
-                type="radio"
-                name="delivery"
-                value="deliveryASAP"
-                onChange={(e) => setASAP(e.target.value)}
-              />
-              Delivery ASAP
-              <input
-                type="radio"
-                name="delivery"
-                value="scheduleDelivery"
-                onChange={(e) => setASAP(e.target.value)}
-              />
-              Schedule Delivery
-              {asap === "deliveryASAP" ? (
-                <p>
-                  1
-                  {items.map((item, index) => (
-                    <div key={(item, index)}>
-                      <p>
-                        Estimated time to arrive:{" "}
-                        {Math.ceil(`${item.qty}` * 10)}
-                      </p>
-                    </div>
-                  ))}
-                </p>
-              ) : (
-                <p>
-                  <TextField
-                    id="date"
-                    label="Delivery Date"
-                    type="datetime-local"
-                    color="secondary"
-                    fullWidth
-                    value={deliveryDate}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={(e) => setDeliveryDate(e.target.value)}
-                    inputProps={{
-                      min: `${minDate}`,
-                    }}
-                    required
-                  />
-                </p>
-              )} */}
               {/* ------------------------------------------------------------- */}
               <br /> <br />
               <Typography align="center" variant="h5" color="secondary">
@@ -381,7 +340,7 @@ const CheckingOut = (product) => {
                   margin="dense"
                   id="gcash-num"
                   color="secondary"
-                  label="Gcash Number"
+                  label="Gcash Ref. Number"
                   type="number"
                   fullWidth
                   required
@@ -401,9 +360,19 @@ const CheckingOut = (product) => {
               )}
               <br /> <br />
               <Typography align="center" variant="h5" color="secondary">
-                Delivery Instructions
+                Remarks
               </Typography>
               <Divider />
+              <TextField
+                type="text"
+                label="Remarks"
+                fullWidth
+                multiline
+                margin="dense"
+                rowsMax={Infinity}
+                color="secondary"
+                onChange={(e) => setRemarks(e.target.value)}
+              />
               <TextField
                 type="text"
                 label="Delivery Instructions"

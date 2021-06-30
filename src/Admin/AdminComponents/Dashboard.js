@@ -14,7 +14,8 @@ import PeopleIcon from "@material-ui/icons/People";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 
-import { green, red, orange } from "@material-ui/core/colors";
+import { green, red, orange, blue } from "@material-ui/core/colors";
+import AssessmentIcon from "@material-ui/icons/Assessment";
 
 import { Link } from "react-router-dom";
 import { firestore } from "./../..//firebase/firebase.utils";
@@ -44,6 +45,7 @@ export default function Dashboard() {
   const [size, setSize] = useState(null);
   const [pendingSize, setPendingSize] = useState(0);
   const [deliverySize, setDeliverySize] = useState(0);
+  const [totalSales, setTotalSales] = useState(0);
 
   //useEffect for counting the total users registered
   useEffect(() => {
@@ -77,6 +79,20 @@ export default function Dashboard() {
       });
   }, []);
 
+  useEffect(() => {
+    var totalSales = 0;
+    firestore
+      .collection("orders")
+      .where("orderStatus", "==", "Delivered")
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          totalSales += doc.data().total;
+        });
+        setTotalSales(totalSales); //sales report
+      });
+  });
+
   return (
     <Card
       style={{
@@ -93,14 +109,14 @@ export default function Dashboard() {
                 color="textSecondary"
                 gutterBottom
               >
-                <PeopleIcon style={{ color: green[500] }} /> Total Users
+                <AssessmentIcon style={{ color: blue[500] }} /> Total Sales
               </Typography>
               <Typography variant="h4" component="h2">
-                {size}
+                ₱ {totalSales}.00
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to="/Users">
+              <Link to="/Deliveries">
                 <Button size="medium">
                   <Typography variant="h6" component="h2">
                     View All
@@ -153,6 +169,31 @@ export default function Dashboard() {
             </CardContent>
             <CardActions>
               <Link to="/Deliveries">
+                <Button size="medium">
+                  <Typography variant="h6" component="h2">
+                    View All
+                  </Typography>
+                </Button>
+              </Link>
+            </CardActions>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Card className={classes.root} variant="outlined">
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
+              >
+                <PeopleIcon style={{ color: green[500] }} /> Total Users
+              </Typography>
+              <Typography variant="h4" component="h2">
+                {size}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/Users">
                 <Button size="medium">
                   <Typography variant="h6" component="h2">
                     View All

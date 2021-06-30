@@ -153,7 +153,15 @@ const OrderDetails = () => {
                   <Typography variant="h6">
                     Payment Method: {order.paymentMethod.toUpperCase()}
                   </Typography>
+
                   <Typography variant="h6">
+                    {order.remarks === "" ? (
+                      <p></p>
+                    ) : (
+                      <Typography variant="h6">
+                        Remarks: {order.remarks}
+                      </Typography>
+                    )}
                     {order.instruction === "" ? (
                       <p></p>
                     ) : (
@@ -162,6 +170,7 @@ const OrderDetails = () => {
                       </Typography>
                     )}
                   </Typography>
+
                   {/* ------------------------------------------------------------------- */}
                   <Divider />
                   {/* -------------------------------------------------------------------- */}

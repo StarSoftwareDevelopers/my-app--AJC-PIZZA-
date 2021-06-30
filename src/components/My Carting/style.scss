@@ -18,7 +18,7 @@
 
   .carts {
     margin: 0 auto;
-    max-width: 100.0rem;
+    max-width: 100rem;
 
     .svg {
       height: 300px;
@@ -29,8 +29,6 @@
       width: 100%;
     }
   }
-
-  
 
   .cartHead,
   .carts {
@@ -61,26 +59,24 @@
     cursor: pointer;
   }
 
-
-
   @media only screen and (max-width: 980px) {
-    
-    .cartHead {
-      display: none;
-    }
+    // .cartHead {
+    //   display: none;
+    // }
 
-    .cartItems {
-      border: 1px solid black;
-    }
+    // .cartItems {
+    //   border: 1px solid #999999;
+    //   border-style: dotted;
+    //   border-radius: 12px;
+    // }
 
-    .carter .card td{
+    .carter .card td {
       width: 100%;
       display: block;
-
     }
 
     .carter .cartButtoning.remove {
-      padding: 1.0rem;
+      padding: 1rem;
       background-color: black;
       color: white;
       width: 100%;

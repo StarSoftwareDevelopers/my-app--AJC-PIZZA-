@@ -6,6 +6,7 @@ import {
   lessenCartItem,
 } from "./../../../Redux/Cart/cartActions";
 import IconButton from "@material-ui/core/IconButton";
+import { Typography } from "@material-ui/core";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
@@ -38,7 +39,9 @@ const Itemized = (product) => {
           <td>
             <img src={productImg} alt={productName} />
           </td>
-          <td>{productName}</td>
+          <td>
+            <Typography variant="h6">{productName}</Typography>{" "}
+          </td>
           <td>
             <IconButton onClick={() => lessQty(product)}>
               <ArrowBackIosIcon size="small" color="secondary" />
@@ -48,7 +51,7 @@ const Itemized = (product) => {
               {<ArrowForwardIosIcon size="small" color="secondary" />}
             </IconButton>
           </td>
-          <td>₱ {productPrice}.00</td>
+          <td>₱{productPrice}.00</td>
           <td>₱{qty * productPrice}.00</td>
           <td>
             <IconButton onClick={() => removeItem(documentID)}>

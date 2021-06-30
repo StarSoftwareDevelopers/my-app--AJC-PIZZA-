@@ -60,6 +60,9 @@ const Pizzas = (product) => {
     productDesc,
     productImg,
     productPrice,
+    slices,
+    pizzaSize,
+    isActive,
   } = product;
 
   const data = [product];
@@ -130,25 +133,46 @@ const Pizzas = (product) => {
               />
 
               <CardContent className={classes.Card}>
+                <Typography variant="subtitle1" component="p" align="center">
+                  {slices} slices, {pizzaSize} inches
+                </Typography>
                 <Typography variant="h6" component="p" align="center">
                   ₱ {productPrice}.00
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button
-                  {...configCart}
-                  onClick={() => {
-                    addToCart(product);
-                    handleClick();
-                  }}
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  style={{ margin: "0 auto" }}
-                  className={classes.Button}
-                >
-                  Add to Cart
-                </Button>
+                {isActive === "true" ? (
+                  <Button
+                    {...configCart}
+                    onClick={() => {
+                      addToCart(product);
+                      handleClick();
+                    }}
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    style={{ margin: "0 auto" }}
+                    className={classes.Button}
+                  >
+                    Add to Cart
+                  </Button>
+                ) : (
+                  <Button
+                    {...configCart}
+                    onClick={() => {
+                      addToCart(product);
+                      handleClick();
+                    }}
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    style={{ margin: "0 auto" }}
+                    className={classes.Button}
+                    disabled
+                  >
+                    Unavailable
+                  </Button>
+                )}
               </CardActions>
             </Card>
           </Grid>

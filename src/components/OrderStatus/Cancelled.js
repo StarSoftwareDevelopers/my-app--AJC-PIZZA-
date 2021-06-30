@@ -236,7 +236,17 @@ const Cancelled = () => {
 
                                     <TableRow>
                                       <TableCell rowSpan={2} />
-                                      <TableCell colSpan={3}>
+                                      <TableCell colSpan={3} align="right">
+                                        Delivery Fee
+                                      </TableCell>
+                                      <TableCell align="right">
+                                        Free Delivery
+                                      </TableCell>
+                                    </TableRow>
+
+                                    <TableRow>
+                                      {/* <TableCell rowSpan={2} /> */}
+                                      <TableCell colSpan={3} align="right">
                                         Total Amount
                                       </TableCell>
                                       <TableCell align="right">
@@ -244,7 +254,7 @@ const Cancelled = () => {
                                       </TableCell>
                                     </TableRow>
                                     <TableRow>
-                                      <TableCell colSpan={3}>
+                                      <TableCell colSpan={4} align="right">
                                         Payment Method
                                       </TableCell>
                                       <TableCell align="right">

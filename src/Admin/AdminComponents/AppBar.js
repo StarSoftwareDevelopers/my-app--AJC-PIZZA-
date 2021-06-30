@@ -235,14 +235,14 @@ export default function PersistentDrawerLeft() {
               <Typography variant="h5">Admin</Typography>
             </ListItem>
           </Link>
-          <Link to="/Staff">
+          {/* <Link to="/Staff">
             <ListItem button key="Staff">
               <ListItemIcon>
                 <GroupIcon fontSize="large" />
               </ListItemIcon>
               <Typography variant="h5">Staff</Typography>
             </ListItem>
-          </Link>
+          </Link> */}
           <Link to="/Users">
             <ListItem button key="Users">
               <ListItemIcon>
